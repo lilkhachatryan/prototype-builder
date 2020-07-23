@@ -1,6 +1,9 @@
 import React from 'react';
 import {fabric} from 'fabric';
-import Rect from "./Rect";
+
+import Divider from './Sidebar/CTAs/Divider';
+import Rect from "./Sidebar/CTAs/Rect";
+import TextBox from './Sidebar/CTAs/TextBox';
 
 class Canvas extends React.Component{
     state = {
@@ -32,8 +35,8 @@ class Canvas extends React.Component{
         this.canvas.add(obj);
     };
 
-    handleLog = () => {
-        this.canvas.getActiveObjects().map( (o) => o.set('fill', this.state.inputValue));
+    handleLog = (attr) => {
+        this.canvas.getActiveObjects().map( (o) => o.set(attr, this.state.inputValue));
         this.canvas.renderAll();
     };
 
@@ -48,11 +51,13 @@ class Canvas extends React.Component{
 
                 </canvas>
                 <Rect handleAdd={this.handleAdd} />
+                <TextBox handleAdd={this.handleAdd} />
+                <Divider handleAdd={this.handleAdd}/>
                 <input
                     onChange={this.handleInputChange}
                     value={this.state.inputValue}
                     type="text"/>
-                <button onClick={this.handleLog} >Set Color to red</button>
+                <button onClick={() => this.handleLog('fill')} >Set Color to red</button>
             </div>
         );
     }
