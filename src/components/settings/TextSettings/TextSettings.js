@@ -4,16 +4,16 @@ class TextSettings extends React.Component {
 
     state = {
         inputs: {
-            fill: '#000000',
-            fontSize: 0,
-            fontFamily: '',
-            fontWeight: 0,
-            fontStyle: 'normal',
-            textAlign: '',
-            textDecoration: '',
-            strokeWidth: 0,
-            stroke: '#000000',
-            lineHeight: 1,
+            fill: this.props.currentElement.fill,
+            fontSize: this.props.currentElement.fontSize,
+            fontFamily: this.props.currentElement.fontFamily,
+            fontWeight: this.props.currentElement.fontWeight,
+            fontStyle: this.props.currentElement.fontStyle,
+            textAlign: this.props.currentElement.textAlign,
+            textDecoration: this.props.currentElement.textDecoration,
+            strokeWidth: this.props.currentElement.strokeWidth,
+            stroke: this.props.currentElement.stroke,
+            lineHeight: this.props.currentElement.lineHeight,
         }
     };
 
