@@ -14,8 +14,8 @@ class SidebarContainer extends React.Component {
         const { handleAdd } = this.props;
         return (
             <div>
-                <AddImageURL handleAdd={handleAdd}/>
-               <UploadImage handleAdd={handleAdd} />
+                <AddImageURL handleAdd={handleAdd} />
+                <UploadImage handleAdd={handleAdd} />
                 <Rect handleAdd={handleAdd} />
                 <Triangle handleAdd={handleAdd} />
                 <Circle handleAdd={handleAdd} />

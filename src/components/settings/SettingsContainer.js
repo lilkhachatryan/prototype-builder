@@ -20,8 +20,7 @@ class SettingsContainer extends React.Component {
 
         return (
             <div>
-                Settings Container
-                {settings}
+                {settings ? settings : <h5>Please select element</h5>}
                 {Object.keys(this.props.currentElement).length > 0 
                     ? <button 
                         className="btn btn-danger" 

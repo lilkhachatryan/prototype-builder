@@ -10,6 +10,17 @@ class LineSettings extends React.Component {
         }
     };
 
+    componentDidUpdate = (prevProps) => {
+        if (prevProps.currentElement !== this.props.currentElement) {
+            const newAtts = {
+                strokeWidth: this.props.currentElement.strokeWidth,
+                stroke: this.props.currentElement.stroke,
+                opacity: this.props.currentElement.opacity
+            }
+            this.setState({ inputs: newAtts })
+        };
+    };
+
     handleChange = (event, type) => {
         let value = event.target.value;
         let newInputs = { ...this.state.inputs };
@@ -20,7 +31,7 @@ class LineSettings extends React.Component {
             value = +value
         }
 
-        this.props.elementChange(type, value)
+        this.props.elementChange({[type]: value})
     };
 
     render() {
@@ -40,15 +51,15 @@ class LineSettings extends React.Component {
                 </div>
                 <div>
                     <label>Opacity:</label>
-                    <input 
-                        type="range" 
-                        name="opacity" 
-                        min="0" 
-                        max="1" 
+                    <input
+                        type="range"
+                        name="opacity"
+                        min="0"
+                        max="1"
                         step="0.05"
-                        value={this.state.inputs.opacity} 
-                        onChange={(_) => this.handleChange(_, 'opacity')}     
-                    /> 
+                        value={this.state.inputs.opacity}
+                        onChange={(_) => this.handleChange(_, 'opacity')}
+                    />
                 </div>
             </div>
         );

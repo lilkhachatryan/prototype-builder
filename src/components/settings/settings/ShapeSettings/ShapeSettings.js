@@ -7,8 +7,22 @@ class ShapeSettings extends React.Component {
             fill: this.props.currentElement.fill,
             strokeWidth: this.props.currentElement.strokeWidth,
             stroke: this.props.currentElement.stroke,
-            opacity: this.props.currentElement.opacity
+            opacity: this.props.currentElement.opacity,
+            ry: this.props.currentElement.ry,
         }
+    };
+
+    componentDidUpdate = (prevProps) => {
+        if (prevProps.currentElement !== this.props.currentElement) {
+            const newAtts = {
+                fill: this.props.currentElement.fill,
+                strokeWidth: this.props.currentElement.strokeWidth,
+                stroke: this.props.currentElement.stroke,
+                opacity: this.props.currentElement.opacity,
+                ry: this.props.currentElement.ry,
+            }
+            this.setState({ inputs: newAtts })
+        };
     };
 
     handleChange = (event, type) => {
@@ -20,8 +34,9 @@ class ShapeSettings extends React.Component {
         if (type === 'opacity' || type === 'strokeWidth') {
             value = +value
         }
-
-        this.props.elementChange(type, value)
+        if (type = 'ry') {
+            this.props.elementChange({ rx: value, ry: value })
+        }
     };
 
     render() {
@@ -36,8 +51,13 @@ class ShapeSettings extends React.Component {
                 </div>
                 <div>
                     <label>Stroke Width (px)</label>
-                    <input type="number" step="0.1" value={this.state.inputs.strokeWidth} onChange={(_) => this.handleChange(_, 'strokeWidth')} />
+                    <input type="number" step="1" value={this.state.inputs.strokeWidth} onChange={(_) => this.handleChange(_, 'strokeWidth')} />
                 </div>
+                {this.props.currentElement.type !== 'rect' ? null : <div>
+                    <label>Border radius (px)</label>
+                    <input type="number" value={this.state.inputs.ry} onChange={(_) => this.handleChange(_, 'ry')} />
+                </div>}
+
                 <div>
                     <label>Stroke Color</label>
                     <input
@@ -48,15 +68,15 @@ class ShapeSettings extends React.Component {
                 </div>
                 <div>
                     <label>Opacity:</label>
-                    <input 
-                        type="range" 
-                        name="opacity" 
-                        min="0" 
-                        max="1" 
+                    <input
+                        type="range"
+                        name="opacity"
+                        min="0"
+                        max="1"
                         step="0.05"
-                        value={this.state.inputs.opacity} 
-                        onChange={(_) => this.handleChange(_, 'opacity')}     
-                    /> 
+                        value={this.state.inputs.opacity}
+                        onChange={(_) => this.handleChange(_, 'opacity')}
+                    />
                 </div>
             </div>
         );
