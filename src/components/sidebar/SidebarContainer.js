@@ -3,6 +3,7 @@ import Rect from "./tools/Rect";
 import TextBox from "./tools/TextBox";
 import Divider from "./tools/Divider";
 import AddImageURL from "./tools/AddImageURL";
+import UploadImage from "./tools/UploadImage";
 
 class SidebarContainer extends React.Component{
    render() {
@@ -13,6 +14,7 @@ class SidebarContainer extends React.Component{
                <TextBox handleAdd={handleAdd} />
                <Divider handleAdd={handleAdd} />
                <AddImageURL handleAdd={handleAdd}/>
+               <UploadImage handleAdd={handleAdd} />
            </div>
        );
    }
