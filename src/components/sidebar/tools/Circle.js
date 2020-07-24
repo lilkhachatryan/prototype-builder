@@ -7,9 +7,9 @@ const Circle = ({handleAdd}) => {
             top: 100,
             left: 100,
             radius: 30,
-            fill: '#000000',
+            fill: '#FFFFFF',
             stroke: '#000000',
-            strokeWidth: 0
+            strokeWidth: 2,
         });
         return handleAdd(circle);
     };

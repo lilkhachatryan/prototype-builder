@@ -10,33 +10,38 @@ class CanvasContainer extends React.Component {
         currentElement: {},
     }
 
-    componentDidMount() {
-        this.currentElement = {};
-        this.canvas = new fabric.Canvas('canvas');
-        this.canvas.on('selection:created', (event) => {
-            this.currentElement = event.target;
-            this.setState({currentElement: event.target})
-        });
-        this.handleZoom();
-        this.canvas.on('selection:updated', (event) => {
-            this.currentElement = event.target;
-            this.setState({currentElement: event.target})
-        });
-
-        window.addEventListener("keydown", event => {
-            if (event.isComposing || event.keyCode === 229) {
-              return;
-            }
-            if(event.key === 'Delete' && Object.keys(this.state.currentElement).length > 1) {
-                this.handleRemove(this.state.currentElement)
-            }
-          });
+    deleteHandler = (event) => {
+        if (event.isComposing || event.keyCode === 229) {
+            return;
+        }
+        if (event.key === 'Delete' && Object.keys(this.state.currentElement).length > 0) {
+            this.handleRemove(this.state.currentElement)
+        }
     }
 
+    componentDidMount() {
+        this.canvas = new fabric.Canvas('canvas');
+        this.canvas.on('selection:created', (event) => {
+            this.setState({ currentElement: this.canvas.getActiveObject() })
+        });
+        this.canvas.on('selection:updated', (event) => {
+            this.setState({ currentElement: this.canvas.getActiveObject() })
+        });
+        this.canvas.on('selection:cleared', (event) => {
+            this.setState({ currentElement: {} })
+        });
+        
+        this.handleZoom();
+        window.addEventListener("keydown", this.deleteHandler)
+    };
+
+    componentWillUnmount = () => {
+        window.removeEventListener('keydown', this.deleteHandler)
+    }
 
     handleZoom = () => {
         const returnCanvas = () => this.canvas;
-        this.canvas.on('mouse:wheel', function(opt) {
+        this.canvas.on('mouse:wheel', function (opt) {
             let delta = opt.e.deltaY;
             let zoom = returnCanvas().getZoom();
             zoom *= 0.999 ** delta;
@@ -46,23 +51,27 @@ class CanvasContainer extends React.Component {
             opt.e.preventDefault();
             opt.e.stopPropagation();
         });
+    }
     handleAdd = (obj) => {
         this.canvas.add(obj);
     };
     handleRemove = (obj) => {
         this.canvas.remove(obj);
-        this.setState({currentElement: {}})
+        this.setState({ currentElement: {} })
     };
 
-    handleElementPropChange = (prop, value) => {
-        this.currentElement.set({ [prop]: value });
+    handleElementPropChange = (obj) => {
+        const newCurrentElement = this.canvas.getActiveObject();
+        newCurrentElement.set({ ...obj });
         this.canvas.renderAll();
+        this.setState({ currentElement: newCurrentElement })
     };
 
     render() {
+        console.log(this.state.currentElement)
         return (
             <div className="container">
-                <SidebarContainer handleAdd={this.handleAdd}/>
+                <SidebarContainer handleAdd={this.handleAdd} />
 
                 <SettingsContainer
                     currentElement={this.state.currentElement}
@@ -81,3 +90,5 @@ class CanvasContainer extends React.Component {
 }
 
 export default CanvasContainer;
+
+
