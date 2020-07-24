@@ -1,7 +1,7 @@
 import React from 'react';
 import Rect from "./tools/Rect";
 
-class SideNav extends React.Component{
+class SideNavContainer extends React.Component{
    render() {
        return (
            <div>
@@ -11,4 +11,4 @@ class SideNav extends React.Component{
    }
 }
 
-export default SideNav;
+export default SideNavContainer;
