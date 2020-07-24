@@ -8,9 +8,9 @@ const Triangle = ({ handleAdd }) => {
             left: 100,
             width: 50,
             height: 50,
-            fill: '#000000',
+            fill: 'transparent',
             stroke: '#000000',
-            strokeWidth: 0
+            strokeWidth: 2,
         });
         return handleAdd(triangle);
     };

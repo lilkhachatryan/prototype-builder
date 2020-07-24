@@ -17,6 +17,24 @@ class TextSettings extends React.Component {
         }
     };
 
+    componentDidUpdate = (prevProps) => {
+        if (prevProps.currentElement !== this.props.currentElement) {
+            const newAtts = {
+                fill: this.props.currentElement.fill,
+                fontSize: this.props.currentElement.fontSize,
+                fontFamily: this.props.currentElement.fontFamily,
+                fontWeight: this.props.currentElement.fontWeight,
+                fontStyle: this.props.currentElement.fontStyle,
+                textAlign: this.props.currentElement.textAlign,
+                textDecoration: this.props.currentElement.textDecoration,
+                strokeWidth: this.props.currentElement.strokeWidth,
+                stroke: this.props.currentElement.stroke,
+                lineHeight: this.props.currentElement.lineHeight,
+            }
+            this.setState({ inputs: newAtts })
+        };
+    };
+
     handleChange = (event, type) => {
         let value = event.target.value;
         let newInputs = { ...this.state.inputs };
@@ -27,7 +45,13 @@ class TextSettings extends React.Component {
             value = +value
         }
 
-        this.props.elementChange(type, value)
+        if (type = 'textDecoration') {
+            this.props.elementChange({'underline': false, 'linethrough': false, 'overline': false});
+            type = value;
+            value = true
+        }
+
+        this.props.elementChange({[type]: value})
     };
 
     render() {
@@ -116,7 +140,7 @@ class TextSettings extends React.Component {
                 <div>
                     <label>Text Decoration</label>
                     <select onChange={(_) => this.handleChange(_, 'textDecoration')} value={this.state.inputs.textDecoration}>
-                        <option value="">Choose decoration</option>
+                        <option value="">None</option>
                         <option value="underline">Underline</option>
                         <option value="linethrough">Linethrough</option>
                         <option value="overline">Overline</option>
