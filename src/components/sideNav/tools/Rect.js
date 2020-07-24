@@ -11,7 +11,7 @@ const Rect = ({handleAdd}) => {
                 height: 40,
                 fill: 'blue',
             });
-            return handleAdd(obj)
+            return handleAdd(obj);
         }}>
             Add Rect
         </button>
