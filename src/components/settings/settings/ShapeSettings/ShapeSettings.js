@@ -34,8 +34,10 @@ class ShapeSettings extends React.Component {
         if (type === 'opacity' || type === 'strokeWidth') {
             value = +value
         }
-        if (type = 'ry') {
+        if (type === 'ry') {
             this.props.elementChange({ rx: value, ry: value })
+        } else {
+            this.props.elementChange({ [type]:value })
         }
     };
 

@@ -10,7 +10,7 @@ class TextSettings extends React.Component {
             fontWeight: this.props.currentElement.fontWeight,
             fontStyle: this.props.currentElement.fontStyle,
             textAlign: this.props.currentElement.textAlign,
-            textDecoration: this.props.currentElement.textDecoration,
+            textDecoration: '',
             strokeWidth: this.props.currentElement.strokeWidth,
             stroke: this.props.currentElement.stroke,
             lineHeight: this.props.currentElement.lineHeight,
@@ -18,6 +18,16 @@ class TextSettings extends React.Component {
     };
 
     componentDidUpdate = (prevProps) => {
+
+        let textDecoration = '';
+        if (this.props.currentElement.underline) {
+            textDecoration = 'underline'
+        } else if (this.props.currentElement.linethrough) {
+            textDecoration = 'linethrough'
+        } else if (this.props.currentElement.overline) {
+            textDecoration = 'overline'
+        };
+
         if (prevProps.currentElement !== this.props.currentElement) {
             const newAtts = {
                 fill: this.props.currentElement.fill,
@@ -26,7 +36,7 @@ class TextSettings extends React.Component {
                 fontWeight: this.props.currentElement.fontWeight,
                 fontStyle: this.props.currentElement.fontStyle,
                 textAlign: this.props.currentElement.textAlign,
-                textDecoration: this.props.currentElement.textDecoration,
+                textDecoration:  textDecoration,
                 strokeWidth: this.props.currentElement.strokeWidth,
                 stroke: this.props.currentElement.stroke,
                 lineHeight: this.props.currentElement.lineHeight,
@@ -45,13 +55,13 @@ class TextSettings extends React.Component {
             value = +value
         }
 
-        if (type = 'textDecoration') {
-            this.props.elementChange({'underline': false, 'linethrough': false, 'overline': false});
+        if (type === 'textDecoration') {
+            this.props.elementChange({ 'underline': false, 'linethrough': false, 'overline': false });
             type = value;
-            value = true
+            value = true;
         }
+        this.props.elementChange({ [type]: value })
 
-        this.props.elementChange({[type]: value})
     };
 
     render() {
