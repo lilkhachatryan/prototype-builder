@@ -8,7 +8,7 @@ class CanvasContainer extends React.Component {
 
     state = {
         currentElement: {},
-    }
+    };
 
     deleteHandler = (event) => {
         if (event.isComposing || event.keyCode === 229) {
@@ -17,7 +17,7 @@ class CanvasContainer extends React.Component {
         if (event.key === 'Delete' && Object.keys(this.state.currentElement).length > 0) {
             this.handleRemove(this.state.currentElement)
         }
-    }
+    };
 
     componentDidMount() {
         this.canvas = new fabric.Canvas('canvas');
@@ -30,14 +30,13 @@ class CanvasContainer extends React.Component {
         this.canvas.on('selection:cleared', (event) => {
             this.setState({ currentElement: {} })
         });
-        
         this.handleZoom();
-        window.addEventListener("keydown", this.deleteHandler)
+        window.addEventListener("keydown", this.deleteHandler);
     };
 
     componentWillUnmount = () => {
         window.removeEventListener('keydown', this.deleteHandler)
-    }
+    };
 
     handleZoom = () => {
         const returnCanvas = () => this.canvas;
@@ -47,17 +46,17 @@ class CanvasContainer extends React.Component {
             zoom *= 0.999 ** delta;
             if (zoom > 20) zoom = 20;
             if (zoom < 0.01) zoom = 0.01;
-            returnCanvas().zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
+            returnCanvas().zoomToPoint({x: opt.e.offsetX, y: opt.e.offsetY}, zoom);
             opt.e.preventDefault();
             opt.e.stopPropagation();
         });
-    }
+    };
     handleAdd = (obj) => {
         this.canvas.add(obj);
     };
     handleRemove = (obj) => {
         this.canvas.remove(obj);
-        this.setState({ currentElement: {} })
+        this.setState({currentElement: {}});
     };
 
     handleElementPropChange = (obj) => {
