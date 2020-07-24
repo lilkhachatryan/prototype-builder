@@ -1,25 +1,24 @@
 import React from 'react';
-import { fabric } from 'fabric';
+import {fabric} from 'fabric';
 
-const Rect = ({ handleAdd }) => {
+const Circle = ({handleAdd}) => {
     const handleClick = () => {
-        const rect = new fabric.Rect({
-            top: 200,
+        const circle = new fabric.Circle({
+            top: 100,
             left: 100,
-            width: 50,
-            height: 50,
+            radius: 30,
             fill: '#000000',
             stroke: '#000000',
             strokeWidth: 0
         });
-        return handleAdd(rect);
+        return handleAdd(circle);
     };
     return (
         <button className="btn btn-light" onClick={handleClick} >
-            Rectangle
+            Circle
         </button>
     );
 };
 
 
-export default Rect;
+export default Circle;

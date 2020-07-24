@@ -6,15 +6,15 @@ const Divider = ({ handleAdd }) => {
         const divider = new fabric.Line([0,0, 200,0], {
             top: 30,
             left: 30,
-            width: 200,
+            width: 300,
             stroke: "#000000",
             strokeWidth: 4,
-            // strokeDashArray: [5, 5],
+            strokeDashArray: [0, 0],
         });
         return handleAdd(divider);
     };
     return (
-        <button onClick={handleClick}>
+        <button className="btn btn-light" onClick={handleClick}>
             Divider
         </button>
     );

@@ -1,9 +1,9 @@
 import React from 'react';
 import { fabric } from 'fabric';
 
-const Rect = ({ handleAdd }) => {
+const Triangle = ({ handleAdd }) => {
     const handleClick = () => {
-        const rect = new fabric.Rect({
+        const triangle = new fabric.Triangle({
             top: 200,
             left: 100,
             width: 50,
@@ -12,14 +12,14 @@ const Rect = ({ handleAdd }) => {
             stroke: '#000000',
             strokeWidth: 0
         });
-        return handleAdd(rect);
+        return handleAdd(triangle);
     };
     return (
         <button className="btn btn-light" onClick={handleClick} >
-            Rectangle
+            Triangle
         </button>
     );
 };
 
 
-export default Rect;
+export default Triangle;

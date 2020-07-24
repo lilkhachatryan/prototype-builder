@@ -20,7 +20,7 @@ const TextBox = ({ handleAdd }) => {
         return handleAdd(textBox);
     };
     return (
-        <button onClick={handleClick}>
+        <button className="btn btn-light" onClick={handleClick}>
             Text
         </button>
     );

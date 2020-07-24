@@ -21,9 +21,22 @@ class CanvasContainer extends React.Component {
             this.setState({currentElement: event.target})
         });
 
+        window.addEventListener("keydown", event => {
+            if (event.isComposing || event.keyCode === 229) {
+              return;
+            }
+            if(event.key === 'Delete' && Object.keys(this.state.currentElement).length > 1) {
+                this.handleRemove(this.state.currentElement)
+            }
+          });
     }
+
     handleAdd = (obj) => {
         this.canvas.add(obj);
+    };
+    handleRemove = (obj) => {
+        this.canvas.remove(obj);
+        this.setState({currentElement: {}})
     };
 
     handleElementPropChange = (prop, value) => {
@@ -33,16 +46,17 @@ class CanvasContainer extends React.Component {
 
     render() {
         return (
-            <div>
-                <SidebarContainer handleAdd={this.handleAdd} />
+            <div className="container">
+                <SidebarContainer handleAdd={this.handleAdd}/>
                 <SettingsContainer
                     currentElement={this.state.currentElement}
                     elementChange={this.handleElementPropChange}
+                    handleRemove={this.handleRemove}
                 />
                 <canvas
                     className='canvas'
                     height={500}
-                    width={600}
+                    width={700}
                     id='canvas'>
                 </canvas>
             </div>
