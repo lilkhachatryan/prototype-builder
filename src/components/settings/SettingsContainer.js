@@ -1,7 +1,8 @@
 import React from 'react';
-import LineSettings from './LineSettings/LineSettings';
-import TextSettings from './TextSettings/TextSettings';
-import ShapeSettings from './ShapeSettings/ShapeSettings';
+import LineSettings from './settings/LineSettings/LineSettings';
+import TextSettings from './settings/TextSettings/TextSettings';
+import ShapeSettings from './settings/ShapeSettings/ShapeSettings';
+import UndoAndRedo from "./settings/undoAndRedo/UndoAndRedo";
 
 class SettingsContainer extends React.Component {
     render() {
@@ -26,6 +27,7 @@ class SettingsContainer extends React.Component {
                         onClick={() => this.props.handleRemove(this.props.currentElement)}
                     >Delete</button> 
                     : null}
+                    <UndoAndRedo handleUndoAndRedo={this.props.handleUndoAndRedo} />
             </div>
         );
     }

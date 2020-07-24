@@ -2,6 +2,7 @@ import React from 'react';
 import { fabric } from 'fabric';
 import SidebarContainer from "./sidebar/SidebarContainer";
 import SettingsContainer from "./settings/SettingsContainer";
+import 'fabric-history';
 
 class CanvasContainer extends React.Component {
 
@@ -22,7 +23,9 @@ class CanvasContainer extends React.Component {
     componentDidMount() {
         this.canvas = new fabric.Canvas('canvas');
         this.canvas.on('selection:created', (event) => {
+
             this.setState({ currentElement: this.canvas.getActiveObject() })
+
         });
         this.canvas.on('selection:updated', (event) => {
             this.setState({ currentElement: this.canvas.getActiveObject() })
@@ -32,11 +35,21 @@ class CanvasContainer extends React.Component {
         });
         this.handleZoom();
         window.addEventListener("keydown", this.deleteHandler);
+        window.addEventListener("keydown", event => {
+            if (event.isComposing || event.keyCode === 229) {
+                return;
+            }
+            if (event.key === 'Delete' && Object.keys(this.state.currentElement).length > 1) {
+                this.handleRemove(this.state.currentElement);
+            }
+        });
     };
+
 
     componentWillUnmount = () => {
         window.removeEventListener('keydown', this.deleteHandler)
     };
+
 
     handleZoom = () => {
         const returnCanvas = () => this.canvas;
@@ -45,11 +58,15 @@ class CanvasContainer extends React.Component {
             let zoom = returnCanvas().getZoom();
             zoom *= 0.999 ** delta;
             if (zoom > 20) zoom = 20;
-            if (zoom < 0.01) zoom = 0.01;
+            if (zoom < 0.5) zoom = 0.5;
             returnCanvas().zoomToPoint({x: opt.e.offsetX, y: opt.e.offsetY}, zoom);
             opt.e.preventDefault();
             opt.e.stopPropagation();
         });
+    };
+
+    handleUndoAndRedo = (type) => {
+        type === 'undo' ? this.canvas.undo() : this.canvas.redo();
     };
     handleAdd = (obj) => {
         this.canvas.add(obj);
@@ -59,20 +76,23 @@ class CanvasContainer extends React.Component {
         this.setState({currentElement: {}});
     };
 
+
     handleElementPropChange = (obj) => {
         const newCurrentElement = this.canvas.getActiveObject();
         newCurrentElement.set({ ...obj });
         this.canvas.renderAll();
-        this.setState({ currentElement: newCurrentElement })
+        this.setState({ currentElement: newCurrentElement });
     };
 
     render() {
-        console.log(this.state.currentElement)
+        console.log(this.state.currentElement);
         return (
             <div className="container">
                 <SidebarContainer handleAdd={this.handleAdd} />
 
+
                 <SettingsContainer
+                    handleUndoAndRedo={this.handleUndoAndRedo}
                     currentElement={this.state.currentElement}
                     elementChange={this.handleElementPropChange}
                     handleRemove={this.handleRemove}
