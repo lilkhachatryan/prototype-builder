@@ -124,8 +124,6 @@ class CanvasContainer extends React.Component {
         return (
             <div className="container">
                 <SidebarContainer handleAdd={this.handleAdd} />
-
-
                 <SettingsContainer
                     panningMode={this.state.panningMode}
                     handlePanningMode={this.handlePanningMode}
