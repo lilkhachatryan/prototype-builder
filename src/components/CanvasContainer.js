@@ -24,6 +24,7 @@ class CanvasContainer extends React.Component{
     handleAdd = (obj) => {
         this.canvas.add(obj);
     };
+
     render() {
         return (
             <div>
