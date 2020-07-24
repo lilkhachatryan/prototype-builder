@@ -2,7 +2,7 @@ import React from 'react';
 import { fabric } from 'fabric';
 import SidebarContainer from "./sidebar/SidebarContainer";
 import SettingsContainer from "./settings/SettingsContainer";
-import 'fabric-history';
+// import 'fabric-history';
 
 class CanvasContainer extends React.Component {
 
@@ -35,14 +35,6 @@ class CanvasContainer extends React.Component {
         });
         this.handleZoom();
         window.addEventListener("keydown", this.deleteHandler);
-        window.addEventListener("keydown", event => {
-            if (event.isComposing || event.keyCode === 229) {
-                return;
-            }
-            if (event.key === 'Delete' && Object.keys(this.state.currentElement).length > 1) {
-                this.handleRemove(this.state.currentElement);
-            }
-        });
     };
 
 
@@ -78,6 +70,7 @@ class CanvasContainer extends React.Component {
 
 
     handleElementPropChange = (obj) => {
+        console.log(obj);
         const newCurrentElement = this.canvas.getActiveObject();
         newCurrentElement.set({ ...obj });
         this.canvas.renderAll();
@@ -92,10 +85,10 @@ class CanvasContainer extends React.Component {
 
 
                 <SettingsContainer
-                    handleUndoAndRedo={this.handleUndoAndRedo}
                     currentElement={this.state.currentElement}
                     elementChange={this.handleElementPropChange}
                     handleRemove={this.handleRemove}
+                    handleUndoAndRedo={this.handleUndoAndRedo}
                 />
                 <canvas
                     className='canvas'
