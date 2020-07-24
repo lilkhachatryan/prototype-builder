@@ -1,9 +1,9 @@
 import React from 'react';
-import Canvas from "../components/Canvas";
+import CanvasContainer from "../components/CanvasContainer";
 
 const Home = () => {
     return (
-        <Canvas />
+        <CanvasContainer />
     );
 };
 
