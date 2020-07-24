@@ -1,6 +1,6 @@
 import React from 'react';
 import {fabric} from 'fabric';
-import SideNavContainer from "./sideNav/SideNavContainer";
+import SidebarContainer from "./sidebar/SidebarContainer";
 import SettingsContainer from "./settings/SettingsContainer";
 
 class CanvasContainer extends React.Component{
@@ -28,14 +28,13 @@ class CanvasContainer extends React.Component{
     render() {
         return (
             <div>
-                <SideNavContainer handleAdd={this.handleAdd}/>
+                <SidebarContainer handleAdd={this.handleAdd}/>
                 <SettingsContainer/>
                 <canvas
                     className='canvas'
                     height={500}
                     width={600}
                     id='canvas'>
-
                 </canvas>
             </div>
         );

@@ -15,9 +15,8 @@ const TextBox = ({ handleAdd }) => {
             lineHeight: 1,
             textBackgroundColor: '#FFFFFF'
         });
-        return handleAdd(textBox)
-    }
-    
+        return handleAdd(textBox);
+    };
     return (
         <button onClick={handleClick}>
             Text

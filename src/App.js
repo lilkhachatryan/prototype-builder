@@ -32,7 +32,6 @@ function App() {
               <Route exact render={() => (
                   <Redirect to={Routes.Home} />
               )} />
-
               <Route path={Routes.NotFoundPage} component={NotFound}/>
           </Switch>
       </Router>
