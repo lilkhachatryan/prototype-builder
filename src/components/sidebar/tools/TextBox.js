@@ -13,7 +13,9 @@ const TextBox = ({ handleAdd }) => {
             fontWeight: 'normal',
             fontStyle: 'normal',
             lineHeight: 1,
-            textBackgroundColor: '#FFFFFF'
+            textBackgroundColor: '#FFFFFF',
+            strokeWidth: 0,
+            stroke: '#000000'
         });
         return handleAdd(textBox);
     };
