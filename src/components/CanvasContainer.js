@@ -1,11 +1,10 @@
 import React from 'react';
 import {fabric} from 'fabric';
-import Rect from "./Rect";
+import SideNav from "./sideNavigation/SideNav";
 
-class Canvas extends React.Component{
+class CanvasContainer extends React.Component{
     state = {
         currentElement: null,
-        inputValue: 'black'
     };
     componentDidMount() {
         this.canvas = new fabric.Canvas('canvas');
@@ -21,25 +20,13 @@ class Canvas extends React.Component{
         });
 
     }
-
-    handleInputChange = (e) => {
-        this.setState({
-            inputValue: e.target.value
-        });
-    };
-
     handleAdd = (obj) => {
         this.canvas.add(obj);
     };
-
-    handleLog = () => {
-        this.canvas.getActiveObjects().map( (o) => o.set('fill', this.state.inputValue));
-        this.canvas.renderAll();
-    };
-
     render() {
         return (
             <div>
+                <SideNav handleAdd={this.handleAdd}/>
                 <canvas
                     className='canvas'
                     height={500}
@@ -47,15 +34,9 @@ class Canvas extends React.Component{
                     id='canvas'>
 
                 </canvas>
-                <Rect handleAdd={this.handleAdd} />
-                <input
-                    onChange={this.handleInputChange}
-                    value={this.state.inputValue}
-                    type="text"/>
-                <button onClick={this.handleLog} >Set Color to red</button>
             </div>
         );
     }
 }
 
-export default Canvas;
+export default CanvasContainer;
