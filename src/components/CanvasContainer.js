@@ -5,6 +5,7 @@ import SettingsContainer from "./settings/SettingsContainer";
 
 class CanvasContainer extends React.Component {
 
+
     state = {
         currentElement: {},
     }
@@ -16,6 +17,7 @@ class CanvasContainer extends React.Component {
             this.currentElement = event.target;
             this.setState({currentElement: event.target})
         });
+        this.handleZoom();
         this.canvas.on('selection:updated', (event) => {
             this.currentElement = event.target;
             this.setState({currentElement: event.target})
@@ -31,6 +33,19 @@ class CanvasContainer extends React.Component {
           });
     }
 
+
+    handleZoom = () => {
+        const returnCanvas = () => this.canvas;
+        this.canvas.on('mouse:wheel', function(opt) {
+            let delta = opt.e.deltaY;
+            let zoom = returnCanvas().getZoom();
+            zoom *= 0.999 ** delta;
+            if (zoom > 20) zoom = 20;
+            if (zoom < 0.01) zoom = 0.01;
+            returnCanvas().zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
+            opt.e.preventDefault();
+            opt.e.stopPropagation();
+        });
     handleAdd = (obj) => {
         this.canvas.add(obj);
     };
@@ -48,6 +63,7 @@ class CanvasContainer extends React.Component {
         return (
             <div className="container">
                 <SidebarContainer handleAdd={this.handleAdd}/>
+
                 <SettingsContainer
                     currentElement={this.state.currentElement}
                     elementChange={this.handleElementPropChange}

@@ -19,6 +19,7 @@ class SettingsContainer extends React.Component {
 
         return (
             <div>
+                Settings Container
                 {settings}
                 {Object.keys(this.props.currentElement).length > 0 
                     ? <button 
