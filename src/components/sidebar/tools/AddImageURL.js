@@ -9,6 +9,7 @@ const AddImageURL = ({handleAdd}) => {
         value = value.replace(/\s+/g, '');
         if (value){
             fabric.Image.fromURL(value, function (img) {
+                ref.current.value = '';
                 return handleAdd(img);
             });
         }

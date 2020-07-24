@@ -46,7 +46,7 @@ class CanvasContainer extends React.Component {
         return (
             <div>
                 <SidebarContainer handleAdd={this.handleAdd}/>
-                <SettingsContainer/>
+                <SettingsContainer />
                 <div className='canvas__wrapper' >
                     <canvas
                         className='canvas'
