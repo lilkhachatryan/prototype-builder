@@ -8,7 +8,9 @@ const HeaderSettings = ({
     handleRemove,
     handleUndoAndRedo,
     panningMode,
-    handlePanningMode
+    handlePanningMode,
+    bringToTop,
+    center
 }) => {
     return (
         <HeaderSettingsWrapper>
@@ -21,9 +23,9 @@ const HeaderSettings = ({
                 className="btn btn-danger"
                 onClick={() => handleRemove(this.props.currentElement)}
             >Delete</button>
-            <button className="btn btn-primary" onClick={this.props.bringToTop}>Bring forward</button>
-            <button className="btn btn-primary" onClick={() => this.props.center('H')}>Center horizontally</button>
-            <button className="btn btn-primary" onClick={() => this.props.center('V')}>Center vertically</button>
+            <button className="btn btn-primary" onClick={bringToTop}>Bring forward</button>
+            <button className="btn btn-primary" onClick={() => center('H')}>Center horizontally</button>
+            <button className="btn btn-primary" onClick={() => center('V')}>Center vertically</button>
         </HeaderSettingsWrapper>
     );
 };
