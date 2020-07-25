@@ -10,6 +10,7 @@ const Divider = ({ handleAdd }) => {
             stroke: "#000000",
             strokeWidth: 4,
             strokeDashArray: [0, 0],
+            // lockScalingY: true,
         });
         return handleAdd(divider);
     };

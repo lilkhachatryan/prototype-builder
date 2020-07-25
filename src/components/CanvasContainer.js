@@ -56,7 +56,7 @@ class CanvasContainer extends React.Component {
             zoom *= 0.999 ** delta;
             if (zoom > 20) zoom = 20;
             if (zoom < 0.5) zoom = 0.5;
-            returnCanvas().zoomToPoint({x: opt.e.offsetX, y: opt.e.offsetY}, zoom);
+            returnCanvas().zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
             opt.e.preventDefault();
             opt.e.stopPropagation();
         });
@@ -64,19 +64,19 @@ class CanvasContainer extends React.Component {
 
     handlePan = () => {
         this.canvas.on('mouse:move', (event) => {
-            if (this.state.panningMode){
+            if (this.state.panningMode) {
                 this.canvas.setCursor('grab');
             }
-            if (this.state.isPanning && this.state.panningMode){
-                    this.canvas.setCursor('grab');
-                    const {e: {movementX, movementY}} = event;
-                    const delta = new fabric.Point(movementX, movementY);
-                    this.canvas.relativePan(delta);
+            if (this.state.isPanning && this.state.panningMode) {
+                this.canvas.setCursor('grab');
+                const { e: { movementX, movementY } } = event;
+                const delta = new fabric.Point(movementX, movementY);
+                this.canvas.relativePan(delta);
             }
         });
         this.canvas.on('mouse:down', () => {
-            if (this.state.panningMode){
-                this.canvas.forEachObject( (o) => o.selectable = false );
+            if (this.state.panningMode) {
+                this.canvas.forEachObject((o) => o.selectable = false);
                 this.canvas.setCursor('grab');
                 this.setState({
                     isPanning: true
@@ -84,7 +84,7 @@ class CanvasContainer extends React.Component {
                 this.canvas.selection = false;
             } else {
                 this.canvas.selection = true;
-                this.canvas.forEachObject( (o) => o.selectable = true );
+                this.canvas.forEachObject((o) => o.selectable = true);
             }
         });
         this.canvas.on('mouse:up', () => {
@@ -102,7 +102,7 @@ class CanvasContainer extends React.Component {
     };
     handleRemove = (obj) => {
         this.canvas.remove(obj);
-        this.setState({currentElement: {}});
+        this.setState({ currentElement: {} });
     };
 
     handlePanningMode = () => {
@@ -120,6 +120,20 @@ class CanvasContainer extends React.Component {
         this.setState({ currentElement: newCurrentElement });
     };
 
+
+    handleBringToTop = () => {
+        this.state.currentElement.bringToFront()
+    }
+    handleCenter = (type) => {
+        if (type === 'H') {
+            this.state.currentElement.centerH();
+            this.state.currentElement.setCoords();
+        } else if (type === 'V') {
+            this.state.currentElement.centerV();
+            this.state.currentElement.setCoords();
+        }
+    }
+
     render() {
         return (
             <div className="container">
@@ -134,6 +148,8 @@ class CanvasContainer extends React.Component {
                     elementChange={this.handleElementPropChange}
                     handleRemove={this.handleRemove}
                     handleUndoAndRedo={this.handleUndoAndRedo}
+                    bringToTop={this.handleBringToTop}
+                    center={this.handleCenter}
                 />
                 <canvas
                     className='canvas'

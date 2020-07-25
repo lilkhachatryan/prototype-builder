@@ -21,11 +21,12 @@ class UploadImage extends React.Component{
             const url = URL.createObjectURL(file);
             if (fileType === 'image/png' || 'image/jpeg') { //check if png
                 fabric.Image.fromURL(url, function(img) {
-                    // img.set({
-                    //     width: 180,
-                    //     height: 180
-                    // });
                     handleAdd(img);
+                }, {
+                    // width: '180',
+                    // height: '180',
+                    stroke: '#000000',
+                    strokeWidth: 3,
                 });
             } else if (fileType === 'image/svg+xml') { //check if svg
                 fabric.loadSVGFromURL(url, function(objects, options) {
