@@ -2,7 +2,9 @@ import React from 'react';
 import { fabric } from 'fabric';
 import SidebarContainer from "./sidebar/SidebarContainer";
 import SettingsContainer from "./settings/SettingsContainer";
+import HeaderSettings from "./settings/HeaderSettings";
 import { WorkspaceWrapper } from "../assets/styles/WorkspaceWrapper.style";
+import { MainContainer } from "../assets/styles/MainContainer.style";
 
 // import 'fabric-history';
 
@@ -127,21 +129,24 @@ class CanvasContainer extends React.Component {
             <WorkspaceWrapper>
                 <SidebarContainer handleAdd={this.handleAdd} />
 
-                <canvas
-                    className='canvas'
-                    height={500}
-                    width={600}
-                    id='canvas'>
-                </canvas>
+                <MainContainer>
+                    <HeaderSettings
+                        panningMode={this.state.panningMode}
+                        handlePanningMode={this.handlePanningMode}
+                        handleUndoAndRedo={this.handleUndoAndRedo}
+                        currentElement={this.state.currentElement}
+                        handleRemove={this.handleRemove} />
+                    <canvas
+                        className='canvas'
+                        height={500}
+                        width={600}
+                        id='canvas'>
+                    </canvas>
+                </MainContainer>
 
                 <SettingsContainer
-                    panningMode={this.state.panningMode}
-                    handlePanningMode={this.handlePanningMode}
-                    handleUndoAndRedo={this.handleUndoAndRedo}
                     currentElement={this.state.currentElement}
-                    elementChange={this.handleElementPropChange}
-                    handleRemove={this.handleRemove}
-                />
+                    elementChange={this.handleElementPropChange} />
             </WorkspaceWrapper>
         );
     }
