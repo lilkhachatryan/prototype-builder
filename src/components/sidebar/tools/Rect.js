@@ -1,6 +1,8 @@
 import React from 'react';
 import { fabric } from 'fabric';
 import { reduce } from 'lodash';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {SidebarItem} from "../../../assets/styles/SidebarItem.style";
 
 const Rect = ({ handleAdd }) => {
     const handleClick = () => {
@@ -18,9 +20,10 @@ const Rect = ({ handleAdd }) => {
         return handleAdd(rect);
     };
     return (
-        <button className="btn btn-light" onClick={handleClick} >
-            Rectangle
-        </button>
+        <SidebarItem onClick={handleClick}>
+            <FontAwesomeIcon icon={['fa', 'code']} />
+            <span>Rectangle</span>
+        </SidebarItem>
     );
 };
 

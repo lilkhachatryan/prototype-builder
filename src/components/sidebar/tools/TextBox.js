@@ -1,5 +1,7 @@
 import React from 'react';
 import { fabric } from 'fabric';
+import {SidebarItem} from "../../../assets/styles/SidebarItem.style";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const TextBox = ({ handleAdd }) => {
     const handleClick = () => {
@@ -19,10 +21,12 @@ const TextBox = ({ handleAdd }) => {
         });
         return handleAdd(textBox);
     };
+
     return (
-        <button className="btn btn-light" onClick={handleClick}>
-            Text
-        </button>
+        <SidebarItem onClick={handleClick}>
+            <FontAwesomeIcon icon={['fa', 'code']} />
+            <span>Text</span>
+        </SidebarItem>
     );
 };
 

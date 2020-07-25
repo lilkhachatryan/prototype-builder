@@ -1,5 +1,7 @@
 import React from 'react';
 import { fabric } from 'fabric';
+import {SidebarItem} from "../../../assets/styles/SidebarItem.style";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const Divider = ({ handleAdd }) => {
     const handleClick = () => {
@@ -14,10 +16,12 @@ const Divider = ({ handleAdd }) => {
         });
         return handleAdd(divider);
     };
+
     return (
-        <button className="btn btn-light" onClick={handleClick}>
-            Divider
-        </button>
+        <SidebarItem onClick={handleClick}>
+            <FontAwesomeIcon icon={['fa', 'code']} />
+            <span>Divider</span>
+        </SidebarItem>
     );
 };
 
