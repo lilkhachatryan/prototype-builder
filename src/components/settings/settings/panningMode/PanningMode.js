@@ -4,9 +4,10 @@ const PanningMode = ({handlePanningMode, panningMode}) => {
     return (
         <div>
             <button
+                className="primary"
                 style={ {color: (panningMode ? 'red' : '')} }
                 onClick={handlePanningMode} >
-                PanningModeToggle
+                Panning Mode
             </button>
         </div>
     );

@@ -1,4 +1,7 @@
 import React from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+
 import { HeaderSettingsWrapper } from "../../assets/styles/HeaderSettingsWrapper.style";
 import UndoAndRedo from "./settings/undoAndRedo/UndoAndRedo";
 import PanningMode from "./settings/panningMode/PanningMode";
@@ -8,7 +11,7 @@ const HeaderSettings = ({
     handleRemove,
     handleUndoAndRedo,
     panningMode,
-    handlePanningMode
+    handlePanningMode,
 }) => {
     return (
         <HeaderSettingsWrapper>
@@ -19,11 +22,9 @@ const HeaderSettings = ({
             <button
                 disabled={!Object.keys(currentElement).length > 0}
                 className="btn btn-danger"
-                onClick={() => handleRemove(this.props.currentElement)}
-            >Delete</button>
-            <button className="btn btn-primary" onClick={this.props.bringToTop}>Bring forward</button>
-            <button className="btn btn-primary" onClick={() => this.props.center('H')}>Center horizontally</button>
-            <button className="btn btn-primary" onClick={() => this.props.center('V')}>Center vertically</button>
+                onClick={() => handleRemove(currentElement)}
+            ><FontAwesomeIcon icon={faTrashAlt} /></button>
+
         </HeaderSettingsWrapper>
     );
 };

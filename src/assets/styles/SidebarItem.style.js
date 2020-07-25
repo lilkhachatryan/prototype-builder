@@ -5,7 +5,7 @@ export const SidebarItem = styled.div`
     font-size: 16px;
     color: #8EE4AF;
     cursor: pointer;
-    padding: 10px 20px;
+    padding: 10px 0;
      &:hover {
         color: #5CDB95
      }

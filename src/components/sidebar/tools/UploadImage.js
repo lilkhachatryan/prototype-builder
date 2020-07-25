@@ -44,7 +44,7 @@ class UploadImage extends React.Component{
                 <input
                     onChange={this.handleChange}
                     type="file"/>
-                    <button onClick={this.handleClick} >Add image</button>
+                    <button className="primary" onClick={this.handleClick} >Add image</button>
             </div>
         );
     }

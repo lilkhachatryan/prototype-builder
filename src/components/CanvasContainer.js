@@ -6,7 +6,7 @@ import HeaderSettings from "./settings/HeaderSettings";
 import { WorkspaceWrapper } from "../assets/styles/WorkspaceWrapper.style";
 import { MainContainer } from "../assets/styles/MainContainer.style";
 
-// import 'fabric-history';
+import 'fabric-history';
 
 class CanvasContainer extends React.Component {
 
@@ -162,7 +162,10 @@ class CanvasContainer extends React.Component {
 
                 <SettingsContainer
                     currentElement={this.state.currentElement}
-                    elementChange={this.handleElementPropChange} />
+                    elementChange={this.handleElementPropChange}
+                    bringToTop={this.handleBringToTop}
+                    center={this.handleCenter}
+                />
             </WorkspaceWrapper>
         );
     }

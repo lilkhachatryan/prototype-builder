@@ -21,6 +21,12 @@ class SettingsContainer extends React.Component {
         return (
             <SettingsWrapper>
                 {settings ? settings : <h5>Please select element</h5>}
+                {settings
+                    ? <div className="objAlignBtns">
+                        <button className="primary" onClick={this.props.bringToTop}>Bring forward</button>
+                        <button className="primary" onClick={() => this.props.center('H')}>Center horizontally</button>
+                        <button className="primary" onClick={() => this.props.center('V')}>Center vertically</button>
+                    </div> : null}
             </SettingsWrapper>
         );
     }

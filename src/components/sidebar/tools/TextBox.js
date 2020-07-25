@@ -17,7 +17,8 @@ const TextBox = ({ handleAdd }) => {
             lineHeight: 1,
             textBackgroundColor: '#FFFFFF',
             strokeWidth: 0,
-            stroke: '#000000'
+            stroke: '#000000',
+            textAlign: 'left',
         });
         return handleAdd(textBox);
     };
