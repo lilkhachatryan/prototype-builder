@@ -9,8 +9,6 @@ import { MainContainer } from "../assets/styles/MainContainer.style";
 // import 'fabric-history';
 
 class CanvasContainer extends React.Component {
-
-
     state = {
         currentElement: {},
         panningMode: false,
@@ -31,7 +29,6 @@ class CanvasContainer extends React.Component {
 
         });
         this.canvas.on('selection:created', (event) => {
-
             this.setState({ currentElement: this.canvas.getActiveObject() });
 
         });
@@ -116,12 +113,16 @@ class CanvasContainer extends React.Component {
     };
 
 
-    handleElementPropChange = (obj) => {
-        console.log(obj);
+    handleElementPropChange = (inputs, item) => {
         const newCurrentElement = this.canvas.getActiveObject();
-        newCurrentElement.set({ ...obj });
-        this.canvas.renderAll();
-        this.setState({ currentElement: newCurrentElement });
+        if (newCurrentElement.type === 'group') {
+            item.set({...inputs});
+            this.canvas.renderAll();
+        } else {
+            newCurrentElement.set({ ...inputs });
+            this.canvas.renderAll();
+            this.setState({ currentElement: newCurrentElement });
+        }
     };
 
 

@@ -21,7 +21,7 @@ const HeaderSettings = ({
             <button
                 disabled={!Object.keys(currentElement).length > 0}
                 className="btn btn-danger"
-                onClick={() => handleRemove(this.props.currentElement)}
+                onClick={() => handleRemove(currentElement)}
             >Delete</button>
             <button className="btn btn-primary" onClick={bringToTop}>Bring forward</button>
             <button className="btn btn-primary" onClick={() => center('H')}>Center horizontally</button>
