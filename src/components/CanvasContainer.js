@@ -2,7 +2,7 @@ import React from 'react';
 import { fabric } from 'fabric';
 import SidebarContainer from "./sidebar/SidebarContainer";
 import SettingsContainer from "./settings/SettingsContainer";
-// import 'fabric-history';
+import 'fabric-history';
 
 class CanvasContainer extends React.Component {
 
