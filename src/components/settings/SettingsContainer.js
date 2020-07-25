@@ -1,4 +1,5 @@
 import React from 'react';
+import { SettingsWrapper } from "../../assets/styles/SettingsWrapper.style";
 import LineSettings from './settings/LineSettings/LineSettings';
 import TextSettings from './settings/TextSettings/TextSettings';
 import ShapeSettings from './settings/ShapeSettings/ShapeSettings';
@@ -20,19 +21,19 @@ class SettingsContainer extends React.Component {
         }
 
         return (
-            <div>
+            <SettingsWrapper>
                 {settings ? settings : <h5>Please select element</h5>}
-                {Object.keys(this.props.currentElement).length > 0 
-                    ? <button 
-                        className="btn btn-danger" 
+                {Object.keys(this.props.currentElement).length > 0
+                    ? <button
+                        className="btn btn-danger"
                         onClick={() => this.props.handleRemove(this.props.currentElement)}
-                    >Delete</button> 
+                    >Delete</button>
                     : null}
                     <UndoAndRedo handleUndoAndRedo={this.props.handleUndoAndRedo} />
                     <PanningMode
                         panningMode={this.props.panningMode}
                         handlePanningMode={this.props.handlePanningMode}/>
-            </div>
+            </SettingsWrapper>
         );
     }
 }

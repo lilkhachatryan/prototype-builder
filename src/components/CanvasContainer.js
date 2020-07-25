@@ -2,6 +2,8 @@ import React from 'react';
 import { fabric } from 'fabric';
 import SidebarContainer from "./sidebar/SidebarContainer";
 import SettingsContainer from "./settings/SettingsContainer";
+import { WorkspaceWrapper } from "../assets/styles/WorkspaceWrapper.style";
+
 // import 'fabric-history';
 
 class CanvasContainer extends React.Component {
@@ -122,9 +124,15 @@ class CanvasContainer extends React.Component {
 
     render() {
         return (
-            <div className="container">
+            <WorkspaceWrapper>
                 <SidebarContainer handleAdd={this.handleAdd} />
 
+                <canvas
+                    className='canvas'
+                    height={500}
+                    width={600}
+                    id='canvas'>
+                </canvas>
 
                 <SettingsContainer
                     panningMode={this.state.panningMode}
@@ -133,15 +141,8 @@ class CanvasContainer extends React.Component {
                     currentElement={this.state.currentElement}
                     elementChange={this.handleElementPropChange}
                     handleRemove={this.handleRemove}
-                    handleUndoAndRedo={this.handleUndoAndRedo}
                 />
-                <canvas
-                    className='canvas'
-                    height={500}
-                    width={700}
-                    id='canvas'>
-                </canvas>
-            </div>
+            </WorkspaceWrapper>
         );
     }
 }
