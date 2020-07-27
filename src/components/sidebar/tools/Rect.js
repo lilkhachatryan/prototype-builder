@@ -3,10 +3,13 @@ import { fabric } from 'fabric';
 import { reduce } from 'lodash';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {SidebarItem} from "../../../assets/styles/SidebarItem.style";
+import {addCanvasObject} from "../../../actions/canvas";
+import {connect} from "react-redux";
+import createFabricObject from "../../../utils/fabricObject";
 
 const Rect = ({ handleAdd }) => {
     const handleClick = () => {
-        const rect = new fabric.Rect({
+        const rect = createFabricObject ('Rect', {
             top: 200,
             left: 100,
             width: 100,
@@ -15,9 +18,10 @@ const Rect = ({ handleAdd }) => {
             stroke: '#000000',
             strokeWidth: 3,
             rx: 0,
-            ry: 0,
-        });
-        return handleAdd(rect);
+            ry: 0
+        }).toObject();
+
+        handleAdd({ newObj: rect });
     };
     return (
         <SidebarItem onClick={handleClick}>
@@ -28,4 +32,10 @@ const Rect = ({ handleAdd }) => {
 };
 
 
-export default Rect;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        handleAdd: (payload) => dispatch(addCanvasObject(payload))
+    };
+};
+
+export default connect(null, mapDispatchToProps)(Rect);

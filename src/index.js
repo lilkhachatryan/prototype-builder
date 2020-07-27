@@ -5,11 +5,15 @@ import '././assets/styles/global.scss';
 import '././assets/styles/custom.scss';
 import './plugins/fontawesome';
 import App from './App';
+import { Provider } from 'react-redux';
+import configureStore from "./store/configureStore";
+
+const store = configureStore();
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 

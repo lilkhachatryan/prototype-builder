@@ -1,7 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import {objectChange } from "../../../../actions/canvas";
 
 class ShapeSettings extends React.Component {
-
     state = {
         inputs: {
             fill: this.props.currentElement.fill,
@@ -13,6 +14,7 @@ class ShapeSettings extends React.Component {
     };
 
     componentDidUpdate = (prevProps) => {
+        console.log('prevProps.currentElement !== this.props.currentElement', prevProps.currentElement !== this.props.currentElement);
         if (prevProps.currentElement !== this.props.currentElement) {
             const newAtts = {
                 fill: this.props.currentElement.fill,
@@ -20,25 +22,30 @@ class ShapeSettings extends React.Component {
                 stroke: this.props.currentElement.stroke,
                 opacity: this.props.currentElement.opacity,
                 ry: this.props.currentElement.ry,
-            }
-            this.setState({ inputs: newAtts })
-        };
+            };
+            this.setState({ inputs: newAtts });
+        }
     };
 
     handleChange = (event, type) => {
         let value = event.target.value;
         let newInputs = { ...this.state.inputs };
         newInputs[type] = value;
-        this.setState({ inputs: newInputs });
+        let selectedObject = {
+            [type]: value
+        };
 
         if (type === 'opacity' || type === 'strokeWidth') {
-            value = +value
+            value = +value;
         }
         if (type === 'ry') {
-            this.props.elementChange({ rx: value, ry: value })
+            selectedObject = { rx: value, ry: value };
         } else {
-            this.props.elementChange({ [type]:value })
+            selectedObject = { [type]: value };
         }
+        this.setState({ inputs: newInputs });
+        console.log('selectedObject', selectedObject);
+        this.props.objectChange({ selectedObject });
     };
 
     render() {
@@ -85,4 +92,10 @@ class ShapeSettings extends React.Component {
     }
 }
 
-export default ShapeSettings;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        objectChange: (payload) => dispatch(objectChange(payload))
+    };
+};
+
+export default connect(null, mapDispatchToProps)(ShapeSettings);

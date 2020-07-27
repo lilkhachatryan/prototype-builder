@@ -42,6 +42,8 @@ const Button = ({ handleAdd }) => {
             strokeWidth: 3,
             rx: 0,
             ry: 0,
+            strokeUniform: true
+            // padding: 10
         });
 
        let button = new fabric.Group([rect, text], {

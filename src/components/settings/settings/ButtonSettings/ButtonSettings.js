@@ -25,6 +25,7 @@ class ButtonSettings extends Component {
             value = true;
         }
         this.props.elementChange({ [type]: value }, this.props.currentElement.item(1));
+        console.log('JSON.stringify(canvas)', JSON.stringify(this.props.currentElement.item(1)));
         this.setState({ text: newInputs });
     };
 
@@ -43,7 +44,7 @@ class ButtonSettings extends Component {
         }
 
         if (type === 'textDecoration') {
-            this.props.elementChange({ 'underline': false, 'linethrough': false, 'overline': false });
+            this.props.elementChange({ 'underline': false, 'linethrough': false, 'overline': false }, this.props.currentElement.item(0));
             type = value;
             value = true;
         }
