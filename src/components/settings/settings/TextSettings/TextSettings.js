@@ -1,4 +1,6 @@
 import React from 'react';
+import {updateCurrentElement} from "../../../../actions/canvas";
+import {connect} from "react-redux";
 
 class TextSettings extends React.Component {
 
@@ -21,12 +23,12 @@ class TextSettings extends React.Component {
 
         let textDecoration = '';
         if (this.props.currentElement.underline) {
-            textDecoration = 'underline'
+            textDecoration = 'underline';
         } else if (this.props.currentElement.linethrough) {
-            textDecoration = 'linethrough'
+            textDecoration = 'linethrough';
         } else if (this.props.currentElement.overline) {
-            textDecoration = 'overline'
-        };
+            textDecoration = 'overline';
+        }
 
         if (prevProps.currentElement !== this.props.currentElement) {
             const newAtts = {
@@ -40,28 +42,33 @@ class TextSettings extends React.Component {
                 strokeWidth: this.props.currentElement.strokeWidth,
                 stroke: this.props.currentElement.stroke,
                 lineHeight: this.props.currentElement.lineHeight,
-            }
-            this.setState({ inputs: newAtts })
-        };
+            };
+            this.setState({ inputs: newAtts });
+        }
     };
 
     handleChange = (event, type) => {
         let value = event.target.value;
         let newInputs = { ...this.state.inputs };
         newInputs[type] = value;
+        let selectedObject = {
+            [type]: value
+        };
         this.setState({ inputs: newInputs });
 
         if (type === 'fontSize' || type === 'strokeWidth' || type === 'fontWeight' || type === 'lineHeight') {
-            value = +value
+            value = +value;
+            selectedObject = {
+                [type]: +value
+            };
         }
 
         if (type === 'textDecoration') {
-            this.props.elementChange({ 'underline': false, 'linethrough': false, 'overline': false });
+            selectedObject = { 'underline': false, 'linethrough': false, 'overline': false };
             type = value;
             value = true;
         }
-        this.props.elementChange({ [type]: value })
-
+        this.props.updateCurrentElement({ selectedObject });
     };
 
     render() {
@@ -180,4 +187,16 @@ class TextSettings extends React.Component {
     }
 }
 
-export default TextSettings;
+const mapStateToProps = (state) => {
+    return {
+        currentElement: state.canvas.selectedObject
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateCurrentElement: (payload) => dispatch(updateCurrentElement(payload))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TextSettings);

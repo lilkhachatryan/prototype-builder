@@ -1,4 +1,6 @@
 import React from 'react';
+import {updateCurrentElement} from "../../../../actions/canvas";
+import {connect} from "react-redux";
 
 class LineSettings extends React.Component {
 
@@ -16,9 +18,9 @@ class LineSettings extends React.Component {
                 strokeWidth: this.props.currentElement.strokeWidth,
                 stroke: this.props.currentElement.stroke,
                 opacity: this.props.currentElement.opacity
-            }
-            this.setState({ inputs: newAtts })
-        };
+            };
+            this.setState({ inputs: newAtts });
+        }
     };
 
     handleChange = (event, type) => {
@@ -28,10 +30,13 @@ class LineSettings extends React.Component {
         this.setState({ inputs: newInputs });
 
         if (type === 'opacity' || type === 'strokeWidth') {
-            value = +value
+            value = +value;
         }
 
-        this.props.elementChange({[type]: value})
+        let selectedObject = {
+            [type]: value
+        };
+        this.props.updateCurrentElement({ selectedObject });
     };
 
     render() {
@@ -66,4 +71,16 @@ class LineSettings extends React.Component {
     }
 }
 
-export default LineSettings;
+const mapStateToProps = (state) => {
+    return {
+        currentElement: state.canvas.selectedObject
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateCurrentElement: (payload) => dispatch(updateCurrentElement(payload))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LineSettings);

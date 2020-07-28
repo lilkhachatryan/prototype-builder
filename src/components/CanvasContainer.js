@@ -6,10 +6,10 @@ import HeaderSettings from "./settings/HeaderSettings";
 import { WorkspaceWrapper } from "../assets/styles/WorkspaceWrapper.style";
 import { MainContainer } from "../assets/styles/MainContainer.style";
 import { connect } from "react-redux";
-import { changeCanvas, objectChange, setActiveObject } from "../actions/canvas";
-import createFabricObject from '../utils/fabricObject';
+import { setCurrentElement } from "../actions/canvas";
 import 'fabric-history';
-import _ from 'lodash'
+import _ from 'lodash';
+import createFabricObject from '../utils/fabricObject';
 
 class CanvasContainer extends React.Component {
     state = {
@@ -22,53 +22,40 @@ class CanvasContainer extends React.Component {
         if (event.isComposing || event.keyCode === 229) {
             return;
         }
-        if (event.key === 'Delete' && Object.keys(this.state.currentElement).length > 0) {
-            this.handleRemove(this.state.currentElement);
-        }
+        // if (event.key === 'Delete' && Object.keys(this.state.currentElement).length > 0) {
+        //     this.handleRemove(this.state.currentElement);
+        // }
     };
 
     componentDidMount() {
-        const { objectChange, setActiveObject } = this.props;
         this.canvas = new fabric.Canvas('canvas', {});
 
         this.loadAndRender();
 
-        this.canvas.on('mouse:up', (event) => {
-            if (event.target) {
-                console.log('event mouse:up', event.target.id);
-                let payload = {
-                    selectedObject: event.target.toObject()
-                };
-                objectChange(payload);
-            }
-        });
-
         this.canvas.on('selection:created', (event) => {
-            console.log('this.canvas.getActiveObject()', this.canvas.getActiveObject().id);
-            console.log('selection:created', event.target.id);
-            setActiveObject({ id: event.target.id });
-
+            this.handleCanvasChane();
         });
         this.canvas.on('selection:updated', (event) => {
-            // this.setState({ currentElement: this.canvas.getActiveObject() });
+            this.handleCanvasChane();
         });
         this.canvas.on('selection:cleared', (event) => {
-            // this.setState({ currentElement: {} });
+            this.handleCanvasChane();
         });
-        // this.handlePan();
-        // this.handleZoom();
-        // window.addEventListener("keydown", this.deleteHandler);
+        this.handlePan();
+        this.handleZoom();
+        window.addEventListener("keydown", this.deleteHandler);
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (!_.isEqual(prevProps.canvas, this.props.canvas)){
+        console.log('is', !_.isEqual(prevProps.currentElementObject, this.props.currentElementObject));
+        if (!_.isEqual(prevProps.currentElementObject, this.props.currentElementObject)){
             this.loadAndRender();
         }
     }
 
 
     componentWillUnmount = () => {
-        // window.removeEventListener('keydown', this.deleteHandler);
+        window.removeEventListener('keydown', this.deleteHandler);
     };
 
 
@@ -121,12 +108,14 @@ class CanvasContainer extends React.Component {
     handleUndoAndRedo = (type) => {
         type === 'undo' ? this.canvas.undo() : this.canvas.redo();
     };
+
     handleAdd = (obj) => {
         this.canvas.add(obj);
     };
+
     handleRemove = (obj) => {
         this.canvas.remove(obj);
-        this.setState({ currentElement: {} });
+        this.props.setCurrentElement({ selectedObject: {} });
     };
 
     handlePanningMode = () => {
@@ -135,6 +124,27 @@ class CanvasContainer extends React.Component {
         });
     };
 
+
+    handleBringToTop = () => {
+        // this.state.currentElement.bringToFront();
+    };
+
+    handleCenter = (type) => {
+        if (type === 'H') {
+            // this.state.currentElement.centerH();
+            // this.state.currentElement.setCoords();
+        } else if (type === 'V') {
+            // this.state.currentElement.centerV();
+            // this.state.currentElement.setCoords();
+        }
+    };
+
+    handleCanvasChane = () => {
+        let payload = {
+            selectedObject: this.canvas.getActiveObject() ? this.canvas.getActiveObject().toObject() : null
+        };
+        this.props.setCurrentElement(payload);
+    };
 
     handleElementPropChange = (inputs, item) => {
         const newCurrentElement = this.canvas.getActiveObject();
@@ -148,33 +158,20 @@ class CanvasContainer extends React.Component {
         }
     };
 
-
-    handleBringToTop = () => {
-        this.state.currentElement.bringToFront()
-    }
-    handleCenter = (type) => {
-        if (type === 'H') {
-            this.state.currentElement.centerH();
-            this.state.currentElement.setCoords();
-        } else if (type === 'V') {
-            this.state.currentElement.centerV();
-            this.state.currentElement.setCoords();
-        }
-    }
-
     loadAndRender = () => {
-        this.canvas.loadFromJSON(this.props.canvas.canvasObject);
+        let { currentElementObject } = this.props;
 
-        // let payload = {
-        //     canvasObject: this.canvas.toObject(),
-        //     selectedObjectId: this.canvas.getObjects().indexOf(this.canvas.getActiveObject())
-        // };
-        // this.props.canvasChange(payload);
-
-        let selectedObjectId = this.props.canvas.selectedObjectId;
-
-        if (selectedObjectId) {
-            this.canvas.setActiveObject(this.canvas.getObjects().find(obj => obj.id === selectedObjectId));
+        if (currentElementObject) {
+            // TODO find better solution
+            let currentElement = this.canvas.getObjects().find(obj => obj.id === currentElementObject.id);
+            // let currentElement = createFabricObject(_.startCase(currentElementObject.type), { ...currentElementObject });
+            if (currentElement.type === 'group') {
+                //TODO maybe will be resolved with custom created class or with above solution
+                // currentElement.item(?).set({...currentElementObject});
+            } else {
+                currentElement.set({ ...currentElementObject });
+            }
+            this.canvas.setActiveObject(currentElement);
         }
         this.canvas.renderAll();
     };
@@ -189,7 +186,6 @@ class CanvasContainer extends React.Component {
                         panningMode={this.state.panningMode}
                         handlePanningMode={this.handlePanningMode}
                         handleUndoAndRedo={this.handleUndoAndRedo}
-                        currentElement={this.state.currentElement}
                         handleRemove={this.handleRemove}
                         bringToTop={this.handleBringToTop}
                         center={this.handleCenter} />
@@ -201,9 +197,7 @@ class CanvasContainer extends React.Component {
                     </canvas>
                 </MainContainer>
 
-                <SettingsContainer
-                    currentElement={this.state.currentElement}
-                    elementChange={this.handleElementPropChange} />
+                <SettingsContainer />
             </WorkspaceWrapper>
         );
     }
@@ -211,15 +205,14 @@ class CanvasContainer extends React.Component {
 
 const mapStateToProps = function(state) {
     return {
+        currentElementObject: state.canvas.selectedObject,
         canvas: state.canvas
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changeCanvas: (payload) => dispatch(changeCanvas(payload)),
-        objectChange: (payload) => dispatch(objectChange(payload)),
-        setActiveObject: (payload) => dispatch(setActiveObject(payload))
+        setCurrentElement: (payload) => dispatch(setCurrentElement(payload))
     };
 };
 

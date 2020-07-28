@@ -1,29 +1,25 @@
-// import {fabric} from "fabric";
-
-export function changeCanvas (payload) {
-    return {
-        type: 'OBJECTS_CANVAS_CHANGE',
-        payload
-    };
-}
-
-export function objectChange (payload) {
-    return {
-        type: 'OBJECT_CANVAS_CHANGE',
-        payload
-    };
-}
-
-export function addCanvasObject (payload) {
-    return {
-        type: 'OBJECT_CANVAS_ADD',
-        payload
-    };
-}
-
 export function setActiveObject(payload) {
     return {
         type: 'SET_ACTIVE_OBJECT',
         payload
+    };
+}
+
+export function updateActiveObject (payload) {
+    return {
+        type: 'UPDATE_ACTIVE_OBJECT',
+        payload
+    };
+}
+
+export function setCurrentElement(payload) {
+    return (dispatch) => {
+        dispatch(setActiveObject(payload));
+    };
+}
+
+export function updateCurrentElement(payload) {
+    return (dispatch) => {
+        dispatch(updateActiveObject(payload));
     };
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { HeaderSettingsWrapper } from "../../assets/styles/HeaderSettingsWrapper.style";
 import UndoAndRedo from "./settings/undoAndRedo/UndoAndRedo";
 import PanningMode from "./settings/panningMode/PanningMode";
+import {connect} from "react-redux";
 
 const HeaderSettings = ({
     currentElement,
@@ -19,7 +20,7 @@ const HeaderSettings = ({
                 panningMode={panningMode}
                 handlePanningMode={handlePanningMode} />
             <button
-                disabled={!Object.keys(currentElement).length > 0}
+                disabled={!currentElement}
                 className="btn btn-danger"
                 onClick={() => handleRemove(currentElement)}
             >Delete</button>
@@ -30,4 +31,9 @@ const HeaderSettings = ({
     );
 };
 
-export default HeaderSettings;
+const mapStateToProps = function(state) {
+    return {
+        currentElement: state.canvas.selectedObject
+    };
+};
+export default connect(mapStateToProps)(HeaderSettings);

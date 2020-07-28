@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {objectChange } from "../../../../actions/canvas";
+import { updateCurrentElement } from "../../../../actions/canvas";
 
 class ShapeSettings extends React.Component {
     state = {
@@ -14,7 +14,6 @@ class ShapeSettings extends React.Component {
     };
 
     componentDidUpdate = (prevProps) => {
-        console.log('prevProps.currentElement !== this.props.currentElement', prevProps.currentElement !== this.props.currentElement);
         if (prevProps.currentElement !== this.props.currentElement) {
             const newAtts = {
                 fill: this.props.currentElement.fill,
@@ -31,12 +30,17 @@ class ShapeSettings extends React.Component {
         let value = event.target.value;
         let newInputs = { ...this.state.inputs };
         newInputs[type] = value;
+
+        // TODO check this part in all setting components, setState too
         let selectedObject = {
             [type]: value
         };
 
         if (type === 'opacity' || type === 'strokeWidth') {
             value = +value;
+            selectedObject = {
+                [type]: +value
+            };
         }
         if (type === 'ry') {
             selectedObject = { rx: value, ry: value };
@@ -45,7 +49,7 @@ class ShapeSettings extends React.Component {
         }
         this.setState({ inputs: newInputs });
         console.log('selectedObject', selectedObject);
-        this.props.objectChange({ selectedObject });
+        this.props.updateCurrentElement({ selectedObject });
     };
 
     render() {
@@ -92,10 +96,16 @@ class ShapeSettings extends React.Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
     return {
-        objectChange: (payload) => dispatch(objectChange(payload))
+        currentElement: state.canvas.selectedObject
     };
 };
 
-export default connect(null, mapDispatchToProps)(ShapeSettings);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateCurrentElement: (payload) => dispatch(updateCurrentElement(payload))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShapeSettings);

@@ -1,8 +1,6 @@
 import React from 'react';
 import {SidebarItem} from "../../../assets/styles/SidebarItem.style";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { connect } from 'react-redux';
-import { addCanvasObject } from "../../../actions/canvas";
 import createFabricObject from "../../../utils/fabricObject";
 
 const Circle = ({ handleAdd }) => {
@@ -22,9 +20,8 @@ const Circle = ({ handleAdd }) => {
             fill: '#FFFFFF',
             stroke: '#000000',
             strokeWidth: 2
-        }).toObject();
-        console.log('circle', circle);
-        handleAdd({ newObj: circle });
+        });
+        handleAdd(circle);
     };
 
     return (
@@ -35,10 +32,4 @@ const Circle = ({ handleAdd }) => {
     );
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        handleAdd: (payload) => dispatch(addCanvasObject(payload))
-    };
-};
-
-export default connect(null, mapDispatchToProps)(Circle);
+export default Circle;

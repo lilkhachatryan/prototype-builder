@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {updateCurrentElement} from "../../../../actions/canvas";
+import {connect} from "react-redux";
 
 class ButtonSettings extends Component {
     state = {
@@ -14,18 +16,23 @@ class ButtonSettings extends Component {
         let newInputs = { ...this.state.text };
         let value = event.target.value;
         newInputs[type] = value;
+        let selectedObject = {
+            [type]: value
+        };
 
         if (type === 'fontSize' || type === 'strokeWidth' || type === 'fontWeight' || type === 'lineHeight') {
             value = +value;
+            selectedObject = {
+                [type]: +value
+            };
         }
 
         if (type === 'textDecoration') {
-            this.props.elementChange({ 'underline': false, 'linethrough': false, 'overline': false });
+            selectedObject.val = { 'underline': false, 'linethrough': false, 'overline': false };
             type = value;
             value = true;
         }
-        this.props.elementChange({ [type]: value }, this.props.currentElement.item(1));
-        console.log('JSON.stringify(canvas)', JSON.stringify(this.props.currentElement.item(1)));
+        this.props.updateCurrentElement({ selectedObject });
         this.setState({ text: newInputs });
     };
 
@@ -33,22 +40,28 @@ class ButtonSettings extends Component {
         let newInputs = { ...this.state.rect };
         let value = event.target.value;
         newInputs[type] = value;
+        let selectedObject = {
+            [type]: value
+        };
 
         if (type === 'fill') {
             this.setState({ text : {...this.state.text, fill: value }});
-            this.props.elementChange({ textBackgroundColor: value }, this.props.currentElement.item(1));
+            selectedObject = { textBackgroundColor: value };
         }
 
         if (type === 'fontSize' || type === 'strokeWidth' || type === 'fontWeight' || type === 'lineHeight') {
             value = +value;
+            selectedObject = {
+                [type]: +value
+            };
         }
 
         if (type === 'textDecoration') {
-            this.props.elementChange({ 'underline': false, 'linethrough': false, 'overline': false }, this.props.currentElement.item(0));
+            selectedObject = { 'underline': false, 'linethrough': false, 'overline': false };
             type = value;
             value = true;
         }
-        this.props.elementChange({ [type]: value }, this.props.currentElement.item(0));
+        this.props.updateCurrentElement({ selectedObject });
         this.setState({ rect: newInputs });
     };
 
@@ -206,4 +219,16 @@ class ButtonSettings extends Component {
     }
 }
 
-export default ButtonSettings;
+const mapStateToProps = (state) => {
+    return {
+        currentElement: state.canvas.selectedObject
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateCurrentElement: (payload) => dispatch(updateCurrentElement(payload))
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ButtonSettings);

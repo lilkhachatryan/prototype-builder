@@ -1,44 +1,25 @@
-import _ from 'lodash';
-
 const initialState = {
-    canvasObject: {
-        objects: [],
-        background: '#fff'
-    },
-    selectedObjectId: null
+    selectedObject: null
 };
 
 export default function canvas(state = initialState, { type, payload }) {
     switch (type) {
-        case 'OBJECTS_CANVAS_CHANGE':
-            return {
-                ...state,
-                canvasObject: payload.canvasObject,
-                selectedObjectId: payload.selectedObjectId
-            };
-        case 'OBJECT_CANVAS_CHANGE': {
-            let newCanvasObject = _.cloneDeep(state.canvasObject);
-            newCanvasObject.objects = newCanvasObject.objects.map(obj => obj.id === state.selectedObjectId ? { ...obj, ...payload.selectedObject} : obj);
-            console.log('newCanvasObject.objects', newCanvasObject.objects);
-            return {
-                ...state,
-                canvasObject: newCanvasObject
-            };
-        }
         case 'SET_ACTIVE_OBJECT':
             return {
                 ...state,
-                selectedObjectId: payload.id
+                selectedObject: payload.selectedObject
             };
-        case 'OBJECT_CANVAS_ADD':
+        case 'UPDATE_ACTIVE_OBJECT':
+        {
+            console.log('aaa', { ...state.selectedObject, ...payload.selectedObject});
             return {
                 ...state,
-                canvasObject: {
-                    ...state.canvasObject,
-                    objects: [...state.canvasObject.objects, payload.newObj]
-                },
-                selectedObjectId: payload.newObj.id
+                selectedObject: {
+                    ...state.selectedObject,
+                    ...payload.selectedObject
+                }
             };
+        }
         default: return state;
     }
 }

@@ -9,31 +9,26 @@ import {connect} from "react-redux";
 
 class SettingsContainer extends React.Component {
     render() {
-        const { canvasObject, selectedObjectId } = this.props.canvas;
-        if (!selectedObjectId) {
+        const { currentElement } = this.props;
+        if (!currentElement) {
             return (<h5>Please select element</h5>);
         }
-
-        const currentElement = canvasObject.objects.find(obj => obj.id === selectedObjectId);
-        console.log('currentElement', currentElement);
 
         let groupTypes;
         let settings = null;
         if (currentElement.type === 'group') {
-            // groupTypes = currentElement._objects.map(obj => _.startCase(obj.type)).join('');
-            // if (groupTypes === 'RectText') {
-            //     settings = <ButtonSettings elementChange={elementChange} currentElement={currentElement} />;
-            // }
+            groupTypes = currentElement._objects.map(obj => _.startCase(obj.type)).join('');
+            if (groupTypes === 'RectText') {
+                settings = <ButtonSettings />;
+            }
         } else {
             if (currentElement.type === 'textbox') {
-                // settings = <TextSettings elementChange={elementChange} currentElement={currentElement}/>
-            } else if (currentElement.type === 'rect'
-                || currentElement.type === 'triangle'
-                || currentElement.type === 'circle') {
-                settings = <ShapeSettings currentElement={currentElement} />;
+                settings = <TextSettings />;
+            } else if (['rect', 'triangle', 'circle'].indexOf(currentElement.type) > -1) {
+                settings = <ShapeSettings />;
             }
             else if (currentElement.type === 'line') {
-                // settings = <LineSettings elementChange={elementChange} currentElement={currentElement}/>
+                settings = <LineSettings />;
             }
         }
 
@@ -47,7 +42,7 @@ class SettingsContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        canvas: state.canvas
+        currentElement: state.canvas.selectedObject
     };
 };
 
