@@ -1,5 +1,10 @@
 import React from 'react';
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAlignCenter, faAlignJustify, faAlignLeft, faAlignRight } from '@fortawesome/free-solid-svg-icons'
+
+import './TextSettings.scss';
+
 class TextSettings extends React.Component {
 
     state = {
@@ -36,7 +41,7 @@ class TextSettings extends React.Component {
                 fontWeight: this.props.currentElement.fontWeight,
                 fontStyle: this.props.currentElement.fontStyle,
                 textAlign: this.props.currentElement.textAlign,
-                textDecoration:  textDecoration,
+                textDecoration: textDecoration,
                 strokeWidth: this.props.currentElement.strokeWidth,
                 stroke: this.props.currentElement.stroke,
                 lineHeight: this.props.currentElement.lineHeight,
@@ -66,31 +71,30 @@ class TextSettings extends React.Component {
 
     render() {
         return (
-            <div>
-                <div>
+            <div className="textSettings itemSettings">
+                <div className="flexInput">
                     <label>Text Color</label>
                     <input
                         type="color"
                         onChange={(_) => this.handleChange(_, 'fill')}
                         value={this.state.inputs.fill} />
                 </div>
-                <div>
+                <div className="flexInput">
                     <label>Font Size (px)</label>
                     <input type="number" value={this.state.inputs.fontSize} onChange={(_) => this.handleChange(_, 'fontSize')} />
                 </div>
-                <div>
+                <div className="flexInput">
                     <label>Line height (em)</label>
                     <input type="number" step="0.1" value={this.state.inputs.lineHeight} onChange={(_) => this.handleChange(_, 'lineHeight')} />
                 </div>
-                <div>
+                <div className="flexInput">
                     <label>Font Family</label>
                     <select onChange={(_) => this.handleChange(_, 'fontFamily')} value={this.state.inputs.fontFamily}>
-                        <option value="">Choose font family</option>
                         <option value="Arial">Arial</option>
                         <option value="Times New Roman">Times New Roman</option>
                     </select>
                 </div>
-                <div>
+                <div className="flexInput">
                     <label>Font Weight</label>
                     <select onChange={(_) => this.handleChange(_, 'fontWeight')} value={this.state.inputs.fontWeight}>
                         <option value="0"></option>
@@ -103,8 +107,7 @@ class TextSettings extends React.Component {
                     </select>
                 </div>
                 <div>
-                    <p>Text Align</p>
-                    <div>
+                    <div className="textAlignSettings">
                         <div>
                             <input
                                 type="radio"
@@ -113,7 +116,7 @@ class TextSettings extends React.Component {
                                 id="left"
                                 onChange={(_) => this.handleChange(_, 'textAlign')}
                                 checked={this.state.inputs.textAlign === 'left'} />
-                            <label htmlFor="left">Left</label>
+                            <label htmlFor="left"><FontAwesomeIcon icon={faAlignLeft} /></label>
                         </div>
                         <div>
                             <input
@@ -123,7 +126,7 @@ class TextSettings extends React.Component {
                                 id="center"
                                 onChange={(_) => this.handleChange(_, 'textAlign')}
                                 checked={this.state.inputs.textAlign === 'center'} />
-                            <label htmlFor="center">Center</label>
+                            <label htmlFor="center"><FontAwesomeIcon icon={faAlignCenter} /></label>
                         </div>
                         <div>
                             <input
@@ -133,7 +136,7 @@ class TextSettings extends React.Component {
                                 id="right"
                                 onChange={(_) => this.handleChange(_, 'textAlign')}
                                 checked={this.state.inputs.textAlign === 'right'} />
-                            <label htmlFor="right">Right</label>
+                            <label htmlFor="right"><FontAwesomeIcon icon={faAlignRight} /></label>
                         </div>
                         <div>
                             <input
@@ -143,11 +146,11 @@ class TextSettings extends React.Component {
                                 id="justify"
                                 onChange={(_) => this.handleChange(_, 'textAlign')}
                                 checked={this.state.inputs.textAlign === 'justify'} />
-                            <label htmlFor="justify">Justify</label>
+                            <label htmlFor="justify"><FontAwesomeIcon icon={faAlignJustify} /></label>
                         </div>
                     </div>
                 </div>
-                <div>
+                <div className="flexInput">
                     <label>Text Decoration</label>
                     <select onChange={(_) => this.handleChange(_, 'textDecoration')} value={this.state.inputs.textDecoration}>
                         <option value="">None</option>
@@ -156,18 +159,18 @@ class TextSettings extends React.Component {
                         <option value="overline">Overline</option>
                     </select>
                 </div>
-                <div>
+                <div className="flexInput">
                     <label>Font Style</label>
                     <select onChange={(_) => this.handleChange(_, 'fontStyle')} value={this.state.inputs.fontStyle}>
                         <option value="normal">Normal</option>
                         <option value="italic">Italic</option>
                     </select>
                 </div>
-                <div>
+                <div className="flexInput">
                     <label>Stroke Width (px)</label>
                     <input type="number" step="0.1" value={this.state.inputs.strokeWidth} onChange={(_) => this.handleChange(_, 'strokeWidth')} />
                 </div>
-                <div>
+                <div className="flexInput">
                     <label>Stroke Color</label>
                     <input
                         type="color"

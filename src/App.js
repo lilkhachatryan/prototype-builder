@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.scss';
-import { Home } from "./views";
+import { Home } from "./pages";
 
 import {
   BrowserRouter as Router,
