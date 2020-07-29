@@ -1,19 +1,21 @@
+import * as actionTypes from '../actions/actionTypes';
+
 const initialState = {
     currentElement: {}
 }
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'UPDATE_CURRENT_OBJECT':
+        case actionTypes.UPDATE_CURRENT_OBJECT:
             return {
                 currentElement: action.payload
             }
-        case 'UPDATE_ELEMENT':
+        case actionTypes.UPDATE_OBJECT:
 
             return {
                 currentElement: action.payload
             }
-        case 'DELETE_OBJECT':
+        case actionTypes.DELETE_OBJECT:
             return {
                 currentElement: action.payload
             };
