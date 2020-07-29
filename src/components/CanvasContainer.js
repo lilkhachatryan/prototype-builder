@@ -1,12 +1,12 @@
 import React from 'react';
 import { fabric } from 'fabric';
+import 'fabric-history';
+
 import SidebarContainer from "./sidebar/SidebarContainer";
 import SettingsContainer from "./settings/SettingsContainer";
 import HeaderSettings from "./settings/HeaderSettings";
-import { WorkspaceWrapper } from "../assets/styles/WorkspaceWrapper.style";
-import { MainContainer } from "../assets/styles/MainContainer.style";
 
-import 'fabric-history';
+import './CanvasContainer.scss';
 
 class CanvasContainer extends React.Component {
 
@@ -26,21 +26,21 @@ class CanvasContainer extends React.Component {
         }
     };
 
+    updateSelection = () => {
+        this.setState({ currentElement: this.canvas.getActiveObject().toObject(['id']) })
+    };
+    removeSelection = () => {
+        this.setState({currentElement: {}})
+    };
+
     componentDidMount() {
         this.canvas = new fabric.Canvas('canvas', {
+            backgroundColor: '#FFFFFF'
+        });
+        this.canvas.on('selection:created', this.updateSelection);
+        this.canvas.on('selection:updated', this.updateSelection);
+        this.canvas.on('selection:cleared', this.removeSelection);
 
-        });
-        this.canvas.on('selection:created', (event) => {
-
-            this.setState({ currentElement: this.canvas.getActiveObject() });
-
-        });
-        this.canvas.on('selection:updated', (event) => {
-            this.setState({ currentElement: this.canvas.getActiveObject() });
-        });
-        this.canvas.on('selection:cleared', (event) => {
-            this.setState({ currentElement: {} });
-        });
         this.handlePan();
         this.handleZoom();
         window.addEventListener("keydown", this.deleteHandler);
@@ -48,6 +48,10 @@ class CanvasContainer extends React.Component {
 
 
     componentWillUnmount = () => {
+        this.canvas.off('selection:created', this.updateSelection);
+        this.canvas.off('selection:updated', this.updateSelection);
+        this.canvas.off('selection:cleared', this.removeSelection);
+
         window.removeEventListener('keydown', this.deleteHandler);
     };
 
@@ -105,7 +109,9 @@ class CanvasContainer extends React.Component {
         this.canvas.add(obj);
     };
     handleRemove = (obj) => {
-        this.canvas.remove(obj);
+        const activeObj = this.canvas.getObjects().find(el => el.id === obj.id);
+        console.log(activeObj)
+        this.canvas.remove(activeObj);
         this.setState({ currentElement: {} });
     };
 
@@ -117,33 +123,36 @@ class CanvasContainer extends React.Component {
 
 
     handleElementPropChange = (obj) => {
-        console.log(obj);
         const newCurrentElement = this.canvas.getActiveObject();
         newCurrentElement.set({ ...obj });
         this.canvas.renderAll();
-        this.setState({ currentElement: newCurrentElement });
+        console.log(newCurrentElement === this.state.currentElement);
+        this.setState({ currentElement: newCurrentElement.toObject() });
     };
 
 
     handleBringToTop = () => {
-        this.state.currentElement.bringToFront()
+        const activeObj = this.canvas.getActiveObject();
+        activeObj.bringToFront();
     }
     handleCenter = (type) => {
         if (type === 'H') {
-            this.state.currentElement.centerH();
-            this.state.currentElement.setCoords();
+            const activeObj = this.canvas.getActiveObject();
+            activeObj.centerH();
+            activeObj.setCoords();
         } else if (type === 'V') {
-            this.state.currentElement.centerV();
-            this.state.currentElement.setCoords();
+            const activeObj = this.canvas.getActiveObject();
+            activeObj.centerV();
+            activeObj.setCoords();
         }
     }
 
     render() {
         return (
-            <WorkspaceWrapper>
+            <div className="workspaceWrapper">
                 <SidebarContainer handleAdd={this.handleAdd} />
 
-                <MainContainer>
+                <div className="mainContainer">
                     <HeaderSettings
                         panningMode={this.state.panningMode}
                         handlePanningMode={this.handlePanningMode}
@@ -158,7 +167,7 @@ class CanvasContainer extends React.Component {
                         width={600}
                         id='canvas'>
                     </canvas>
-                </MainContainer>
+                </div>
 
                 <SettingsContainer
                     currentElement={this.state.currentElement}
@@ -166,7 +175,7 @@ class CanvasContainer extends React.Component {
                     bringToTop={this.handleBringToTop}
                     center={this.handleCenter}
                 />
-            </WorkspaceWrapper>
+            </div>
         );
     }
 }

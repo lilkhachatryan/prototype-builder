@@ -53,7 +53,6 @@ const Button = ({ handleAdd }) => {
 
     return (
         <SidebarItem onClick={handleClick}>
-            <FontAwesomeIcon icon={['fa', 'code']} />
             <span>Button</span>
         </SidebarItem>
     );
