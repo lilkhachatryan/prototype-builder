@@ -2,9 +2,9 @@ import React from 'react';
 
 const UndoAndRedo = ({handleUndoAndRedo}) => {
     return (
-        <div>
-            <button onClick={ () => handleUndoAndRedo('undo') } >Undo</button>
-            <button onClick={() => handleUndoAndRedo('redo')} >Redo</button>
+        <div className="undoRedoWrap">
+            <button className="primary" onClick={ () => handleUndoAndRedo('undo') } >&#8634;</button>
+            <button className="primary" onClick={() => handleUndoAndRedo('redo')} >&#8635;</button>
         </div>
     );
 };

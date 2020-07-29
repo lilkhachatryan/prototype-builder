@@ -2,11 +2,12 @@ import React from 'react';
 
 const PanningMode = ({handlePanningMode, panningMode}) => {
     return (
-        <div>
+        <div className="panningModeBtnWrap">
             <button
+                className="primary"
                 style={ {color: (panningMode ? 'red' : '')} }
                 onClick={handlePanningMode} >
-                PanningModeToggle
+                Panning Mode
             </button>
         </div>
     );

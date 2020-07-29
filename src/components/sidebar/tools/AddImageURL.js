@@ -20,7 +20,7 @@ const AddImageURL = ({handleAdd}) => {
                 ref={ref}
                 placeholder='simply add the URL'
                 type="text"/>
-                <button type='submit' >
+                <button className="primary" type='submit' >
                     Add image
                 </button>
         </form>

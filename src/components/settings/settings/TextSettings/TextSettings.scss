@@ -1,0 +1,45 @@
+.textSettings {
+    .textAlignSettings {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px auto;
+        max-width: 220px;
+
+        > div {
+            width: calc(25% - 5px);
+            text-align: center;
+            input {
+                display: none;
+            }
+            label {
+                padding: 3px 9px;
+                border: 1px solid #dddddd;
+                border-radius: 3px;
+                cursor: pointer;
+                transition: all 0.3s;
+
+                &:hover {
+                    background-color: rgba(0, 0, 0, 0.03);
+                }
+            }
+            input:checked ~ label {
+                background-color: rgba(0, 0, 0, 0.03);
+            }
+        }
+    }
+    label {
+        margin-right: 15px;
+    }
+    .flexInput {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+
+        input[type="number"] {
+            width: 55px;
+        }
+    }
+    select {
+        height: 32px;
+    }
+}
