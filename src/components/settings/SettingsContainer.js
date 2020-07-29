@@ -1,10 +1,12 @@
 import React from 'react';
-import { SettingsWrapper } from "../../assets/styles/SettingsWrapper.style";
+
 import LineSettings from './settings/LineSettings/LineSettings';
 import TextSettings from './settings/TextSettings/TextSettings';
 import ShapeSettings from './settings/ShapeSettings/ShapeSettings';
 import ButtonSettings from "./settings/ButtonSettings/ButtonSettings";
 import _ from 'lodash';
+
+import './Settings.scss';
 
 class SettingsContainer extends React.Component {
     render() {
@@ -30,9 +32,15 @@ class SettingsContainer extends React.Component {
         }
 
         return (
-            <SettingsWrapper>
+            <div className="settingsWrapper">
                 {settings ? settings : <h5>Please select element</h5>}
-            </SettingsWrapper>
+                {settings
+                    ? <div className="objAlignBtns">
+                        <button className="primary" onClick={this.props.bringToTop}>Bring forward</button>
+                        <button className="primary" onClick={() => this.props.center('H')}>Center horizontally</button>
+                        <button className="primary" onClick={() => this.props.center('V')}>Center vertically</button>
+                    </div> : null}
+            </div>
         );
     }
 }

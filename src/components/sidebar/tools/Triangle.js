@@ -13,13 +13,13 @@ const Triangle = ({ handleAdd }) => {
             fill: 'transparent',
             stroke: '#000000',
             strokeWidth: 2,
+            strokeUniform: true
         });
         return handleAdd(triangle);
     };
 
     return (
         <SidebarItem onClick={handleClick}>
-            <FontAwesomeIcon icon={['fa', 'code']} />
             <span>Triangle</span>
         </SidebarItem>
     );
