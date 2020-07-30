@@ -28,7 +28,7 @@ const Rect = ({ handleAdd, panningPosition }) => {
             transparentCorners: false,
             cornerStrokeColor: '#aaaaaa',
         });
-        console.log(!!rect.getObjects)
+        console.log(!!rect.getObjects);
         return handleAdd(rect);
     };
     return (
