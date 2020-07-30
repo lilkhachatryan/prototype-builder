@@ -1,16 +1,24 @@
-import React, {useRef} from 'react';
-import {fabric} from 'fabric';
+import React, { useRef } from 'react';
+import { fabric } from 'fabric';
 
-const AddImageURL = ({handleAdd}) => {
+const AddImageURL = ({ handleAdd }) => {
     const ref = useRef();
     const handleSubmit = (e) => {
         e.preventDefault();
         let value = ref.current.value;
         value = value.replace(/\s+/g, '');
-        if (value){
+        if (value) {
             fabric.Image.fromURL(value, function (img) {
                 ref.current.value = '';
                 return handleAdd(img);
+            }, {
+                borderColor: 'gray',
+                borderDashArray: [4, 3],
+                cornerColor: '#49f500',
+                cornerSize: 11,
+                cornerStyle: 'circle',
+                transparentCorners: false,
+                cornerStrokeColor: '#aaaaaa',
             });
         }
     };
@@ -19,9 +27,9 @@ const AddImageURL = ({handleAdd}) => {
             <input
                 ref={ref}
                 placeholder='simply add the URL'
-                type="text"/>
-                <button className="primary" type='submit' >
-                    Add image
+                type="text" />
+            <button className="primary" type='submit' >
+                Add image
                 </button>
         </form>
     );

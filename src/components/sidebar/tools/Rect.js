@@ -20,6 +20,13 @@ const Rect = ({ handleAdd, panningPosition }) => {
             rx: 0,
             ry: 0,
             strokeUniform: true,
+            borderColor: 'gray',
+            borderDashArray: [4, 3],
+            cornerColor: '#49f500',
+            cornerSize: 11,
+            cornerStyle: 'circle',
+            transparentCorners: false,
+            cornerStrokeColor: '#aaaaaa',
         });
         console.log(!!rect.getObjects)
         return handleAdd(rect);

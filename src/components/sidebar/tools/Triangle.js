@@ -13,7 +13,14 @@ const Triangle = ({ handleAdd, panningPosition }) => {
             fill: 'transparent',
             stroke: '#000000',
             strokeWidth: 1,
-            strokeUniform: true
+            strokeUniform: true,
+            borderColor: 'gray',
+            borderDashArray: [4, 3],
+            cornerColor: '#49f500',
+            cornerSize: 11,
+            cornerStyle: 'circle',
+            transparentCorners: false,
+            cornerStrokeColor: '#aaaaaa',
         });
         return handleAdd(triangle);
     };
