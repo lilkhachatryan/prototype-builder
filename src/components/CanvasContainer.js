@@ -6,12 +6,11 @@ import { connect } from 'react-redux';
 import SidebarContainer from "./sidebar/SidebarContainer";
 import SettingsContainer from "./settings/SettingsContainer";
 import HeaderSettings from "./settings/HeaderSettings";
-import {moveCoords} from "../actions/canvasActions";
 
 import './CanvasContainer.scss';
 
 
-import { updateElement, updateCurrentObject, deleteObject } from '../actions/canvasActions';
+import * as actions from '../actions/canvasActions';
 
 
 class CanvasContainer extends React.Component {
@@ -34,10 +33,10 @@ class CanvasContainer extends React.Component {
     };
 
     updateSelection = () => {
-        return this.props.onCurrentObjectUpdate(this.canvas.getActiveObject().toObject(['id']))
+        return this.props.onCurrentObjectUpdate(this.canvas.getActiveObject().toObject(['id', 'colors', 'fillName']))
     };
     removeSelection = () => {
-        return this.props.onCurrentObjectUpdate({})
+        return this.props.onCurrentObjectUpdate({});
     };
 
     componentDidMount() {
@@ -78,6 +77,7 @@ class CanvasContainer extends React.Component {
     };
 
     handlePan = () => {
+        let move = {x: 0, y: 0};
         this.canvas.on('mouse:move', (event) => {
             if (this.state.panningMode) {
                 this.canvas.setCursor('grab');
@@ -87,6 +87,8 @@ class CanvasContainer extends React.Component {
                 const { e: { movementX, movementY } } = event;
                 const delta = new fabric.Point(movementX, movementY);
                 this.canvas.relativePan(delta);
+                move.x += movementX;
+                move.y += movementY;
             }
         });
         this.canvas.on('mouse:down', (event) => {
@@ -103,13 +105,9 @@ class CanvasContainer extends React.Component {
                 this.canvas.forEachObject((o) => o.selectable = true);
             }
         });
-        this.canvas.on('mouse:up', (event) => {
-            const points = this.canvas.getPointer(event, {ignoreZoom: true});
-            let p = {x: this.canvas.width/2, y: this.canvas.height};
-            let invertedMatrix = fabric.util.invertTransform(this.canvas.viewportTransform);
-            let transformedP = fabric.util.transformPoint(p, invertedMatrix);
-            console.log(transformedP, 'jhjh');
-            this.props.onMoveCoords(transformedP);
+
+        this.canvas.on('mouse:up', () => {
+            this.props.onUpdatePanningPosition(move)
             this.setState({
                 isPanning: false,
             });
@@ -144,6 +142,9 @@ class CanvasContainer extends React.Component {
         // console.log(newCurrentElement === this.state.currentElement);
         // this.setState({ currentElement: newCurrentElement.toObject() });
         this.props.onElementPropChange(this.canvas, obj)
+    };
+    handleGroupPropChange = (obj) => {
+        this.props.onGroupPropChange(this.canvas, obj)
     };
 
 
@@ -188,6 +189,7 @@ class CanvasContainer extends React.Component {
                 <SettingsContainer
                     currentElement={this.props.currentElement}
                     elementChange={this.handleElementPropChange}
+                    groupElementChange={this.handleGroupPropChange}
                     bringToTop={this.handleBringToTop}
                     center={this.handleCenter}
                 />
@@ -204,10 +206,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onMoveCoords: (coords) => dispatch(moveCoords(coords)),
-        onCurrentObjectUpdate: (obj) => dispatch(updateCurrentObject(obj)),
-        onDeleteObject: (canvas, obj) => dispatch(deleteObject(canvas, obj)),
-        onElementPropChange: (canvas, obj) => dispatch(updateElement(canvas, obj))
+        onCurrentObjectUpdate: (obj) => dispatch(actions.updateCurrentObject(obj)),
+        onDeleteObject: (canvas, obj) => dispatch(actions.deleteObject(canvas, obj)),
+        onElementPropChange: (canvas, obj) => dispatch(actions.updateElement(canvas, obj)),
+        onGroupPropChange: (canvas, obj) => dispatch(actions.updateGroupElement(canvas, obj)),
+        onUpdatePanningPosition: (data) => dispatch(actions.updatePanningPosition(data))
     };
 };
 

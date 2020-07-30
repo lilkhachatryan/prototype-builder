@@ -10,6 +10,24 @@ export const updateElement = (canvas, obj) => {
         payload: newCurrentElement.toObject()
     };
 };
+export const updateGroupElement = (canvas, obj) => {
+    const newCurrentElement = canvas.getActiveObject();
+    if (obj.fill) {
+        newCurrentElement.fillName = obj.fill;
+        newCurrentElement.forEachObject(el => el.set({ ...obj }));
+    };
+    if (obj.colors) {
+        newCurrentElement.colors = obj.colors;
+        newCurrentElement.forEachObject(el => el.set({ ...obj }));
+    };
+
+    canvas.renderAll();
+    console.log(newCurrentElement.toObject(['colors', 'fillName', 'vertical']))
+    return {
+        type: actionTypes.UPDATE_GROUP_OBJECT,
+        payload: newCurrentElement.toObject(['colors', 'fillName', 'vertical'])
+    };
+};
 
 export const updateCurrentObject = (obj) => {
     return {
@@ -21,7 +39,6 @@ export const updateCurrentObject = (obj) => {
 export const deleteObject = (canvas, obj) => {
     // const activeObj = canvas.getObjects().find(el => el.id === obj.id);
     const activeObj = canvas.getActiveObject();
-    console.log(activeObj);
     canvas.remove(activeObj);
 
     return {
@@ -30,10 +47,10 @@ export const deleteObject = (canvas, obj) => {
     };
 };
 
-export const moveCoords = (coords) => {
+export const updatePanningPosition = (data) => {
     return {
-        type: actionTypes.MOVE_COORDS,
-        coords
+        type: actionTypes.UPDATE_PANNING_POSITION,
+        payload: data
     };
 };
 

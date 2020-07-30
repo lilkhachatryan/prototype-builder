@@ -2,31 +2,37 @@ import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
     currentElement: {},
-    coords: {top: 0, left: 0}
+    panningPosition: { x: 0, y: 0 }
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.UPDATE_CURRENT_OBJECT:
             return {
+                ...state,
                 currentElement: action.payload
             };
         case actionTypes.UPDATE_OBJECT:
-
-            return {
-                currentElement: action.payload
-            };
-        case actionTypes.DELETE_OBJECT:
-            return {
-                currentElement: action.payload
-            };
-        case actionTypes.MOVE_COORDS: {
-            const coords = {...action.coords};
             return {
                 ...state,
-                coords: {top: coords.y, left: coords.x}
+                currentElement: action.payload
+            }
+        case actionTypes.UPDATE_GROUP_OBJECT:
+            return {
+                ...state,
+                currentElement: action.payload,
+            }
+        case actionTypes.DELETE_OBJECT:
+            return {
+                ...state,
+                currentElement: action.payload
             };
-        }
+        case actionTypes.UPDATE_PANNING_POSITION:
+            console.log(action.payload)
+            return {
+                ...state,
+                panningPosition: action.payload
+            };
         default:
             return state;
     }

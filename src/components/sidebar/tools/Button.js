@@ -3,7 +3,7 @@ import { fabric } from 'fabric';
 import { SidebarItem } from "../../../assets/styles/SidebarItem.style";
 
 
-const Button = ({ handleAdd }) => {
+const Button = ({ handleAdd, panningPosition }) => {
     const defaultPadding = {
         top: 5,
         right: 20,
@@ -44,8 +44,8 @@ const Button = ({ handleAdd }) => {
         });
 
        let button = new fabric.Group([rect, text], {
-           left: 150,
-           top: 100,
+           left: -panningPosition.x + 100,
+           top: -panningPosition.y + 100,
        });
        handleAdd(button);
     };

@@ -1,15 +1,17 @@
 import React from 'react';
-import {fabric} from 'fabric';
+import { fabric } from 'fabric';
 import { v4 as uuid } from 'uuid';
 import {connect} from 'react-redux';
 
-import {SidebarItem} from "../../../assets/styles/SidebarItem.style";
+import { SidebarItem } from "../../../assets/styles/SidebarItem.style";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Circle = ({handleAdd, coords}) => {
+const Circle = ({ handleAdd, panningPosition }) => {
     const handleClick = () => {
         const circle = new fabric.Circle({
             id: uuid(),
-            ...coords,
+            top: -panningPosition.y + 100,
+            left: -panningPosition.x + 100,
             radius: 30,
             fill: '#FFFFFF',
             stroke: '#000000',

@@ -6,11 +6,12 @@ import {connect} from 'react-redux';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {SidebarItem} from "../../../assets/styles/SidebarItem.style";
 
-const Rect = ({ handleAdd, coords }) => {
+const Rect = ({ handleAdd, panningPosition }) => {
     const handleClick = () => {
         const rect = new fabric.Rect({
             id: uuid(),
-            ...coords,
+            top: -panningPosition.y + 20,
+            left: -panningPosition.x + 75,
             width: 450,
             height: 50,
             fill: '#FFFFFF',
@@ -20,6 +21,7 @@ const Rect = ({ handleAdd, coords }) => {
             ry: 0,
             strokeUniform: true,
         });
+        console.log(!!rect.getObjects)
         return handleAdd(rect);
     };
     return (
@@ -32,7 +34,7 @@ const Rect = ({ handleAdd, coords }) => {
 const mapStateToProps = (state) => {
     return {
         coords: state.coords
-    }
+    };
 };
 
 
