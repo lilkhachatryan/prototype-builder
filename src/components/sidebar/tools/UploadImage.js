@@ -4,17 +4,23 @@ import { fabric } from 'fabric';
 class UploadImage extends React.Component {
     state = {
         chooseFiles: [],
+        filePath: ''
     };
     handleChange = (e) => {
         e.persist();
         const files = [...e.target.files];
         this.setState({
-            chooseFiles: files
+            chooseFiles: files,
+            filePath: e.target.value
         });
     };
     handleClick = () => {
         const handleAdd = (input) => {
             this.props.handleAdd(input);
+            this.setState({
+                filePath: '',
+                chooseFiles: []
+            });
         };
         this.state.chooseFiles.forEach((file) => {
             const fileType = file.type;
@@ -51,6 +57,7 @@ class UploadImage extends React.Component {
         return (
             <div>
                 <input
+                    value={this.state.filePath}
                     onChange={this.handleChange}
                     type="file" />
                 <button className="primary" onClick={this.handleClick} >Add image</button>
