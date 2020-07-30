@@ -25,8 +25,8 @@ class UploadImage extends React.Component {
                 }, {
                     // width: '180',
                     // height: '180',
-                    stroke: '#000000',
-                    strokeWidth: 3,
+                    stroke: '#FFFFFF',
+                    strokeWidth: 0,
                     borderColor: 'gray',
                     borderDashArray: [4, 3],
                     cornerColor: '#49f500',
@@ -34,6 +34,8 @@ class UploadImage extends React.Component {
                     cornerStyle: 'circle',
                     transparentCorners: false,
                     cornerStrokeColor: '#aaaaaa',
+                    scaleX: 0.3,
+                    scaleY: 0.3,
                 });
             } else if (fileType === 'image/svg+xml') { //check if svg
                 fabric.loadSVGFromURL(url, function (objects, options) {

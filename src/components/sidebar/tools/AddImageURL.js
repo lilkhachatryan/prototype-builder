@@ -12,6 +12,8 @@ const AddImageURL = ({ handleAdd }) => {
                 ref.current.value = '';
                 return handleAdd(img);
             }, {
+                stroke: '#FFFFFF',
+                strokeWidth: 0,
                 borderColor: 'gray',
                 borderDashArray: [4, 3],
                 cornerColor: '#49f500',
@@ -19,6 +21,8 @@ const AddImageURL = ({ handleAdd }) => {
                 cornerStyle: 'circle',
                 transparentCorners: false,
                 cornerStrokeColor: '#aaaaaa',
+                scaleX: 0.3,
+                scaleY: 0.3,
             });
         }
     };

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import ImageSettings from './ImageSettings';
 import LineSettings from './LineSettings/LineSettings';
 import TextSettings from './TextSettings/TextSettings';
 import ShapeSettings from './ShapeSettings/ShapeSettings';
@@ -30,9 +31,10 @@ class SettingsContainer extends React.Component {
             }
             else if (currentElement.type === 'line') {
                 settings = <LineSettings elementChange={elementChange} currentElement={currentElement}/>
-            }
-            else if (currentElement.type === 'shareIcons') {
+            } else if (currentElement.type === 'shareIcons') {
                 settings = <ShareIconsSettings groupElementChange={groupElementChange} currentElement={currentElement}/>
+            } else if (currentElement.type === 'image') {
+                settings = <ImageSettings elementChange={elementChange} currentElement={currentElement}/>
             }
         }
 
