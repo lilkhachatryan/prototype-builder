@@ -22,12 +22,12 @@ class SidebarContainer extends React.Component {
                 <UploadImage handleAdd={handleAdd} panningPosition={this.props.panningPosition}/>
                 <Rect handleAdd={handleAdd} panningPosition={this.props.panningPosition}/>
                 {/* <Triangle handleAdd={handleAdd} /> */}
-                <Circle handleAdd={handleAdd}  panningPosition={this.props.panningPosition}/>
+                <Circle handleAdd={handleAdd} panningPosition={this.props.panningPosition}/>
                 <TextBox handleAdd={handleAdd} fontSize="32" name="Header" panningPosition={this.props.panningPosition}/>
                 <TextBox handleAdd={handleAdd} fontSize="24" name="Subheader" panningPosition={this.props.panningPosition}/>
                 <TextBox handleAdd={handleAdd} fontSize="16" name="Text" panningPosition={this.props.panningPosition}/>
-                <Divider handleAdd={handleAdd}  panningPosition={this.props.panningPosition}/>
-                <Button handleAdd={handleAdd}  panningPosition={this.props.panningPosition}/>
+                <Divider handleAdd={handleAdd} panningPosition={this.props.panningPosition}/>
+                <Button handleAdd={handleAdd} panningPosition={this.props.panningPosition}/>
                 <ShareIcons handleAdd={handleAdd} panningPosition={this.props.panningPosition}/>
             </div>
         );

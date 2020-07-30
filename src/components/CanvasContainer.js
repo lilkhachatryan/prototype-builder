@@ -8,6 +8,8 @@ import SettingsContainer from "./settings/SettingsContainer";
 import HeaderSettings from "./settings/HeaderSettings";
 
 import './CanvasContainer.scss';
+import initAligningGuidelines from "../aligning_guidelines";
+import centeringGuildelines from "../centering_guidelines";
 
 
 import * as actions from '../actions/canvasActions';
@@ -35,14 +37,18 @@ class CanvasContainer extends React.Component {
     updateSelection = () => {
         return this.props.onCurrentObjectUpdate(this.canvas.getActiveObject().toObject(['id', 'colors', 'fillName']))
     };
+
     removeSelection = () => {
         return this.props.onCurrentObjectUpdate({});
     };
 
     componentDidMount() {
         this.canvas = new fabric.Canvas('canvas', {
-            backgroundColor: '#FFFFFF'
+            backgroundColor: '#FFFFFF',
+            preserveObjectStacking: true
         });
+        initAligningGuidelines(this.canvas);
+        centeringGuildelines(this.canvas);
         this.canvas.on('selection:created', this.updateSelection);
         this.canvas.on('selection:updated', this.updateSelection);
         this.canvas.on('selection:cleared', this.removeSelection);
