@@ -12,7 +12,7 @@ const Triangle = ({ handleAdd, panningPosition }) => {
             height: 50,
             fill: 'transparent',
             stroke: '#000000',
-            strokeWidth: 2,
+            strokeWidth: 1,
             strokeUniform: true
         });
         return handleAdd(triangle);

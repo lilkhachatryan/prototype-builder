@@ -16,7 +16,7 @@ const Rect = ({ handleAdd, panningPosition }) => {
             height: 50,
             fill: '#FFFFFF',
             stroke: '#000000',
-            strokeWidth: 3,
+            strokeWidth: 1,
             rx: 0,
             ry: 0,
             strokeUniform: true,

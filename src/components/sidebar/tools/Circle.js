@@ -15,7 +15,7 @@ const Circle = ({ handleAdd, panningPosition }) => {
             radius: 30,
             fill: '#FFFFFF',
             stroke: '#000000',
-            strokeWidth: 2,
+            strokeWidth: 1,
             strokeUniform: true,
         });
         return handleAdd(circle);
