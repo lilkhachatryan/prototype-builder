@@ -10,7 +10,7 @@ import HeaderSettings from "./settings/HeaderSettings";
 import './CanvasContainer.scss';
 
 
-import { updateElement, updateCurrentObject, deleteObject } from '../actions/canvasActions';
+import * as actions from '../actions/canvasActions';
 
 
 class CanvasContainer extends React.Component {
@@ -19,7 +19,8 @@ class CanvasContainer extends React.Component {
     state = {
         // currentElement: {},
         panningMode: false,
-        isPanning: false
+        isPanning: false,
+        sendCoords: false
     };
 
     deleteHandler = (event) => {
@@ -32,10 +33,10 @@ class CanvasContainer extends React.Component {
     };
 
     updateSelection = () => {
-        return this.props.onCurrentObjectUpdate(this.canvas.getActiveObject().toObject(['id']))
+        return this.props.onCurrentObjectUpdate(this.canvas.getActiveObject().toObject(['id', 'colors', 'fillName']))
     };
     removeSelection = () => {
-        return this.props.onCurrentObjectUpdate({})
+        return this.props.onCurrentObjectUpdate({});
     };
 
     componentDidMount() {
@@ -67,15 +68,16 @@ class CanvasContainer extends React.Component {
             let delta = opt.e.deltaY;
             let zoom = returnCanvas().getZoom();
             zoom *= 0.999 ** delta;
-            if (zoom > 20) zoom = 20;
+            if (zoom > 5) zoom = 5;
             if (zoom < 0.5) zoom = 0.5;
-            returnCanvas().zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
+            returnCanvas().setZoom(zoom);
             opt.e.preventDefault();
             opt.e.stopPropagation();
         });
     };
 
     handlePan = () => {
+        let move = {x: 0, y: 0};
         this.canvas.on('mouse:move', (event) => {
             if (this.state.panningMode) {
                 this.canvas.setCursor('grab');
@@ -85,14 +87,17 @@ class CanvasContainer extends React.Component {
                 const { e: { movementX, movementY } } = event;
                 const delta = new fabric.Point(movementX, movementY);
                 this.canvas.relativePan(delta);
+                move.x += movementX;
+                move.y += movementY;
             }
         });
-        this.canvas.on('mouse:down', () => {
+        this.canvas.on('mouse:down', (event) => {
             if (this.state.panningMode) {
                 this.canvas.forEachObject((o) => o.selectable = false);
                 this.canvas.setCursor('grab');
                 this.setState({
-                    isPanning: true
+                    isPanning: true,
+                    sendCoords: true
                 });
                 this.canvas.selection = false;
             } else {
@@ -100,9 +105,11 @@ class CanvasContainer extends React.Component {
                 this.canvas.forEachObject((o) => o.selectable = true);
             }
         });
+
         this.canvas.on('mouse:up', () => {
+            this.props.onUpdatePanningPosition(move)
             this.setState({
-                isPanning: false
+                isPanning: false,
             });
         });
     };
@@ -136,12 +143,15 @@ class CanvasContainer extends React.Component {
         // this.setState({ currentElement: newCurrentElement.toObject() });
         this.props.onElementPropChange(this.canvas, obj)
     };
+    handleGroupPropChange = (obj) => {
+        this.props.onGroupPropChange(this.canvas, obj)
+    };
 
 
     handleBringToTop = () => {
         const activeObj = this.canvas.getActiveObject();
         activeObj.bringToFront();
-    }
+    };
     handleCenter = (type) => {
         if (type === 'H') {
             const activeObj = this.canvas.getActiveObject();
@@ -179,6 +189,7 @@ class CanvasContainer extends React.Component {
                 <SettingsContainer
                     currentElement={this.props.currentElement}
                     elementChange={this.handleElementPropChange}
+                    groupElementChange={this.handleGroupPropChange}
                     bringToTop={this.handleBringToTop}
                     center={this.handleCenter}
                 />
@@ -195,9 +206,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onCurrentObjectUpdate: (obj) => dispatch(updateCurrentObject(obj)),
-        onDeleteObject: (canvas, obj) => dispatch(deleteObject(canvas, obj)),
-        onElementPropChange: (canvas, obj) => dispatch(updateElement(canvas, obj))
+        onCurrentObjectUpdate: (obj) => dispatch(actions.updateCurrentObject(obj)),
+        onDeleteObject: (canvas, obj) => dispatch(actions.deleteObject(canvas, obj)),
+        onElementPropChange: (canvas, obj) => dispatch(actions.updateElement(canvas, obj)),
+        onGroupPropChange: (canvas, obj) => dispatch(actions.updateGroupElement(canvas, obj)),
+        onUpdatePanningPosition: (data) => dispatch(actions.updatePanningPosition(data))
     };
 };
 
