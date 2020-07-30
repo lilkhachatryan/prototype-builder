@@ -2,6 +2,7 @@ import React from 'react';
 import { fabric } from 'fabric';
 import 'fabric-history';
 import { connect } from 'react-redux';
+import saveAs from 'file-saver';
 
 import SidebarContainer from "./sidebar/SidebarContainer";
 import SettingsContainer from "./settings/SettingsContainer";
@@ -38,6 +39,13 @@ class CanvasContainer extends React.Component {
     removeSelection = () => {
         return this.props.onCurrentObjectUpdate({});
     };
+    handleSave = (type) => {
+        if (type === 'png'){
+            saveAs(this.canvas.toDataURL({
+                format: 'png'
+            }));
+        }
+    };
 
     componentDidMount() {
         this.canvas = new fabric.Canvas('canvas', {
@@ -70,7 +78,7 @@ class CanvasContainer extends React.Component {
             zoom *= 0.999 ** delta;
             if (zoom > 5) zoom = 5;
             if (zoom < 0.5) zoom = 0.5;
-            returnCanvas().setZoom(zoom);
+            returnCanvas().zoomToPoint(returnCanvas().getVpCenter(), zoom);
             opt.e.preventDefault();
             opt.e.stopPropagation();
         });
@@ -107,7 +115,7 @@ class CanvasContainer extends React.Component {
         });
 
         this.canvas.on('mouse:up', () => {
-            this.props.onUpdatePanningPosition(move)
+            this.props.onUpdatePanningPosition(move);
             this.setState({
                 isPanning: false,
             });
@@ -171,6 +179,7 @@ class CanvasContainer extends React.Component {
 
                 <div className="mainContainer">
                     <HeaderSettings
+                        handleSave={this.handleSave}
                         panningMode={this.state.panningMode}
                         handlePanningMode={this.handlePanningMode}
                         handleUndoAndRedo={this.handleUndoAndRedo}

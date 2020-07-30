@@ -21,7 +21,7 @@ const Rect = ({ handleAdd, panningPosition }) => {
             ry: 0,
             strokeUniform: true,
         });
-        console.log(!!rect.getObjects)
+        console.log(!!rect.getObjects);
         return handleAdd(rect);
     };
     return (

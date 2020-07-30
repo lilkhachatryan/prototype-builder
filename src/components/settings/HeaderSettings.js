@@ -1,28 +1,32 @@
 import React from 'react';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faTrashAlt} from '@fortawesome/free-solid-svg-icons'
 
 import UndoAndRedo from "./settings/undoAndRedo/UndoAndRedo";
 import PanningMode from "./settings/panningMode/PanningMode";
+import SaveAs from "./Save";
 
 const HeaderSettings = ({
-    currentElement,
-    handleRemove,
-    handleUndoAndRedo,
-    panningMode,
-    handlePanningMode,
-}) => {
+                            handleSave,
+                            currentElement,
+                            handleRemove,
+                            handleUndoAndRedo,
+                            panningMode,
+                            handlePanningMode,
+
+                        }) => {
     return (
         <div className="headerSettingsWrapper">
-            <UndoAndRedo handleUndoAndRedo={handleUndoAndRedo} />
+            <UndoAndRedo handleUndoAndRedo={handleUndoAndRedo}/>
             <PanningMode
                 panningMode={panningMode}
-                handlePanningMode={handlePanningMode} />
+                handlePanningMode={handlePanningMode}/>
+            <SaveAs handleSave={handleSave}/>
             <button
                 disabled={!Object.keys(currentElement).length > 0}
                 className="btn btn-danger"
                 onClick={() => handleRemove(currentElement)}
-            ><FontAwesomeIcon icon={faTrashAlt} /></button>
+            ><FontAwesomeIcon icon={faTrashAlt}/></button>
 
         </div>
     );
