@@ -44,9 +44,7 @@ class CanvasContainer extends React.Component {
     };
     handleSave = (type) => {
         if (type === 'png'){
-            saveAs(this.canvas.toDataURL({
-                format: 'png'
-            }));
+            saveAs(this.canvas.toDataURL({format: 'png'}));
         }
     };
 
