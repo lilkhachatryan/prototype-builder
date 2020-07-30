@@ -1,8 +1,8 @@
 import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTrashAlt} from '@fortawesome/free-solid-svg-icons'
-import UndoAndRedo from "./settings/undoAndRedo/UndoAndRedo";
-import PanningMode from "./settings/panningMode/PanningMode";
+import {faTrashAlt} from '@fortawesome/free-solid-svg-icons';
+import PanningMode from './panningMode/PanningMode'
+import UndoAndRedo from "./undoAndRedo/UndoAndRedo";
 import SaveAs from "./Save";
 
 
