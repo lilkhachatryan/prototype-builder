@@ -84,7 +84,7 @@ class CanvasContainer extends React.Component {
             }
             if (this.state.isPanning && this.state.panningMode) {
                 this.canvas.setCursor('grab');
-                const { pointer: { movementX, movementY } } = event;
+                const { e: { movementX, movementY } } = event;
                 const delta = new fabric.Point(movementX, movementY);
                 this.canvas.relativePan(delta);
             }
@@ -105,7 +105,11 @@ class CanvasContainer extends React.Component {
         });
         this.canvas.on('mouse:up', (event) => {
             const points = this.canvas.getPointer(event, {ignoreZoom: true});
-            console.log(points);
+            let p = {x: this.canvas.width/2, y: this.canvas.height};
+            let invertedMatrix = fabric.util.invertTransform(this.canvas.viewportTransform);
+            let transformedP = fabric.util.transformPoint(p, invertedMatrix);
+            console.log(transformedP, 'jhjh');
+            this.props.onMoveCoords(transformedP);
             this.setState({
                 isPanning: false,
             });
