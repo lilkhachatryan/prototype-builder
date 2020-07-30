@@ -31,6 +31,17 @@ const TextBox = ({ handleAdd, fontSize, name, panningPosition }) => {
             transparentCorners: false,
             cornerStrokeColor: '#aaaaaa',
         });
+        textBox.setControlsVisibility({
+            bl: true,
+            br: true,
+            mb: false,
+            ml: true,
+            mr: true,
+            mt: false,
+            tr: true,
+            tl: true,
+            mtr: true,
+        })
         return handleAdd(textBox);
     };
 
