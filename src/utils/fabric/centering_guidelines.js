@@ -64,7 +64,9 @@ export default function initCenteringGuidelines(canvas) {
     });
 
     canvas.on('before:render', function() {
-        canvas.clearContext(canvas.contextTop);
+        if (canvas.contextTop) {
+            canvas.clearContext(canvas.contextTop);
+        }
     });
 
     canvas.on('after:render', function() {
