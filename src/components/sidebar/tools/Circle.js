@@ -15,8 +15,15 @@ const Circle = ({ handleAdd, panningPosition }) => {
             radius: 30,
             fill: '#FFFFFF',
             stroke: '#000000',
-            strokeWidth: 2,
+            strokeWidth: 1,
             strokeUniform: true,
+            borderColor: 'gray',
+            borderDashArray: [4, 3],
+            cornerColor: '#49f500',
+            cornerSize: 11,
+            cornerStyle: 'circle',
+            transparentCorners: false,
+            cornerStrokeColor: '#aaaaaa',
         });
         return handleAdd(circle);
     };

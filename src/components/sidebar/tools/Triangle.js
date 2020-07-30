@@ -12,8 +12,15 @@ const Triangle = ({ handleAdd, panningPosition }) => {
             height: 50,
             fill: 'transparent',
             stroke: '#000000',
-            strokeWidth: 2,
-            strokeUniform: true
+            strokeWidth: 1,
+            strokeUniform: true,
+            borderColor: 'gray',
+            borderDashArray: [4, 3],
+            cornerColor: '#49f500',
+            cornerSize: 11,
+            cornerStyle: 'circle',
+            transparentCorners: false,
+            cornerStrokeColor: '#aaaaaa',
         });
         return handleAdd(triangle);
     };

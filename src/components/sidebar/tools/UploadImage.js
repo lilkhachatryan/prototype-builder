@@ -1,7 +1,7 @@
 import React from 'react';
-import {fabric} from 'fabric';
+import { fabric } from 'fabric';
 
-class UploadImage extends React.Component{
+class UploadImage extends React.Component {
     state = {
         chooseFiles: [],
     };
@@ -16,35 +16,44 @@ class UploadImage extends React.Component{
         const handleAdd = (input) => {
             this.props.handleAdd(input);
         };
-        this.state.chooseFiles.forEach( (file) => {
+        this.state.chooseFiles.forEach((file) => {
             const fileType = file.type;
             const url = URL.createObjectURL(file);
             if (fileType === 'image/png' || 'image/jpeg') { //check if png
-                fabric.Image.fromURL(url, function(img) {
+                fabric.Image.fromURL(url, function (img) {
                     handleAdd(img);
                 }, {
                     // width: '180',
                     // height: '180',
-                    stroke: '#000000',
-                    strokeWidth: 3,
+                    stroke: '#FFFFFF',
+                    strokeWidth: 0,
+                    borderColor: 'gray',
+                    borderDashArray: [4, 3],
+                    cornerColor: '#49f500',
+                    cornerSize: 11,
+                    cornerStyle: 'circle',
+                    transparentCorners: false,
+                    cornerStrokeColor: '#aaaaaa',
+                    scaleX: 0.3,
+                    scaleY: 0.3,
                 });
             } else if (fileType === 'image/svg+xml') { //check if svg
-                fabric.loadSVGFromURL(url, function(objects, options) {
+                fabric.loadSVGFromURL(url, function (objects, options) {
                     const svg = fabric.util.groupSVGElements(objects, options);
                     // svg.scaleToWidth(180);
                     // svg.scaleToHeight(180);
                     handleAdd(svg);
                 });
             }
-        } );
+        });
     };
     render() {
         return (
             <div>
                 <input
                     onChange={this.handleChange}
-                    type="file"/>
-                    <button className="primary" onClick={this.handleClick} >Add image</button>
+                    type="file" />
+                <button className="primary" onClick={this.handleClick} >Add image</button>
             </div>
         );
     }

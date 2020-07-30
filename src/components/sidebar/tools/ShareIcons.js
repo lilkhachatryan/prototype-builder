@@ -44,6 +44,13 @@ const ShareIcons = ({ handleAdd, panningPosition }) => {
             type: 'shareIcons',
             fillName: '',
             colors: '',
+            borderColor: 'gray',
+            borderDashArray: [4, 3],
+            cornerColor: '#49f500',
+            cornerSize: 11,
+            cornerStyle: 'circle',
+            transparentCorners: false,
+            cornerStrokeColor: '#aaaaaa',
         });
         console.log(shareIcons.toObject())
         return handleAdd(shareIcons);

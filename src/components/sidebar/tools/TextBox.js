@@ -22,7 +22,14 @@ const TextBox = ({ handleAdd, fontSize, name, panningPosition }) => {
             stroke: '#000000',
             textAlign: 'left',
             textBackgroundColor: 'rgba(255,255,255,0)',
-            lockScalingY: true
+            // lockScalingY: true,
+            borderColor: 'gray',
+            borderDashArray: [4, 3],
+            cornerColor: '#49f500',
+            cornerSize: 11,
+            cornerStyle: 'circle',
+            transparentCorners: false,
+            cornerStrokeColor: '#aaaaaa',
         });
         return handleAdd(textBox);
     };

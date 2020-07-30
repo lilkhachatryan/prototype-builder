@@ -1,16 +1,19 @@
 import React from 'react';
 
+import ImageSettings from './ImageSettings';
 import LineSettings from './LineSettings/LineSettings';
 import TextSettings from './TextSettings/TextSettings';
 import ShapeSettings from './ShapeSettings/ShapeSettings';
 import ButtonSettings from "./ButtonSettings/ButtonSettings";
+import ShareIconsSettings from "./settings/ShareIconsSettings";
+
 import _ from 'lodash';
 
 import './Settings.scss';
 
 class SettingsContainer extends React.Component {
     render() {
-        const { currentElement, elementChange } = this.props;
+        const { currentElement, elementChange, groupElementChange } = this.props;
         let groupTypes;
         let settings = null;
         if (currentElement.type === 'group') {
@@ -28,6 +31,10 @@ class SettingsContainer extends React.Component {
             }
             else if (currentElement.type === 'line') {
                 settings = <LineSettings elementChange={elementChange} currentElement={currentElement}/>
+            } else if (currentElement.type === 'shareIcons') {
+                settings = <ShareIconsSettings groupElementChange={groupElementChange} currentElement={currentElement}/>
+            } else if (currentElement.type === 'image') {
+                settings = <ImageSettings elementChange={elementChange} currentElement={currentElement}/>
             }
         }
 

@@ -11,12 +11,19 @@ const Divider = ({ handleAdd, panningPosition }) => {
             id: uuid(),
             top: -panningPosition.y + 30,
             left: -panningPosition.x + 50,
-            width: 500,
+            // width: 500,
             stroke: "#000000",
-            strokeWidth: 3,
+            strokeWidth: 1,
             strokeDashArray: [0, 0],
             // lockScalingY: true,
-            strokeUniform: true
+            strokeUniform: true,
+            borderColor: 'gray',
+            borderDashArray: [4, 3],
+            cornerColor: '#49f500',
+            cornerSize: 11,
+            cornerStyle: 'circle',
+            transparentCorners: false,
+            cornerStrokeColor: '#aaaaaa',
         });
         return handleAdd(divider);
     };

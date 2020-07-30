@@ -16,10 +16,17 @@ const Rect = ({ handleAdd, panningPosition }) => {
             height: 50,
             fill: '#FFFFFF',
             stroke: '#000000',
-            strokeWidth: 3,
+            strokeWidth: 1,
             rx: 0,
             ry: 0,
             strokeUniform: true,
+            borderColor: 'gray',
+            borderDashArray: [4, 3],
+            cornerColor: '#49f500',
+            cornerSize: 11,
+            cornerStyle: 'circle',
+            transparentCorners: false,
+            cornerStrokeColor: '#aaaaaa',
         });
         console.log(!!rect.getObjects);
         return handleAdd(rect);
