@@ -1,10 +1,10 @@
 import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons'
-
 import UndoAndRedo from "./settings/undoAndRedo/UndoAndRedo";
 import PanningMode from "./settings/panningMode/PanningMode";
 import SaveAs from "./Save";
+
 
 const HeaderSettings = ({
                             handleSave,

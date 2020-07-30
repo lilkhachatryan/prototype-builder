@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 class ButtonSettings extends Component {
     state = {
         rect: {
-            ...this.props.currentElement.item(0)
+            ...this.props.currentElement.objects[0]
         },
         text: {
-            ...this.props.currentElement.item(1)
+            ...this.props.currentElement.objects[1]
         }
     };
 
@@ -24,7 +24,7 @@ class ButtonSettings extends Component {
             type = value;
             value = true;
         }
-        this.props.elementChange({ [type]: value }, this.props.currentElement.item(1));
+        this.props.elementChange({ [type]: value });
         this.setState({ text: newInputs });
     };
 
@@ -35,7 +35,7 @@ class ButtonSettings extends Component {
 
         if (type === 'fill') {
             this.setState({ text : {...this.state.text, fill: value }});
-            this.props.elementChange({ textBackgroundColor: value }, this.props.currentElement.item(1));
+            this.props.elementChange({ [type]: value });
         }
 
         if (type === 'fontSize' || type === 'strokeWidth' || type === 'fontWeight' || type === 'lineHeight') {
@@ -47,14 +47,14 @@ class ButtonSettings extends Component {
             type = value;
             value = true;
         }
-        this.props.elementChange({ [type]: value }, this.props.currentElement.item(0));
+        this.props.elementChange({ [type]: value });
         this.setState({ rect: newInputs });
     };
 
     render() {
         return (
             <div>
-                <p>button styles</p>
+                <p>Button styles</p>
                 <div>
                     <label>Fill</label>
                     <input
@@ -91,7 +91,7 @@ class ButtonSettings extends Component {
                         onChange={(_) => this.handleRectChange(_, 'opacity')}
                     />
                 </div>
-                <p>Text styles</p>
+                <p className="mt-3">Text styles</p>
                 <div>
                     <label>Text Color</label>
                     <input
