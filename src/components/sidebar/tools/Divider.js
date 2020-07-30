@@ -12,6 +12,7 @@ const Divider = ({ handleAdd, panningPosition }) => {
             top: -panningPosition.y + 30,
             left: -panningPosition.x + 50,
             // width: 500,
+            padding: 15,
             stroke: "#000000",
             strokeWidth: 1,
             strokeDashArray: [0, 0],
@@ -25,6 +26,17 @@ const Divider = ({ handleAdd, panningPosition }) => {
             transparentCorners: false,
             cornerStrokeColor: '#aaaaaa',
         });
+        divider.setControlsVisibility({
+            bl: false,
+            br: false,
+            mb: false,
+            ml: true,
+            mr: true,
+            mt: false,
+            tr: false,
+            tl: false,
+            mtr: true,
+        })
         return handleAdd(divider);
     };
 

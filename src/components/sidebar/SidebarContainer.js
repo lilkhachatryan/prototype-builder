@@ -9,6 +9,8 @@ import UploadImage from "./tools/UploadImage";
 import Button from "./tools/Button";
 import Triangle from './tools/Triangle';
 import Circle from './tools/Circle';
+import Header from './tools/Header';
+import Footer from './tools/Footer';
 
 import './Sidebar.scss';
 import ShareIcons from './tools/ShareIcons';
@@ -23,12 +25,14 @@ class SidebarContainer extends React.Component {
                 <Rect handleAdd={handleAdd} panningPosition={this.props.panningPosition}/>
                 {/* <Triangle handleAdd={handleAdd} /> */}
                 <Circle handleAdd={handleAdd} panningPosition={this.props.panningPosition}/>
-                <TextBox handleAdd={handleAdd} fontSize="32" name="Header" panningPosition={this.props.panningPosition}/>
-                <TextBox handleAdd={handleAdd} fontSize="24" name="Subheader" panningPosition={this.props.panningPosition}/>
+                <TextBox handleAdd={handleAdd} fontSize="32" name="Heading" panningPosition={this.props.panningPosition}/>
+                <TextBox handleAdd={handleAdd} fontSize="24" name="Subheading" panningPosition={this.props.panningPosition}/>
                 <TextBox handleAdd={handleAdd} fontSize="16" name="Text" panningPosition={this.props.panningPosition}/>
                 <Divider handleAdd={handleAdd} panningPosition={this.props.panningPosition}/>
                 <Button handleAdd={handleAdd} panningPosition={this.props.panningPosition}/>
                 <ShareIcons handleAdd={handleAdd} panningPosition={this.props.panningPosition}/>
+                <Header handleAdd={handleAdd} panningPosition={this.props.panningPosition}/>
+                <Footer handleAdd={handleAdd} panningPosition={this.props.panningPosition}/>
             </div>
         );
     }

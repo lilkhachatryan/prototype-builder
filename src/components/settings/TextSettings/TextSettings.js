@@ -90,8 +90,12 @@ class TextSettings extends React.Component {
                 <div className="flexInput">
                     <label>Font Family</label>
                     <select onChange={(_) => this.handleChange(_, 'fontFamily')} value={this.state.inputs.fontFamily}>
-                        <option value="Arial">Arial</option>
-                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Arial" style={{fontFamily: 'Arial'}}>Arial</option>
+                        <option value="Times New Roman" style={{fontFamily: 'Times New Roman'}}>Times New Roman</option>
+                        <option value="Caesar Dressing" style={{fontFamily: 'Caesar Dressing'}}>Caesar Dressing</option>
+                        <option value="Coming Soon" style={{fontFamily: 'Coming Soon'}}>Coming Soon</option>
+                        <option value="Montserrat" style={{fontFamily: 'Montserrat'}}>Montserrat</option>
+                        <option value="Open Sans" style={{fontFamily: 'Open Sans'}}>Open Sans</option>
                     </select>
                 </div>
                 <div className="flexInput">
