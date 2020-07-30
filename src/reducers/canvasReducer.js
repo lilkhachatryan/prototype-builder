@@ -16,12 +16,12 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentElement: action.payload
-            }
+            };
         case actionTypes.UPDATE_GROUP_OBJECT:
             return {
                 ...state,
                 currentElement: action.payload,
-            }
+            };
         case actionTypes.DELETE_OBJECT:
             return {
                 ...state,
