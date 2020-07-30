@@ -21,6 +21,7 @@ const Rect = ({ handleAdd }) => {
             ry: 0,
             strokeUniform: true,
         });
+        console.log(!!rect.getObjects)
         return handleAdd(rect);
     };
     return (

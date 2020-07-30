@@ -10,6 +10,7 @@ import Triangle from './tools/Triangle';
 import Circle from './tools/Circle';
 
 import './Sidebar.scss';
+import ShareIcons from './tools/ShareIcons';
 
 class SidebarContainer extends React.Component {
     render() {
@@ -26,6 +27,7 @@ class SidebarContainer extends React.Component {
                 <TextBox handleAdd={handleAdd} fontSize="16" name="Text"/>
                 <Divider handleAdd={handleAdd} />
                 <Button handleAdd={handleAdd} />
+                <ShareIcons handleAdd={handleAdd}/>
             </div>
         );
     }

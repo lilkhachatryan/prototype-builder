@@ -3,6 +3,7 @@ import React from 'react';
 import LineSettings from './settings/LineSettings/LineSettings';
 import TextSettings from './settings/TextSettings/TextSettings';
 import ShapeSettings from './settings/ShapeSettings/ShapeSettings';
+import ShareIconsSettings from './settings/ShareIconsSettings';
 
 import './Settings.scss';
 
@@ -15,9 +16,10 @@ class SettingsContainer extends React.Component {
             || this.props.currentElement.type === 'triangle'
             || this.props.currentElement.type === 'circle') {
             settings = <ShapeSettings elementChange={this.props.elementChange} currentElement={this.props.currentElement} />
-        }
-        else if (this.props.currentElement.type === 'line') {
+        } else if (this.props.currentElement.type === 'line') {
             settings = <LineSettings elementChange={this.props.elementChange} currentElement={this.props.currentElement} />
+        } else if (this.props.currentElement.type === 'shareIcons') {
+            settings = <ShareIconsSettings groupElementChange={this.props.groupElementChange} currentElement={this.props.currentElement} />
         }
 
         return (

@@ -10,7 +10,7 @@ import HeaderSettings from "./settings/HeaderSettings";
 import './CanvasContainer.scss';
 
 
-import { updateElement, updateCurrentObject, deleteObject } from '../actions/canvasActions';
+import { updateElement, updateCurrentObject, deleteObject, updateGroupElement } from '../actions/canvasActions';
 
 
 class CanvasContainer extends React.Component {
@@ -32,7 +32,7 @@ class CanvasContainer extends React.Component {
     };
 
     updateSelection = () => {
-        return this.props.onCurrentObjectUpdate(this.canvas.getActiveObject().toObject(['id']))
+        return this.props.onCurrentObjectUpdate(this.canvas.getActiveObject().toObject(['id', 'colors', 'fillName']))
     };
     removeSelection = () => {
         return this.props.onCurrentObjectUpdate({})
@@ -136,6 +136,9 @@ class CanvasContainer extends React.Component {
         // this.setState({ currentElement: newCurrentElement.toObject() });
         this.props.onElementPropChange(this.canvas, obj)
     };
+    handleGroupPropChange = (obj) => {
+        this.props.onGroupPropChange(this.canvas, obj)
+    };
 
 
     handleBringToTop = () => {
@@ -179,6 +182,7 @@ class CanvasContainer extends React.Component {
                 <SettingsContainer
                     currentElement={this.props.currentElement}
                     elementChange={this.handleElementPropChange}
+                    groupElementChange={this.handleGroupPropChange}
                     bringToTop={this.handleBringToTop}
                     center={this.handleCenter}
                 />
@@ -197,7 +201,8 @@ const mapDispatchToProps = dispatch => {
     return {
         onCurrentObjectUpdate: (obj) => dispatch(updateCurrentObject(obj)),
         onDeleteObject: (canvas, obj) => dispatch(deleteObject(canvas, obj)),
-        onElementPropChange: (canvas, obj) => dispatch(updateElement(canvas, obj))
+        onElementPropChange: (canvas, obj) => dispatch(updateElement(canvas, obj)),
+        onGroupPropChange: (canvas, obj) => dispatch(updateGroupElement(canvas, obj))
     }
 }
 

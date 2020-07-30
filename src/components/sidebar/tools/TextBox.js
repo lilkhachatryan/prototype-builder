@@ -22,7 +22,8 @@ const TextBox = ({ handleAdd, fontSize, name }) => {
             strokeWidth: 0,
             stroke: '#000000',
             textAlign: 'left',
-            textBackgroundColor: 'rgba(255,255,255,0)'
+            textBackgroundColor: 'rgba(255,255,255,0)',
+            lockScalingY: true
         });
         return handleAdd(textBox);
     };

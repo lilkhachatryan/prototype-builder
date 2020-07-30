@@ -1,7 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    currentElement: {}
+    currentElement: {},
 }
 
 const reducer = (state = initialState, action) => {
@@ -11,9 +11,12 @@ const reducer = (state = initialState, action) => {
                 currentElement: action.payload
             }
         case actionTypes.UPDATE_OBJECT:
-
             return {
                 currentElement: action.payload
+            }
+        case actionTypes.UPDATE_GROUP_OBJECT:
+            return {
+                currentElement: action.payload,
             }
         case actionTypes.DELETE_OBJECT:
             return {

@@ -10,6 +10,23 @@ export const updateElement = (canvas, obj) => {
         payload: newCurrentElement.toObject()
     }
 }
+export const updateGroupElement = (canvas, obj) => {
+    const newCurrentElement = canvas.getActiveObject();
+    newCurrentElement.forEachObject(el => el.set({ ...obj }));
+    if (obj.fill) {
+        newCurrentElement.fillName = obj.fill;
+    }
+    if(obj.colors) {
+        newCurrentElement.colors = obj.colors;
+    }
+    canvas.renderAll();
+    console.log(newCurrentElement.toObject(['colors', 'fillName']))
+    return {
+        type: actionTypes.UPDATE_GROUP_OBJECT,
+        payload: newCurrentElement.toObject(['colors', 'fillName'])
+    }
+}
+
 
 export const updateCurrentObject = (obj) => {
     return {
@@ -21,7 +38,6 @@ export const updateCurrentObject = (obj) => {
 export const deleteObject = (canvas, obj) => {
     // const activeObj = canvas.getObjects().find(el => el.id === obj.id);
     const activeObj = canvas.getActiveObject();
-    console.log(activeObj)
     canvas.remove(activeObj);
 
     return {
