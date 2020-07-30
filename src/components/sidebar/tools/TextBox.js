@@ -5,12 +5,12 @@ import { v4 as uuid } from 'uuid';
 import {SidebarItem} from "../../../assets/styles/SidebarItem.style";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-const TextBox = ({ handleAdd, fontSize, name }) => {
+const TextBox = ({ handleAdd, fontSize, name, panningPosition }) => {
     const handleClick = () => {
         const textBox = new fabric.Textbox("Type your text here", {
             id: uuid(),
-            top: 30,
-            left: 75,
+            top: -panningPosition.y + 30,
+            left: -panningPosition.x + 50,
             width: 450,
             fill: "#000000",
             fontFamily: 'Times New Roman',

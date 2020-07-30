@@ -3,11 +3,11 @@ import { fabric } from 'fabric';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {SidebarItem} from "../../../assets/styles/SidebarItem.style";
 
-const Triangle = ({ handleAdd }) => {
+const Triangle = ({ handleAdd, panningPosition }) => {
     const handleClick = () => {
         const triangle = new fabric.Triangle({
-            top: 200,
-            left: 100,
+            top: -panningPosition.y + 100,
+            left: -panningPosition.x + 100,
             width: 50,
             height: 50,
             fill: 'transparent',

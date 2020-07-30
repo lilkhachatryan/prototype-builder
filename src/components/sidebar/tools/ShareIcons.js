@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid';
 
 import { SidebarItem } from "../../../assets/styles/SidebarItem.style";
 
-const ShareIcons = ({ handleAdd }) => {
+const ShareIcons = ({ handleAdd, panningPosition }) => {
     const handleClick = () => {
         const facebook = new fabric.Path('m15.997 3.985h2.191v-3.816c-.378-.052-1.678-.169-3.192-.169-3.159 \
             0-5.323 1.987-5.323 5.639v3.361h-3.486v4.266h3.486v10.734h4.274v-10.733h3.345l.531\
@@ -39,11 +39,11 @@ const ShareIcons = ({ handleAdd }) => {
              -.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z');
         youtube.set({ left: 170, fill: '#FF0000'});
         let shareIcons = new fabric.Group([facebook, twitter, linkedIn], {
-            left: 150,
-            top: 100,
+            left: -panningPosition.x + 100,
+            top: -panningPosition.y + 100,
             type: 'shareIcons',
             fillName: '',
-            colors: ''
+            colors: '',
         });
         console.log(shareIcons.toObject())
         return handleAdd(shareIcons);

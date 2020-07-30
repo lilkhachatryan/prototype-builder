@@ -10,7 +10,7 @@ import HeaderSettings from "./settings/HeaderSettings";
 import './CanvasContainer.scss';
 
 
-import { updateElement, updateCurrentObject, deleteObject, updateGroupElement } from '../actions/canvasActions';
+import * as actions from '../actions/canvasActions';
 
 
 class CanvasContainer extends React.Component {
@@ -76,6 +76,7 @@ class CanvasContainer extends React.Component {
     };
 
     handlePan = () => {
+        let move = {x: 0, y: 0};
         this.canvas.on('mouse:move', (event) => {
             if (this.state.panningMode) {
                 this.canvas.setCursor('grab');
@@ -85,6 +86,8 @@ class CanvasContainer extends React.Component {
                 const { e: { movementX, movementY } } = event;
                 const delta = new fabric.Point(movementX, movementY);
                 this.canvas.relativePan(delta);
+                move.x += movementX;
+                move.y += movementY;
             }
         });
         this.canvas.on('mouse:down', () => {
@@ -101,6 +104,7 @@ class CanvasContainer extends React.Component {
             }
         });
         this.canvas.on('mouse:up', () => {
+            this.props.onUpdatePanningPosition(move)
             this.setState({
                 isPanning: false
             });
@@ -199,10 +203,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onCurrentObjectUpdate: (obj) => dispatch(updateCurrentObject(obj)),
-        onDeleteObject: (canvas, obj) => dispatch(deleteObject(canvas, obj)),
-        onElementPropChange: (canvas, obj) => dispatch(updateElement(canvas, obj)),
-        onGroupPropChange: (canvas, obj) => dispatch(updateGroupElement(canvas, obj))
+        onCurrentObjectUpdate: (obj) => dispatch(actions.updateCurrentObject(obj)),
+        onDeleteObject: (canvas, obj) => dispatch(actions.deleteObject(canvas, obj)),
+        onElementPropChange: (canvas, obj) => dispatch(actions.updateElement(canvas, obj)),
+        onGroupPropChange: (canvas, obj) => dispatch(actions.updateGroupElement(canvas, obj)),
+        onUpdatePanningPosition: (data) => dispatch(actions.updatePanningPosition(data))
     }
 }
 

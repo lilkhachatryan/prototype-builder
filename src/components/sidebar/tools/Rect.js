@@ -6,12 +6,12 @@ import { v4 as uuid } from 'uuid';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {SidebarItem} from "../../../assets/styles/SidebarItem.style";
 
-const Rect = ({ handleAdd }) => {
+const Rect = ({ handleAdd, panningPosition }) => {
     const handleClick = () => {
         const rect = new fabric.Rect({
             id: uuid(),
-            top: 50,
-            left: 75,
+            top: -panningPosition.y + 20,
+            left: -panningPosition.x + 75,
             width: 450,
             height: 50,
             fill: '#FFFFFF',
