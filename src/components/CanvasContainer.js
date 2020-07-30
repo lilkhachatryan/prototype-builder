@@ -8,8 +8,8 @@ import SettingsContainer from "./settings/SettingsContainer";
 import HeaderSettings from "./settings/HeaderSettings";
 
 import './CanvasContainer.scss';
-import initAligningGuidelines from "../aligning_guidelines";
-import centeringGuildelines from "../centering_guidelines";
+import initAligningGuidelines from "../utils/fabric/aligning_guidelines";
+import centeringGuildelines from "../utils/fabric/centering_guidelines";
 
 
 import * as actions from '../actions/canvasActions';
@@ -45,10 +45,12 @@ class CanvasContainer extends React.Component {
     componentDidMount() {
         this.canvas = new fabric.Canvas('canvas', {
             backgroundColor: '#FFFFFF',
-            preserveObjectStacking: true
+            preserveObjectStacking: true,
+            hoverCursor: 'pointer'
         });
         initAligningGuidelines(this.canvas);
         centeringGuildelines(this.canvas);
+
         this.canvas.on('selection:created', this.updateSelection);
         this.canvas.on('selection:updated', this.updateSelection);
         this.canvas.on('selection:cleared', this.removeSelection);
@@ -134,12 +136,55 @@ class CanvasContainer extends React.Component {
         // this.setState({ currentElement: {} });
     };
 
+    handleClone = () => {
+        let activeObject = this.canvas.getActiveObject();
+        activeObject.clone((cloned) => {
+            this.canvas.discardActiveObject();
+            cloned.set({
+                top: cloned.top + 20,
+                evented: true
+            });
+            if (cloned.type === 'activeSelection') {
+                cloned.canvas = this.canvas;
+                cloned.forEachObject((obj) => {
+                    this.canvas.add(obj);
+                });
+                cloned.setCoords();
+            } else {
+                this.canvas.add(cloned);
+            }
+            this.canvas.setActiveObject(cloned);
+            this.canvas.requestRenderAll();
+        });
+    };
+
+    handleObjectsGroup = () => {
+        if (!this.canvas.getActiveObject()) {
+            return;
+        }
+        if (this.canvas.getActiveObject().type !== 'activeSelection') {
+            return;
+        }
+        this.canvas.getActiveObject().toGroup();
+        this.canvas.requestRenderAll();
+    };
+
+    handleUnGroupObjects = () => {
+        if (!this.canvas.getActiveObject()) {
+            return;
+        }
+        if (this.canvas.getActiveObject().type !== 'group') {
+            return;
+        }
+        this.canvas.getActiveObject().toActiveSelection();
+        this.canvas.requestRenderAll();
+    };
+
     handlePanningMode = () => {
         this.setState({
             panningMode: !this.state.panningMode
         });
     };
-
 
     handleElementPropChange = (obj) => {
         // const newCurrentElement = this.canvas.getActiveObject();
@@ -149,10 +194,10 @@ class CanvasContainer extends React.Component {
         // this.setState({ currentElement: newCurrentElement.toObject() });
         this.props.onElementPropChange(this.canvas, obj)
     };
+
     handleGroupPropChange = (obj) => {
         this.props.onGroupPropChange(this.canvas, obj)
     };
-
 
     handleBringToTop = () => {
         const activeObj = this.canvas.getActiveObject();
@@ -182,6 +227,9 @@ class CanvasContainer extends React.Component {
                         handleUndoAndRedo={this.handleUndoAndRedo}
                         currentElement={this.props.currentElement}
                         handleRemove={this.handleRemove}
+                        handleClone={this.handleClone}
+                        handleUnGroupObjects={this.handleUnGroupObjects}
+                        handleObjectsGroup={this.handleObjectsGroup}
                         bringToTop={this.handleBringToTop}
                         center={this.handleCenter} />
                     <canvas

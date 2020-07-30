@@ -23,7 +23,8 @@ const Button = ({ handleAdd, panningPosition }) => {
             lineHeight: 1,
             textBackgroundColor: '#FFFFFF',
             strokeWidth: 0,
-            stroke: '#000000'
+            stroke: '#000000',
+            selectable: true
         });
 
         let textWidth = Math.ceil(text.calcTextWidth());
@@ -41,6 +42,7 @@ const Button = ({ handleAdd, panningPosition }) => {
             strokeWidth: 3,
             rx: 0,
             ry: 0,
+            strokeUniform: true,
         });
 
        let button = new fabric.Group([rect, text], {
@@ -48,6 +50,42 @@ const Button = ({ handleAdd, panningPosition }) => {
            top: -panningPosition.y + 100,
        });
        handleAdd(button);
+
+
+        //  let LabeledRect = fabric.util.createClass(fabric.Rect, {
+       //
+       //      type: 'labeledRect',
+       //
+       //      initialize: function(options) {
+       //          options || (options = { });
+       //
+       //          this.callSuper('initialize', options);
+       //          this.set('label', options.label || '');
+       //      },
+       //
+       //      toObject: function() {
+       //          return fabric.util.object.extend(this.callSuper('toObject'), {
+       //              label: this.get('label')
+       //          });
+       //      },
+       //
+       //      _render: function(ctx) {
+       //          this.callSuper('_render', ctx);
+       //
+       //          ctx.font = '20px Helvetica';
+       //          ctx.fillStyle = '#333';
+       //          ctx.fillText(this.label, -this.width/2, -this.height/2 + 20);
+       //      }
+       //  });
+       //  let labeledRect = new LabeledRect({
+       //      width: 100,
+       //      height: 50,
+       //      left: 100,
+       //      top: 100,
+       //      label: 'test test testtesttest',
+       //      fill: '#faa'
+       //  });
+       // handleAdd(labeledRect);
     };
 
     return (
