@@ -2,9 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import {applyMiddleware} from "redux";
-import * as fromReduxThunk from 'redux-thunk';
-
 
 
 import './index.css';
@@ -15,7 +12,10 @@ import App from './App';
 import reducer from './reducers/canvasReducer';
 
 
-const store = createStore(reducer, applyMiddleware(fromReduxThunk.default));
+
+
+
+const store = createStore(reducer);
 
 ReactDOM.render(
   <React.StrictMode>

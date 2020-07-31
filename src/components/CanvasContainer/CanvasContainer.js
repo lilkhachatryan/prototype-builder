@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import saveAs from 'file-saver';
 import {changeDpiDataUrl} from "changedpi/src";
 
-import SidebarContainer from "../Sidebar/SidebarContainer";
-import SettingsContainer from "../Settings/SettingsContainer";
-import HeaderContainer from "../Settings/Header/HeaderContainer";
+import SidebarContainer from "../sidebar/SidebarContainer";
+import SettingsContainer from "../settings/SettingsContainer";
+import HeaderContainer from "../settings/Header/HeaderContainer";
 import './CanvasContainer.scss';
 import initAligningGuidelines from "../../utils/fabric/aligning_guidelines";
 import initCenteringGuidelines from "../../utils/fabric/centering_guidelines";

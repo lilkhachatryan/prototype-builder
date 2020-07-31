@@ -1,4 +1,16 @@
 import firebase from "../firebase";
+import * as fromActionTypes from './actionTypes';
+
+
+export function loginUserSuccess(payload) {
+    return {
+        type: fromActionTypes.LOGIN_USER_SUCCESS,
+        payload
+    };
+}
+
+
+
 
 
 export function registerUser(user) {
@@ -15,7 +27,8 @@ export function login(userInfo) {
     const {email, password} = userInfo;
     return (dispatch) => {
         return firebase.auth().signInWithEmailAndPassword(email, password).then( (response) => {
-            console.log(response, 'response login');
+            console.log(response);
+            dispatch(loginUserSuccess(response.user));
         } );
     };
 }

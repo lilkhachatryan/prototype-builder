@@ -3,11 +3,16 @@ import * as YUP from 'yup';
 import {withFormik} from "formik";
 import Field from "./Field";
 import {connect} from "react-redux";
+import {login} from "../../actions/UserActions";
+import Add from "./add";
 
 
-const Login = ({values, handleChange, errors, touched, handleBlur}) => {
+const Login = ({values, handleChange, errors, touched, handleBlur, submitForm}) => {
     function getTouchedAndError(fieldName) {
         return touched[fieldName] && errors[fieldName];
+    }
+    function handleSubmit() {
+        submitForm();
     }
 
     return (
@@ -31,9 +36,11 @@ const Login = ({values, handleChange, errors, touched, handleBlur}) => {
                 hasError={getTouchedAndError('password')}
             />
             <button
+                onClick={handleSubmit}
                 type='button'>
                 Log in
             </button>
+            <Add/>
         </form>
     );
 };
@@ -49,6 +56,9 @@ const WithLoginForm = withFormik({
         email: YUP.string().email().required(),
         password: YUP.string().required()
     }),
+    handleSubmit(values, {props, ...rest}) {
+        props.dispatch(login(values));
+    }
 })(Login);
 
 
