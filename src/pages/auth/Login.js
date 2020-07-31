@@ -48,7 +48,7 @@ const WithLoginForm = withFormik({
     validationSchema: YUP.object().shape({
         email: YUP.string().email().required(),
         password: YUP.string().required()
-    })
+    }),
 })(Login);
 
 
