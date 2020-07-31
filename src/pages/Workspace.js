@@ -8,8 +8,8 @@ const Workspace = () => {
     return (
         // <ConnectedRegister/>
         // <ConnectedLogin/>
-        // <CanvasContainer/>
-        <Test/>
+        <CanvasContainer/>
+        // <Test/>
     );
 };
 
