@@ -4,7 +4,7 @@ import { fabric } from 'fabric';
 import { SidebarItem } from "../../../assets/styles/SidebarItem.style";
 
 
-const Header  = ({ handleAdd, panningPosition }) => {
+const Header = ({ handleAdd, panningPosition }) => {
     const defaultPadding = {
         top: 10,
         right: 25,
