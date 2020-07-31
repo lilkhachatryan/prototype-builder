@@ -6,8 +6,10 @@ import {connect} from 'react-redux';
 import {passwordValidator} from "../../utils/validators";
 import {registerUser} from "../../actions/UserActions";
 
+
 const passwordValidationText = 'Password should contain at least one uppercase letter, should consist of 5 or more characters';
 const confirmPasswordValidationMessage = 'field password and confirm password are not matching!';
+
 
 const Register = ({values, handleChange, handleBlur, errors, touched, submitForm}) => {
     function getTouchedAndError(fieldName) {
@@ -66,6 +68,7 @@ const Register = ({values, handleChange, handleBlur, errors, touched, submitForm
                 />
                 <button
                     onClick={handleSubmit}
+
                     type='button'>
                     Submit
                 </button>
@@ -93,6 +96,7 @@ const WithRegisterForm = withFormik({
             return value && value === this.parent.password;
         } ).required()
     }),
+
     handleSubmit(values, {props, ...rest}){
         console.log(values);
         props.dispatch(registerUser(values));

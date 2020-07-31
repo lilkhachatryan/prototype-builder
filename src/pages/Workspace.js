@@ -4,12 +4,16 @@ import ConnectedRegister from "./auth/Register";
 import ConnectedLogin from "./auth/Login";
 import Test from "./auth/AuthContainer";
 
+
 const Workspace = () => {
     return (
         // <ConnectedRegister/>
-        <ConnectedLogin/>
-        // <CanvasContainer/>
+
+        // <ConnectedLogin/>
+        <CanvasContainer/>
         // <Test/>
+
+        // <ConnectedLogin/>
     );
 };
 
