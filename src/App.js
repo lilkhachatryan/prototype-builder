@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.scss';
-import { Home } from "./pages";
+import { Workspace, ConnectedLogin, ConnectedRegister } from "./pages";
 
 import {
   BrowserRouter as Router,
@@ -11,7 +11,9 @@ import {
 
 export const Routes = Object.freeze({
   Root: '/',
-  Home: '/home',
+  Workspace: '/workspace',
+  Login: '/login',
+  Register: '/register',
   NotFoundPage: '*'
 });
 
@@ -28,9 +30,11 @@ function App() {
   return (
       <Router>
           <Switch>
-              <Route path={Routes.Home} component={Home} />
+              <Route path={Routes.Workspace} component={Workspace} />
+              <Route path={Routes.Login} component={ConnectedLogin} />
+              <Route path={Routes.Register} component={ConnectedRegister} />
               <Route exact render={() => (
-                  <Redirect to={Routes.Home} />
+                  <Redirect to={Routes.Workspace} />
               )} />
               <Route path={Routes.NotFoundPage} component={NotFound}/>
           </Switch>

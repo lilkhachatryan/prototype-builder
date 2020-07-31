@@ -12,10 +12,10 @@ const Button = ({ handleAdd, panningPosition }) => {
     };
 
     const handleClick = () => {
-        const text = new fabric.Text("Submit", {
+        const text = new fabric.IText("Submit", {
             originX: 'center',
             originY: 'center',
-            fill: "#000000",
+            // fill: "#000000",
             fontFamily: 'Times New Roman',
             fontSize: 18,
             fontWeight: 'normal',
@@ -23,8 +23,7 @@ const Button = ({ handleAdd, panningPosition }) => {
             lineHeight: 1,
             textBackgroundColor: '#FFFFFF',
             strokeWidth: 0,
-            stroke: '#000000',
-            selectable: true
+            stroke: '#000000'
         });
 
         let textWidth = Math.ceil(text.calcTextWidth());
@@ -46,6 +45,7 @@ const Button = ({ handleAdd, panningPosition }) => {
         });
 
         let button = new fabric.Group([rect, text], {
+            type: 'button',
             left: -panningPosition.x + 100,
             top: -panningPosition.y + 100,
             borderColor: 'gray',

@@ -15,14 +15,14 @@ export const updateGroupElement = (canvas, obj) => {
     if (obj.fill) {
         newCurrentElement.fillName = obj.fill;
         newCurrentElement.forEachObject(el => el.set({ ...obj }));
-    };
+    }
     if (obj.colors) {
         newCurrentElement.colors = obj.colors;
         newCurrentElement.forEachObject(el => el.set({ ...obj }));
-    };
+    }
 
     canvas.renderAll();
-    console.log(newCurrentElement.toObject(['colors', 'fillName', 'vertical']))
+    console.log(newCurrentElement.toObject(['colors', 'fillName', 'vertical', 'aaaaaaaa']));
     return {
         type: actionTypes.UPDATE_GROUP_OBJECT,
         payload: newCurrentElement.toObject(['colors', 'fillName', 'vertical'])

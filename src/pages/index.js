@@ -1,5 +1,9 @@
-import Home from "./Home";
+import Workspace from "./Workspace";
+import ConnectedLogin from "./auth/Login";
+import ConnectedRegister from "./auth/Register";
 
 export {
-    Home
+    Workspace,
+    ConnectedLogin,
+    ConnectedRegister
 };
