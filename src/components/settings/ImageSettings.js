@@ -72,7 +72,7 @@ class ImageSettings extends React.Component {
                     <label>Fill</label>
                     <input
                         type="color"
-                        onChange={(_) => this.handleChange(_, 'fill')}
+                        onChange={(_) => this.handleChange(_, 'backgroundColor')}
                         value={this.state.inputs.fill} />
                 </div>
                 <div>
@@ -103,7 +103,7 @@ class ImageSettings extends React.Component {
                 <div>
                     <label>Image source</label>
                     <input type="text" onChange={this.handleSrcInputChange} value={this.state.inputs.src} placeholder="Image url" />
-                    <input type="file" onChange={this.handleFileChange} placeholder="Image url" />
+                    <input type="file" onChange={this.handleFileChange}/>
                     <button onClick={this.handleSrcChange}>Update source</button>
                 </div>
             </div>

@@ -12,6 +12,10 @@ class CanvasSettings extends React.Component {
         }
     }
 
+    shouldComponentUpdate = (nextProps, nextState) => {
+        return (nextProps.canvas !== this.props.canvas || nextState.bgColor !== this.state.bgColor)
+    }
+
     handleChange = (event) => {
         this.props.changeCanvasBg(event.target.value);
         this.setState({bgColor: event.target.value})

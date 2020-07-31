@@ -3,7 +3,7 @@ import * as actionTypes from './actionTypes';
 export const updateElement = (canvas, obj) => {
     const newCurrentElement = canvas.getActiveObject();
 
-    if (newCurrentElement.type === 'image') {
+    if (obj.src) {
         // newCurrentElement.setSrc('');
         newCurrentElement.setSrc(obj.src, () => {
             // canvas.discardActiveObject();
