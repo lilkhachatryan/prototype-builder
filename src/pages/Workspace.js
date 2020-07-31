@@ -7,8 +7,8 @@ import Test from "./auth/AuthContainer";
 const Workspace = () => {
     return (
         // <ConnectedRegister/>
-        // <ConnectedLogin/>
-        <CanvasContainer/>
+        <ConnectedLogin/>
+        // <CanvasContainer/>
         // <Test/>
     );
 };
