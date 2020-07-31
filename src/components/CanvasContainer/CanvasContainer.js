@@ -3,11 +3,11 @@ import { fabric } from 'fabric';
 import 'fabric-history';
 import { connect } from 'react-redux';
 import saveAs from 'file-saver';
-import {changeDpiDataUrl} from "changedpi/src";
+import { changeDpiDataUrl } from "changedpi/src";
 
-import SidebarContainer from "../Sidebar/SidebarContainer";
-import SettingsContainer from "../Settings/SettingsContainer";
-import HeaderContainer from "../Settings/Header/HeaderContainer";
+import SidebarContainer from "../sidebar/SidebarContainer";
+import SettingsContainer from "../settings/SettingsContainer";
+import HeaderContainer from "../settings/Header/HeaderContainer";
 import './CanvasContainer.scss';
 import initAligningGuidelines from "../../utils/fabric/aligning_guidelines";
 import initCenteringGuidelines from "../../utils/fabric/centering_guidelines";
@@ -40,8 +40,8 @@ class CanvasContainer extends React.Component {
         return this.props.onCurrentObjectUpdate({});
     };
     handleSave = (type) => {
-        if (type === 'png'){
-            let urlData = this.canvas.toDataURL({format: 'png', multiplier: 4});
+        if (type === 'png') {
+            let urlData = this.canvas.toDataURL({ format: 'png', multiplier: 4 });
             let changedDpi = changeDpiDataUrl(urlData, 5000);
             saveAs(changedDpi);
         }
@@ -90,7 +90,7 @@ class CanvasContainer extends React.Component {
     };
 
     handlePan = () => {
-        let move = {x: 0, y: 0};
+        let move = { x: 0, y: 0 };
         this.canvas.on('mouse:move', (event) => {
             if (this.state.panningMode) {
                 this.canvas.setCursor('grab');
@@ -237,7 +237,7 @@ class CanvasContainer extends React.Component {
             height: 600,
             width: 800
         };
-        if (!this.state.isDesktopView){
+        if (!this.state.isDesktopView) {
             canvasSize.height = 600;
             canvasSize.width = 700;
         }
@@ -256,7 +256,7 @@ class CanvasContainer extends React.Component {
                     bringToTop={this.handleBringToTop}
                     center={this.handleCenter} />
                 <div className="mainContainer">
-                    <SidebarContainer handleAdd={this.handleAdd}/>
+                    <SidebarContainer handleAdd={this.handleAdd} />
                     <canvas
                         className='canvas'
                         height={canvasSize.height}
@@ -268,6 +268,7 @@ class CanvasContainer extends React.Component {
                         elementChange={this.handleElementPropChange}
                         groupElementChange={this.handleGroupPropChange}
                         bringToTop={this.handleBringToTop}
+                        sendToBack={this.handleSendToBack}
                         center={this.handleCenter}
                         changeCanvasBg={this.handleCanvasBgChange}
                         canvas={canvas}
