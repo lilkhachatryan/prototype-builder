@@ -1,3 +1,5 @@
+// Canvas actions
+
 export const UPDATE_OBJECT = 'UPDATE_OBJECT';
 export const UPDATE_GROUP_OBJECT = 'UPDATE_GROUP_OBJECT';
 export const UPDATE_CURRENT_OBJECT = 'UPDATE_CURRENT_OBJECT';
