@@ -20,7 +20,11 @@ class CanvasContainer extends React.Component {
         // currentElement: {},
         panningMode: false,
         isPanning: false,
-        sendCoords: false
+        sendCoords: false,
+        canvasSize: {
+            height: 600,
+            width: 800
+        }
     };
 
     deleteHandler = (event) => {
@@ -48,10 +52,20 @@ class CanvasContainer extends React.Component {
     };
 
     componentDidMount() {
+        if (!this.state.isDesktopView){
+            this.setState({
+                canvasSize: {
+                    height: 600,
+                    width: 700
+                }
+            });
+        }
         this.canvas = new fabric.Canvas('canvas', {
             backgroundColor: '#FFFFFF',
             preserveObjectStacking: true,
-            hoverCursor: 'pointer'
+            hoverCursor: 'pointer',
+            // selection: true,
+            // selectionBorderColor: 'green',
         });
         initAligningGuidelines(this.canvas);
         initCenteringGuidelines(this.canvas);
@@ -227,16 +241,22 @@ class CanvasContainer extends React.Component {
         this.canvas.renderAll();
     };
 
+    handleCanvasBgImageChange = (image) => {
+        image.set({
+            ...this.state.canvasSize,
+            scaleX: 1,
+            scaleY: 1,
+            top: 0,
+            left: 0
+        });
+        this.canvas.setBackgroundImage(image, this.canvas.renderAll.bind(this.canvas), {
+            backgroundImageOpacity: 0.5,
+            backgroundImageStretch: false
+        });
+    };
+
     render() {
         let canvas = this.canvas ? this.canvas.toObject() : null;
-        const canvasSize = {
-            height: 600,
-            width: 800
-        };
-        if (!this.state.isDesktopView){
-            canvasSize.height = 600;
-            canvasSize.width = 700;
-        }
         return (
             <>
                 <HeaderContainer
@@ -255,8 +275,8 @@ class CanvasContainer extends React.Component {
                     <SidebarContainer handleAdd={this.handleAdd}/>
                     <canvas
                         className='canvas'
-                        height={canvasSize.height}
-                        width={canvasSize.width}
+                        height={this.state.canvasSize.height}
+                        width={this.state.canvasSize.width}
                         id='canvas'>
                     </canvas>
                     <SettingsContainer
@@ -266,6 +286,7 @@ class CanvasContainer extends React.Component {
                         bringToTop={this.handleBringToTop}
                         center={this.handleCenter}
                         changeCanvasBg={this.handleCanvasBgChange}
+                        changeCanvasBgImage={this.handleCanvasBgImageChange}
                         canvas={canvas}
                     />
                 </div>

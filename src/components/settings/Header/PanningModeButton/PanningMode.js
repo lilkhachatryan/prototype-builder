@@ -5,8 +5,7 @@ import {faHandRock} from "@fortawesome/free-solid-svg-icons";
 
 const PanningModeButton = ({handlePanningMode, panningMode}) => {
     return (
-            <button className="panningButton"
-                    disabled={!panningMode}
+            <button className={`${panningMode ? 'panningButton' : 'panningButton active'}`}
                     onClick={handlePanningMode} >
                 <FontAwesomeIcon
                     icon={faHandRock}/>
