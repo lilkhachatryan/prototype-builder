@@ -42,11 +42,11 @@ const Button = ({ handleAdd }) => {
             strokeWidth: 1,
             rx: 0,
             ry: 0,
-<<<<<<< HEAD
+
             strokeUniform: true,
         });
 
-        let button = new fabric.Group([rect, text], {
+/*        let button = new fabric.Group([rect, text], {
             type: 'button',
             left: -panningPosition.x + 100,
             top: -panningPosition.y + 100,
@@ -57,9 +57,8 @@ const Button = ({ handleAdd }) => {
             cornerStyle: 'circle',
             transparentCorners: false,
             cornerStrokeColor: '#aaaaaa',
-=======
->>>>>>> 202835e... Massive changes
-        });
+
+        });*/
 
        let button = new fabric.Group([rect, text], {
            left: 150,

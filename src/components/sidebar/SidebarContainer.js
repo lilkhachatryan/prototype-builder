@@ -7,15 +7,11 @@ import Divider from "./tools/Divider";
 import UploadImage from "./tools/UploadImage/UploadImage";
 import Button from "./tools/Button";
 import Circle from './tools/Circle';
-<<<<<<< HEAD
 import Header from './tools/Header';
-import Footer from './tools/Footer';
-import './Sidebar.scss';
+import './SidebarContainer.scss';
 import ShareIcons from './tools/ShareIcons';
-=======
 
 import './SidebarContainer.scss';
->>>>>>> 202835e... Massive changes
 
 class SidebarContainer extends React.Component {
     render() {
