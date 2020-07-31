@@ -4,6 +4,7 @@ import {withFormik} from "formik";
 import Field from "./Field";
 import {connect} from "react-redux";
 import {login} from "../../actions/UserActions";
+import Add from "./add";
 
 
 const Login = ({values, handleChange, errors, touched, handleBlur, submitForm}) => {
@@ -39,6 +40,7 @@ const Login = ({values, handleChange, errors, touched, handleBlur, submitForm}) 
                 type='button'>
                 Log in
             </button>
+            <Add/>
         </form>
     );
 };
@@ -54,7 +56,7 @@ const WithLoginForm = withFormik({
         email: YUP.string().email().required(),
         password: YUP.string().required()
     }),
-    handleSubmit(values, {props, ...rest}){
+    handleSubmit(values, {props, ...rest}) {
         props.dispatch(login(values));
     }
 })(Login);
