@@ -29,7 +29,7 @@ const Header = ({ handleAdd, panningPosition }) => {
             left: 20
         });
 
-        const menu = new fabric.Textbox("Home    About    Contact Us", {
+        const menu = new fabric.Textbox("Workspace    About    Contact Us", {
             originX: 'left',
             originY: 'center',
             fill: "#000000",

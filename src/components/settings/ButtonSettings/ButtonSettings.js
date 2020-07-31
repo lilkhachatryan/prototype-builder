@@ -14,6 +14,7 @@ class ButtonSettings extends Component {
         let newInputs = { ...this.state.text };
         let value = event.target.value;
         newInputs[type] = value;
+        this.setState({ text: newInputs });
 
         if (type === 'fontSize' || type === 'strokeWidth' || type === 'fontWeight' || type === 'lineHeight') {
             value = +value;
@@ -25,18 +26,18 @@ class ButtonSettings extends Component {
             value = true;
         }
         this.props.elementChange({ [type]: value });
-        this.setState({ text: newInputs });
     };
 
     handleRectChange = (event, type) => {
         let newInputs = { ...this.state.rect };
         let value = event.target.value;
         newInputs[type] = value;
+        this.setState({ rect: newInputs });
 
-        if (type === 'fill') {
-            this.setState({ text : {...this.state.text, fill: value }});
-            this.props.elementChange({ [type]: value });
-        }
+        // if (type === 'fill') {
+        //     this.setState({ text : {...this.state.text, fill: value }});
+        //     this.props.elementChange({ [type]: value });
+        // }
 
         if (type === 'fontSize' || type === 'strokeWidth' || type === 'fontWeight' || type === 'lineHeight') {
             value = +value;
@@ -48,7 +49,6 @@ class ButtonSettings extends Component {
             value = true;
         }
         this.props.elementChange({ [type]: value });
-        this.setState({ rect: newInputs });
     };
 
     render() {

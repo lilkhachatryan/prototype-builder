@@ -11,7 +11,6 @@ import Triangle from './tools/Triangle';
 import Circle from './tools/Circle';
 import Header from './tools/Header';
 import Footer from './tools/Footer';
-
 import './Sidebar.scss';
 import ShareIcons from './tools/ShareIcons';
 
