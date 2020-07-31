@@ -1,6 +1,7 @@
 import React from 'react';
 import Footer from "./Footer/Footer";
 import CanvasContainer from "../CanvasContainer/CanvasContainer";
+import Header from "./Hader/Header";
 
 
 class PageLayout extends React.Component {
@@ -24,6 +25,7 @@ class PageLayout extends React.Component {
         }
         return (
             <div>
+                <Header />
                 <CanvasContainer />
                 <Footer viewChanged={(event) => this.deviceViewHandler(event)}/>
             </div>

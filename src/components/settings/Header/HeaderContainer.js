@@ -20,10 +20,6 @@ const HeaderContainer = ({
 }) => {
     return (
         <div className="header-container">
-            <header className="header-container__headings">
-                <h1 className="header-container__headings-item">Team Add Objects</h1>
-                <h2 className="header-container__headings-item">Prototype Builder</h2>
-            </header>
             <div className="header-container__actionButtons">
                 <UndoAndRedo handleUndoAndRedo={handleUndoAndRedo} />
                 <PanningModeButton
