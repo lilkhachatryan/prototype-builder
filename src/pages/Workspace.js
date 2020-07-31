@@ -1,9 +1,9 @@
 import React from 'react';
 import CanvasContainer from "../components/CanvasContainer";
-import ConnectedRegister from "../auth/Register";
-import ConnectedLogin from "../auth/Login";
+import ConnectedRegister from "./auth/Register";
+import ConnectedLogin from "./auth/Login";
 
-const Home = () => {
+const Workspace = () => {
     return (
         // <ConnectedRegister/>
         // <ConnectedLogin/>
@@ -12,4 +12,4 @@ const Home = () => {
 };
 
 
-export default Home;
+export default Workspace;

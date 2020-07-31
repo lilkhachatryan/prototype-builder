@@ -3,7 +3,7 @@ import {withFormik} from "formik";
 import Field from "./Field";
 import * as YUP from 'yup';
 import {connect} from 'react-redux';
-import {passwordValidator} from "../utils/validators";
+import {passwordValidator} from "../../utils/validators";
 
 const passwordValidationText = 'Password should contain at least one uppercase letter, should consist of 5 or more characters';
 const confirmPasswordValidationMessage = 'field password and confirm password are not matching!';

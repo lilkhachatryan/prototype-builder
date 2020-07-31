@@ -35,7 +35,6 @@ export const youtube = new fabric.Path('M19.615 3.184c-3.604-.246-11.631-.245-15
 
 const ShareIcons = ({ handleAdd, panningPosition }) => {
     const handleClick = () => {
-        
         facebook.set({ left: 0, fill: '#3b5998' });
 
         twitter.set({ left: 35, fill: '#00acee' });
@@ -59,7 +58,7 @@ const ShareIcons = ({ handleAdd, panningPosition }) => {
             transparentCorners: false,
             cornerStrokeColor: '#aaaaaa',
         });
-        console.log(shareIcons.toObject())
+
         return handleAdd(shareIcons);
     };
     return (

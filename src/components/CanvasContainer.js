@@ -201,11 +201,11 @@ class CanvasContainer extends React.Component {
         // this.canvas.renderAll();
         // console.log(newCurrentElement === this.state.currentElement);
         // this.setState({ currentElement: newCurrentElement.toObject() });
-        this.props.onElementPropChange(this.canvas, obj)
+        this.props.onElementPropChange(this.canvas, obj);
     };
 
     handleGroupPropChange = (obj) => {
-        this.props.onGroupPropChange(this.canvas, obj)
+        this.props.onGroupPropChange(this.canvas, obj);
     };
 
     handleBringToTop = () => {
