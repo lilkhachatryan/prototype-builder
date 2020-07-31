@@ -1,5 +1,6 @@
 import React from 'react';
 
+import CanvasSettings from './CanvasSettings';
 import ImageSettings from './ImageSettings';
 import LineSettings from './LineSettings/LineSettings';
 import TextSettings from './TextSettings/TextSettings';
@@ -13,6 +14,7 @@ import './Settings.scss';
 
 class SettingsContainer extends React.Component {
     render() {
+        console.log(this.props)
         const { currentElement, elementChange, groupElementChange } = this.props;
         let groupTypes;
         let settings = null;
@@ -40,7 +42,7 @@ class SettingsContainer extends React.Component {
 
         return (
             <div className="settingsWrapper">
-                {settings ? settings : <h5>Please select element</h5>}
+                {settings ? settings : <CanvasSettings canvas={this.props.canvas} changeCanvasBg={this.props.changeCanvasBg}/>}
                 {settings
                     ? <div className="objAlignBtns">
                         <button className="primary" onClick={this.props.bringToTop}>Bring forward</button>

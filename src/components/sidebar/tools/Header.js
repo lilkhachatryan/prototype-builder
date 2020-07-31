@@ -13,7 +13,7 @@ const Header = ({ handleAdd, panningPosition }) => {
     };
 
     const handleClick = () => {
-        const logo = new fabric.Text("Logo", {
+        const logo = new fabric.Textbox("Logo", {
             originX: 'left',
             originY: 'center',
             fill: "#000000",
@@ -29,7 +29,7 @@ const Header = ({ handleAdd, panningPosition }) => {
             left: 20
         });
 
-        const menu = new fabric.Text("Home    About    Contact Us", {
+        const menu = new fabric.Textbox("Home    About    Contact Us", {
             originX: 'left',
             originY: 'center',
             fill: "#000000",
@@ -43,6 +43,7 @@ const Header = ({ handleAdd, panningPosition }) => {
             stroke: '#000000',
             selectable: true,
             left: 390,
+            width: 200
         });
 
         let textWidth = Math.ceil(logo.calcTextWidth());

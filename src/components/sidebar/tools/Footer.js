@@ -13,7 +13,7 @@ const Footer = ({ handleAdd, panningPosition }) => {
     };
 
     const handleClick = () => {
-        const logo = new fabric.Text("Logo", {
+        const logo = new fabric.Textbox("Logo", {
             originX: 'left',
             originY: 'center',
             fill: "#000000",
@@ -26,10 +26,18 @@ const Footer = ({ handleAdd, panningPosition }) => {
             strokeWidth: 0,
             stroke: '#000000',
             selectable: true,
-            left: 20
+            left: 20,
+            borderColor: 'gray',
+            borderDashArray: [4, 3],
+            cornerColor: '#49f500',
+            cornerSize: 11,
+            cornerStyle: 'circle',
+            transparentCorners: false,
+            cornerStrokeColor: '#aaaaaa',
+            width: 100,
         });
 
-        const menu = new fabric.Text(`Home     About     Contact Us`,
+        const menu = new fabric.Textbox(`Home     About     Contact Us`,
             {
                 originX: 'left',
                 originY: 'center',
@@ -44,7 +52,15 @@ const Footer = ({ handleAdd, panningPosition }) => {
                 stroke: '#000000',
                 selectable: true,
                 left: 20,
-                top: 60,
+                top: 50,
+                borderColor: 'gray',
+                borderDashArray: [4, 3],
+                cornerColor: '#49f500',
+                cornerSize: 11,
+                cornerStyle: 'circle',
+                transparentCorners: false,
+                cornerStrokeColor: '#aaaaaa',
+                width: 220,
             });
 
         let textWidth = Math.ceil(logo.calcTextWidth());
@@ -69,7 +85,14 @@ const Footer = ({ handleAdd, panningPosition }) => {
             rx: 0,
             ry: 0,
             strokeUniform: true,
-            shadow: '0px 0px 5px rgba(0,0,0,0.2)'
+            shadow: '0px 0px 5px rgba(0,0,0,0.2)',
+            borderColor: 'gray',
+            borderDashArray: [4, 3],
+            cornerColor: '#49f500',
+            cornerSize: 11,
+            cornerStyle: 'circle',
+            transparentCorners: false,
+            cornerStrokeColor: '#aaaaaa',
         });
         let shareIcons = new fabric.Group([facebook, twitter, linkedIn], {
             // left: -panningPosition.x + 100,
@@ -90,7 +113,7 @@ const Footer = ({ handleAdd, panningPosition }) => {
             cornerStrokeColor: '#aaaaaa',
         });
 
-        const contact = new fabric.Text(`Phone: (001) 123-456-789
+        const contact = new fabric.Textbox(`Phone: (001) 123-456-789
 Email: placeholder@email.com`, {
             originX: 'left',
             originY: 'center',
@@ -107,9 +130,17 @@ Email: placeholder@email.com`, {
             selectable: true,
             left: 400,
             top: 50,
+            borderColor: 'gray',
+            borderDashArray: [4, 3],
+            cornerColor: '#49f500',
+            cornerSize: 11,
+            cornerStyle: 'circle',
+            transparentCorners: false,
+            cornerStrokeColor: '#aaaaaa',
+            width: 180,
         });
 
-        const copyright = new fabric.Text(`Copyright: All right reserved 2020`,
+        const copyright = new fabric.Textbox(`Copyright: All right reserved 2020`,
             {
                 originX: 'left',
                 originY: 'center',
@@ -124,7 +155,15 @@ Email: placeholder@email.com`, {
                 stroke: '#000000',
                 selectable: true,
                 top: 100,
-                left: 200
+                left: 200,
+                borderColor: 'gray',
+                borderDashArray: [4, 3],
+                cornerColor: '#49f500',
+                cornerSize: 11,
+                cornerStyle: 'circle',
+                transparentCorners: false,
+                cornerStrokeColor: '#aaaaaa',
+                width: 300,
             });
 
 
@@ -138,6 +177,7 @@ Email: placeholder@email.com`, {
             cornerStyle: 'circle',
             transparentCorners: false,
             cornerStrokeColor: '#aaaaaa',
+
         });
         handleAdd(header);
     };

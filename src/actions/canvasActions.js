@@ -42,6 +42,7 @@ export const deleteObject = (canvas, obj) => {
     if(!activeObj.getObjects) {
         canvas.remove(activeObj);
     } else {
+        canvas.remove(activeObj);
         activeObj.forEachObject(el => canvas.remove(el));
         canvas.discardActiveObject();
     }
