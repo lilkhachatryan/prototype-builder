@@ -1,14 +1,16 @@
 import React from 'react';
+import './Save.css';
+
 const SaveAs = ({handleSave}) => {
     return (
-        <div>
-            <button onClick={ () => handleSave('png') } >
+        <>
+            <button className="saveButton" onClick={ () => handleSave('png') } >
                 save as png
             </button>
-            <button onClick={ () => handleSave('json') } >
+            <button className="saveButton" onClick={ () => handleSave('json') } >
                 save as json
             </button>
-        </div>
+        </>
     );
 };
 

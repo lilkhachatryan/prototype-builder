@@ -4,10 +4,9 @@ import { connect } from 'react-redux';
 import Rect from "./tools/Rect";
 import TextBox from "./tools/TextBox";
 import Divider from "./tools/Divider";
-import AddImageURL from "./tools/AddImageURL";
-import UploadImage from "./tools/UploadImage";
+import UploadImage from "./tools/UploadImage/UploadImage";
 import Button from "./tools/Button";
-import Triangle from './tools/Triangle';
+// import Triangle from './tools/Triangle';
 import Circle from './tools/Circle';
 import Header from './tools/Header';
 import Footer from './tools/Footer';
@@ -19,7 +18,6 @@ class SidebarContainer extends React.Component {
         const { handleAdd } = this.props;
         return (
             <div className="sidebarWrapper">
-                <AddImageURL handleAdd={handleAdd} panningPosition={this.props.panningPosition}/>
                 <UploadImage handleAdd={handleAdd} panningPosition={this.props.panningPosition}/>
                 <Rect handleAdd={handleAdd} panningPosition={this.props.panningPosition}/>
                 {/* <Triangle handleAdd={handleAdd} /> */}
