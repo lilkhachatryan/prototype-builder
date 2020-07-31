@@ -1,0 +1,21 @@
+
+.panningButton {
+  margin: 5px;
+  padding: 5px;
+  background-color: bisque;
+  width: 50px;
+  height: 40px;
+  border: none;
+  border-radius: 4px;
+  &:hover{
+    border: 2px solid azure;
+  }
+
+  &:focus{
+    outline: azure;
+  }
+
+  &:disabled{
+    opacity: 0.5;
+  }
+}

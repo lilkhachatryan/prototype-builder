@@ -5,17 +5,13 @@ import { connect } from 'react-redux';
 import saveAs from 'file-saver';
 import {changeDpiDataUrl} from "changedpi/src";
 
-import SidebarContainer from "./sidebar/SidebarContainer";
-import SettingsContainer from "./settings/SettingsContainer";
-import HeaderSettings from "./settings/HeaderSettings";
-
+import SidebarContainer from "../Sidebar/SidebarContainer";
+import SettingsContainer from "../Settings/SettingsContainer";
+import HeaderContainer from "../Settings/Header/HeaderContainer";
 import './CanvasContainer.scss';
-import initAligningGuidelines from "../utils/fabric/aligning_guidelines";
-import centeringGuildelines from "../utils/fabric/centering_guidelines";
-
-
-import * as actions from '../actions/canvasActions';
-
+import initAligningGuidelines from "../../utils/fabric/aligning_guidelines";
+import initCenteringGuidelines from "../../utils/fabric/centering_guidelines";
+import * as actions from '../../actions/canvasActions';
 
 class CanvasContainer extends React.Component {
 
@@ -58,7 +54,7 @@ class CanvasContainer extends React.Component {
             hoverCursor: 'pointer',
         });
         initAligningGuidelines(this.canvas);
-        centeringGuildelines(this.canvas);
+        initCenteringGuidelines(this.canvas);
 
         this.canvas.on('selection:created', this.updateSelection);
         this.canvas.on('selection:updated', this.updateSelection);
@@ -134,9 +130,11 @@ class CanvasContainer extends React.Component {
     handleUndoAndRedo = (type) => {
         type === 'undo' ? this.canvas.undo() : this.canvas.redo();
     };
+
     handleAdd = (obj) => {
         this.canvas.add(obj);
     };
+
     handleRemove = () => {
         this.props.onDeleteObject(this.canvas, this.props.currentElement);
         // const activeObj = this.canvas.getObjects().find(el => el.id === obj.id);
@@ -231,47 +229,51 @@ class CanvasContainer extends React.Component {
     handleCanvasBgChange = (value) => {
         this.canvas.setBackgroundColor(value);
         this.canvas.renderAll();
-    }
+    };
 
     render() {
         let canvas = this.canvas ? this.canvas.toObject() : null;
+        const canvasSize = {
+            height: 600,
+            width: 800
+        };
+        if (!this.state.isDesktopView){
+            canvasSize.height = 600;
+            canvasSize.width = 700;
+        }
         return (
-            <div className="workspaceWrapper">
-                <SidebarContainer handleAdd={this.handleAdd} />
-
+            <>
+                <HeaderContainer
+                    handleSave={this.handleSave}
+                    panningMode={this.state.panningMode}
+                    handlePanningMode={this.handlePanningMode}
+                    handleUndoAndRedo={this.handleUndoAndRedo}
+                    currentElement={this.props.currentElement}
+                    handleRemove={this.handleRemove}
+                    handleClone={this.handleClone}
+                    handleUnGroupObjects={this.handleUnGroupObjects}
+                    handleObjectsGroup={this.handleObjectsGroup}
+                    bringToTop={this.handleBringToTop}
+                    center={this.handleCenter} />
                 <div className="mainContainer">
-                    <HeaderSettings
-                        handleSave={this.handleSave}
-                        panningMode={this.state.panningMode}
-                        handlePanningMode={this.handlePanningMode}
-                        handleUndoAndRedo={this.handleUndoAndRedo}
-                        currentElement={this.props.currentElement}
-                        handleRemove={this.handleRemove}
-                        handleClone={this.handleClone}
-                        handleUnGroupObjects={this.handleUnGroupObjects}
-                        handleObjectsGroup={this.handleObjectsGroup}
-                        bringToTop={this.handleBringToTop}
-                        sendToBack={this.handleSendToBack}
-                        center={this.handleCenter} />
+                    <SidebarContainer handleAdd={this.handleAdd}/>
                     <canvas
                         className='canvas'
-                        height={700}
-                        width={600}
+                        height={canvasSize.height}
+                        width={canvasSize.width}
                         id='canvas'>
                     </canvas>
+                    <SettingsContainer
+                        currentElement={this.props.currentElement}
+                        elementChange={this.handleElementPropChange}
+                        groupElementChange={this.handleGroupPropChange}
+                        bringToTop={this.handleBringToTop}
+                        center={this.handleCenter}
+                        changeCanvasBg={this.handleCanvasBgChange}
+                        canvas={canvas}
+                    />
                 </div>
-
-                <SettingsContainer
-                    currentElement={this.props.currentElement}
-                    elementChange={this.handleElementPropChange}
-                    groupElementChange={this.handleGroupPropChange}
-                    bringToTop={this.handleBringToTop}
-                    sendToBack={this.handleSendToBack}
-                    center={this.handleCenter}
-                    changeCanvasBg={this.handleCanvasBgChange}
-                    canvas={canvas}
-                />
-            </div>
+            </>
         );
     }
 }
