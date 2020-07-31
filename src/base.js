@@ -1,5 +1,4 @@
-import Rebase from 're-base';
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 
 
 const firebaseConfig = {
@@ -13,7 +12,7 @@ const firebaseConfig = {
     measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
 
-const app = firebase.initializeApp(firebaseConfig);
-const base = Rebase.createClass(app.database());
+firebase.initializeApp(firebaseConfig);
 
-export {base};
+
+export default firebase;
