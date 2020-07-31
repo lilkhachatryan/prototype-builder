@@ -3,6 +3,7 @@ import { fabric } from 'fabric';
 import 'fabric-history';
 import { connect } from 'react-redux';
 import saveAs from 'file-saver';
+import {changeDpiDataUrl} from "changedpi/src";
 
 import SidebarContainer from "./sidebar/SidebarContainer";
 import SettingsContainer from "./settings/SettingsContainer";
@@ -44,7 +45,9 @@ class CanvasContainer extends React.Component {
     };
     handleSave = (type) => {
         if (type === 'png'){
-            saveAs(this.canvas.toDataURL({format: 'png'}));
+            let urlData = this.canvas.toDataURL({format: 'png', multiplier: 4});
+            let changedDpi = changeDpiDataUrl(urlData, 5000);
+            saveAs(changedDpi);
         }
     };
 
