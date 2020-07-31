@@ -7,7 +7,7 @@ import TextSettings from './TextSettings/TextSettings';
 import ShapeSettings from './ShapeSettings/ShapeSettings';
 import ButtonSettings from "./ButtonSettings/ButtonSettings";
 import ShareIconsSettings from "./ShareIconsSettings";
-import './Settings.scss';
+import './SettingsContainer.scss';
 
 export const Settings = Object.freeze({
     image: ImageSettings,
@@ -27,22 +27,22 @@ class SettingsContainer extends React.Component {
 
         if (!SettingsComponent) {
             return (
-                <div className="settingsWrapper">
+                <div className="settingsContainer">
                     <CanvasSettings canvas={this.props.canvas} changeCanvasBg={this.props.changeCanvasBg}/>
                 </div>
             );
         }
 
         return (
-            <div className="settingsWrapper">
+            <div className="settingsContainer">
                 <SettingsComponent
                     elementChange={elementChange}
                     currentElement={currentElement}
                     groupElementChange={groupElementChange} />
                 <div className="objAlignBtns">
-                    <button className="primary" onClick={this.props.bringToTop}>Bring forward</button>
-                    <button className="primary" onClick={() => this.props.center('H')}>Center horizontally</button>
-                    <button className="primary" onClick={() => this.props.center('V')}>Center vertically</button>
+                    <button className="settingsButton" onClick={this.props.bringToTop}>Bring forward</button>
+                    <button className="settingsButton" onClick={() => this.props.center('H')}>Center horizontally</button>
+                    <button className="settingsButton" onClick={() => this.props.center('V')}>Center vertically</button>
                 </div>
             </div>
         );

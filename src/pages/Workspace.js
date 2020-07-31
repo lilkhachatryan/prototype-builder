@@ -14,6 +14,11 @@ const Workspace = () => {
         // <Test/>
 
         // <ConnectedLogin/>
+import PageLayout from "../components/Layout/PageLayout";
+
+const Workspace = () => {
+    return (
+        <PageLayout />
     );
 };
 

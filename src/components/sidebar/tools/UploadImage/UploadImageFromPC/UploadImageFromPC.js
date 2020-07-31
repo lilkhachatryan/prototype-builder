@@ -1,15 +1,21 @@
 import React from 'react';
-import { fabric } from 'fabric';
+import {fabric} from 'fabric';
+import './UploadImageFromPC.scss';
+import {faUpload} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {v4 as uuid} from "uuid";
 
-class UploadImage extends React.Component {
+class UploadImageFromPC extends React.Component {
     state = {
+        labelName: "Choose a file...",
         chooseFiles: [],
-        filePath: ''
     };
     handleChange = (e) => {
+        const fileName = e.nativeEvent.target.files[0].name;
         e.persist();
         const files = [...e.target.files];
         this.setState({
+            labelName: fileName,
             chooseFiles: files,
             filePath: e.target.value
         });
@@ -22,6 +28,7 @@ class UploadImage extends React.Component {
                 chooseFiles: []
             });
         };
+        const { panningPosition } = this.props;
         this.state.chooseFiles.forEach((file) => {
             const fileType = file.type;
             const url = URL.createObjectURL(file);
@@ -31,6 +38,9 @@ class UploadImage extends React.Component {
                 }, {
                     // width: '180',
                     // height: '180',
+                    id: uuid(),
+                    top: -panningPosition.y + 100,
+                    left: -panningPosition.x + 100,
                     stroke: '#FFFFFF',
                     strokeWidth: 0,
                     borderColor: 'gray',
@@ -53,17 +63,26 @@ class UploadImage extends React.Component {
             }
         });
     };
+
     render() {
         return (
             <div>
-                <input
-                    value={this.state.filePath}
-                    onChange={this.handleChange}
-                    type="file" />
-                <button className="primary" onClick={this.handleClick} >Add image</button>
+
+                <input value={this.state.filePath}
+                       onChange={this.handleChange}
+                       type="file"
+                       name="file"
+                       id="file"
+                       className="inputfile"/>
+                <div className="labelContainer">
+                    <FontAwesomeIcon icon={faUpload} />
+                    <label htmlFor="file">{this.state.labelName}</label>
+                </div>
+
+                <button className='inputButton' onClick={this.handleClick}>ADD</button>
             </div>
         );
     }
 }
 
-export default UploadImage;
+export default UploadImageFromPC;
