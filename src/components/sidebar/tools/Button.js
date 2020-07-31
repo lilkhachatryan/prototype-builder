@@ -1,9 +1,10 @@
 import React from 'react';
 import { fabric } from 'fabric';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { SidebarItem } from "../../../assets/styles/SidebarItem.style";
 
 
-const Button = ({ handleAdd, panningPosition }) => {
+const Button = ({ handleAdd }) => {
     const defaultPadding = {
         top: 5,
         right: 25,
@@ -41,6 +42,7 @@ const Button = ({ handleAdd, panningPosition }) => {
             strokeWidth: 1,
             rx: 0,
             ry: 0,
+<<<<<<< HEAD
             strokeUniform: true,
         });
 
@@ -55,44 +57,15 @@ const Button = ({ handleAdd, panningPosition }) => {
             cornerStyle: 'circle',
             transparentCorners: false,
             cornerStrokeColor: '#aaaaaa',
+=======
+>>>>>>> 202835e... Massive changes
         });
-        handleAdd(button);
 
-
-        //  let LabeledRect = fabric.util.createClass(fabric.Rect, {
-        //
-        //      type: 'labeledRect',
-        //
-        //      initialize: function(options) {
-        //          options || (options = { });
-        //
-        //          this.callSuper('initialize', options);
-        //          this.set('label', options.label || '');
-        //      },
-        //
-        //      toObject: function() {
-        //          return fabric.util.object.extend(this.callSuper('toObject'), {
-        //              label: this.get('label')
-        //          });
-        //      },
-        //
-        //      _render: function(ctx) {
-        //          this.callSuper('_render', ctx);
-        //
-        //          ctx.font = '20px Helvetica';
-        //          ctx.fillStyle = '#333';
-        //          ctx.fillText(this.label, -this.width/2, -this.height/2 + 20);
-        //      }
-        //  });
-        //  let labeledRect = new LabeledRect({
-        //      width: 100,
-        //      height: 50,
-        //      left: 100,
-        //      top: 100,
-        //      label: 'test test testtesttest',
-        //      fill: '#faa'
-        //  });
-        // handleAdd(labeledRect);
+       let button = new fabric.Group([rect, text], {
+           left: 150,
+           top: 100,
+       });
+       handleAdd(button);
     };
 
     return (

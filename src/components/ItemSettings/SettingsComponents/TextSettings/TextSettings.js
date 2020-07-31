@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAlignCenter, faAlignJustify, faAlignLeft, faAlignRight } from '@fortawesome/free-solid-svg-icons';
+import { faAlignCenter, faAlignJustify, faAlignLeft, faAlignRight } from '@fortawesome/free-solid-svg-icons'
 
 import './TextSettings.scss';
 
@@ -26,12 +26,12 @@ class TextSettings extends React.Component {
 
         let textDecoration = '';
         if (this.props.currentElement.underline) {
-            textDecoration = 'underline';
+            textDecoration = 'underline'
         } else if (this.props.currentElement.linethrough) {
-            textDecoration = 'linethrough';
+            textDecoration = 'linethrough'
         } else if (this.props.currentElement.overline) {
-            textDecoration = 'overline';
-        }
+            textDecoration = 'overline'
+        };
 
         if (prevProps.currentElement !== this.props.currentElement) {
             const newAtts = {
@@ -45,9 +45,9 @@ class TextSettings extends React.Component {
                 strokeWidth: this.props.currentElement.strokeWidth,
                 stroke: this.props.currentElement.stroke,
                 lineHeight: this.props.currentElement.lineHeight,
-            };
-            this.setState({ inputs: newAtts });
-        }
+            }
+            this.setState({ inputs: newAtts })
+        };
     };
 
     handleChange = (event, type) => {
@@ -57,7 +57,7 @@ class TextSettings extends React.Component {
         this.setState({ inputs: newInputs });
 
         if (type === 'fontSize' || type === 'strokeWidth' || type === 'fontWeight' || type === 'lineHeight') {
-            value = +value;
+            value = +value
         }
 
         if (type === 'textDecoration') {
@@ -65,7 +65,7 @@ class TextSettings extends React.Component {
             type = value;
             value = true;
         }
-        this.props.elementChange({ [type]: value });
+        this.props.elementChange({ [type]: value })
 
     };
 
@@ -90,12 +90,8 @@ class TextSettings extends React.Component {
                 <div className="flexInput">
                     <label>Font Family</label>
                     <select onChange={(_) => this.handleChange(_, 'fontFamily')} value={this.state.inputs.fontFamily}>
-                        <option value="Arial" style={{fontFamily: 'Arial'}}>Arial</option>
-                        <option value="Times New Roman" style={{fontFamily: 'Times New Roman'}}>Times New Roman</option>
-                        <option value="Caesar Dressing" style={{fontFamily: 'Caesar Dressing'}}>Caesar Dressing</option>
-                        <option value="Coming Soon" style={{fontFamily: 'Coming Soon'}}>Coming Soon</option>
-                        <option value="Montserrat" style={{fontFamily: 'Montserrat'}}>Montserrat</option>
-                        <option value="Open Sans" style={{fontFamily: 'Open Sans'}}>Open Sans</option>
+                        <option value="Arial">Arial</option>
+                        <option value="Times New Roman">Times New Roman</option>
                     </select>
                 </div>
                 <div className="flexInput">

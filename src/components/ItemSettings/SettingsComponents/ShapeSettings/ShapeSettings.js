@@ -1,6 +1,6 @@
 import React from 'react';
 
-class ImageSettings extends React.Component {
+class ShapeSettings extends React.Component {
 
     state = {
         inputs: {
@@ -8,6 +8,7 @@ class ImageSettings extends React.Component {
             strokeWidth: this.props.currentElement.strokeWidth,
             stroke: this.props.currentElement.stroke,
             opacity: this.props.currentElement.opacity,
+            ry: this.props.currentElement.ry,
         }
     };
 
@@ -18,13 +19,13 @@ class ImageSettings extends React.Component {
                 strokeWidth: this.props.currentElement.strokeWidth,
                 stroke: this.props.currentElement.stroke,
                 opacity: this.props.currentElement.opacity,
+                ry: this.props.currentElement.ry,
             }
             this.setState({ inputs: newAtts })
         };
     };
 
     handleChange = (event, type) => {
-        console.log(type, ':', event.target.value)
         let value = event.target.value;
         let newInputs = { ...this.state.inputs };
         newInputs[type] = value;
@@ -54,6 +55,10 @@ class ImageSettings extends React.Component {
                     <label>Stroke Width (px)</label>
                     <input type="number" step="1" value={this.state.inputs.strokeWidth} onChange={(_) => this.handleChange(_, 'strokeWidth')} />
                 </div>
+                {this.props.currentElement.type !== 'rect' ? null : <div>
+                    <label>Border radius (px)</label>
+                    <input type="number" value={this.state.inputs.ry} onChange={(_) => this.handleChange(_, 'ry')} />
+                </div>}
 
                 <div>
                     <label>Stroke Color</label>
@@ -80,4 +85,4 @@ class ImageSettings extends React.Component {
     }
 }
 
-export default ImageSettings;
+export default ShapeSettings;

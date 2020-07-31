@@ -13,11 +13,9 @@ import reducer from './reducers/canvasReducer';
 const store = createStore(reducer);
 
 ReactDOM.render(
-  <React.StrictMode>
     <Provider store={store}>
       <App />
-    </Provider>
-  </React.StrictMode>,
+    </Provider>,
   document.getElementById('root')
 );
 

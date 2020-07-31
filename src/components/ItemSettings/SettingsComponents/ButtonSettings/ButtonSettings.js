@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 class ButtonSettings extends Component {
     state = {
         rect: {
-            ...this.props.currentElement.objects[0]
+            ...this.props.currentElement.item(0)
         },
         text: {
-            ...this.props.currentElement.objects[1]
+            ...this.props.currentElement.item(1)
         }
     };
 
@@ -14,7 +14,6 @@ class ButtonSettings extends Component {
         let newInputs = { ...this.state.text };
         let value = event.target.value;
         newInputs[type] = value;
-        this.setState({ text: newInputs });
 
         if (type === 'fontSize' || type === 'strokeWidth' || type === 'fontWeight' || type === 'lineHeight') {
             value = +value;
@@ -25,19 +24,19 @@ class ButtonSettings extends Component {
             type = value;
             value = true;
         }
-        this.props.elementChange({ [type]: value });
+        this.props.elementChange({ [type]: value }, this.props.currentElement.item(1));
+        this.setState({ text: newInputs });
     };
 
     handleRectChange = (event, type) => {
         let newInputs = { ...this.state.rect };
         let value = event.target.value;
         newInputs[type] = value;
-        this.setState({ rect: newInputs });
 
-        // if (type === 'fill') {
-        //     this.setState({ text : {...this.state.text, fill: value }});
-        //     this.props.elementChange({ [type]: value });
-        // }
+        if (type === 'fill') {
+            this.setState({ text : {...this.state.text, fill: value }});
+            this.props.elementChange({ textBackgroundColor: value }, this.props.currentElement.item(1));
+        }
 
         if (type === 'fontSize' || type === 'strokeWidth' || type === 'fontWeight' || type === 'lineHeight') {
             value = +value;
@@ -48,13 +47,14 @@ class ButtonSettings extends Component {
             type = value;
             value = true;
         }
-        this.props.elementChange({ [type]: value });
+        this.props.elementChange({ [type]: value }, this.props.currentElement.item(0));
+        this.setState({ rect: newInputs });
     };
 
     render() {
         return (
             <div>
-                <p>Button styles</p>
+                <p>button styles</p>
                 <div>
                     <label>Fill</label>
                     <input
@@ -91,7 +91,7 @@ class ButtonSettings extends Component {
                         onChange={(_) => this.handleRectChange(_, 'opacity')}
                     />
                 </div>
-                <p className="mt-3">Text styles</p>
+                <p>Text styles</p>
                 <div>
                     <label>Text Color</label>
                     <input

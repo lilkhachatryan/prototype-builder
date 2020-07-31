@@ -1,26 +1,26 @@
 import React from 'react';
-import { fabric } from 'fabric';
+import {fabric} from 'fabric';
+import './UploadImageFromPC.scss';
+import {faUpload} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-class UploadImage extends React.Component {
+class UploadImageFromPC extends React.Component {
     state = {
+        labelName: "Choose a file...",
         chooseFiles: [],
-        filePath: ''
     };
     handleChange = (e) => {
+        const fileName = e.nativeEvent.target.files[0].name;
         e.persist();
         const files = [...e.target.files];
         this.setState({
-            chooseFiles: files,
-            filePath: e.target.value
+            labelName: fileName,
+            chooseFiles: files
         });
     };
     handleClick = () => {
         const handleAdd = (input) => {
             this.props.handleAdd(input);
-            this.setState({
-                filePath: '',
-                chooseFiles: []
-            });
         };
         this.state.chooseFiles.forEach((file) => {
             const fileType = file.type;
@@ -31,17 +31,8 @@ class UploadImage extends React.Component {
                 }, {
                     // width: '180',
                     // height: '180',
-                    stroke: '#FFFFFF',
-                    strokeWidth: 0,
-                    borderColor: 'gray',
-                    borderDashArray: [4, 3],
-                    cornerColor: '#49f500',
-                    cornerSize: 11,
-                    cornerStyle: 'circle',
-                    transparentCorners: false,
-                    cornerStrokeColor: '#aaaaaa',
-                    scaleX: 0.3,
-                    scaleY: 0.3,
+                    stroke: '#000000',
+                    strokeWidth: 3,
                 });
             } else if (fileType === 'image/svg+xml') { //check if svg
                 fabric.loadSVGFromURL(url, function (objects, options) {
@@ -53,17 +44,21 @@ class UploadImage extends React.Component {
             }
         });
     };
+
     render() {
         return (
             <div>
-                <input
-                    value={this.state.filePath}
-                    onChange={this.handleChange}
-                    type="file" />
-                <button className="primary" onClick={this.handleClick} >Add image</button>
+
+                <input onChange={this.handleChange} type="file" name="file" id="file" className="inputfile"/>
+                <div className="labelContainer">
+                    <FontAwesomeIcon icon={faUpload} />
+                    <label htmlFor="file">{this.state.labelName}</label>
+                </div>
+
+                <button className='inputButton' onClick={this.handleClick}>ADD</button>
             </div>
         );
     }
 }
 
-export default UploadImage;
+export default UploadImageFromPC;

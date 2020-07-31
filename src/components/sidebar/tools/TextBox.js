@@ -5,12 +5,12 @@ import { v4 as uuid } from 'uuid';
 import {SidebarItem} from "../../../assets/styles/SidebarItem.style";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-const TextBox = ({ handleAdd, fontSize, name, panningPosition }) => {
+const TextBox = ({ handleAdd, fontSize, name }) => {
     const handleClick = () => {
         const textBox = new fabric.Textbox("Type your text here", {
             id: uuid(),
-            top: -panningPosition.y + 30,
-            left: -panningPosition.x + 50,
+            top: 30,
+            left: 75,
             width: 450,
             fill: "#000000",
             fontFamily: 'Times New Roman',
@@ -22,7 +22,6 @@ const TextBox = ({ handleAdd, fontSize, name, panningPosition }) => {
             stroke: '#000000',
             textAlign: 'left',
             textBackgroundColor: 'rgba(255,255,255,0)',
-            // lockScalingY: true,
             borderColor: 'gray',
             borderDashArray: [4, 3],
             cornerColor: '#49f500',
@@ -31,17 +30,6 @@ const TextBox = ({ handleAdd, fontSize, name, panningPosition }) => {
             transparentCorners: false,
             cornerStrokeColor: '#aaaaaa',
         });
-        textBox.setControlsVisibility({
-            bl: true,
-            br: true,
-            mb: false,
-            ml: true,
-            mr: true,
-            mt: false,
-            tr: true,
-            tl: true,
-            mtr: true,
-        })
         return handleAdd(textBox);
     };
 

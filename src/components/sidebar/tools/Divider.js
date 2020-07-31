@@ -5,14 +5,13 @@ import { v4 as uuid } from 'uuid';
 import {SidebarItem} from "../../../assets/styles/SidebarItem.style";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-const Divider = ({ handleAdd, panningPosition }) => {
+const Divider = ({ handleAdd }) => {
     const handleClick = () => {
-        const divider = new fabric.Line([0,0, 500,0], {
+        const divider = new fabric.Line([0,0, 200,0], {
             id: uuid(),
-            top: -panningPosition.y + 30,
-            left: -panningPosition.x + 50,
+            top: 30,
+            left: 100,
             // width: 500,
-            padding: 15,
             stroke: "#000000",
             strokeWidth: 1,
             strokeDashArray: [0, 0],
@@ -26,17 +25,6 @@ const Divider = ({ handleAdd, panningPosition }) => {
             transparentCorners: false,
             cornerStrokeColor: '#aaaaaa',
         });
-        divider.setControlsVisibility({
-            bl: false,
-            br: false,
-            mb: false,
-            ml: true,
-            mr: true,
-            mt: false,
-            tr: false,
-            tl: false,
-            mtr: true,
-        })
         return handleAdd(divider);
     };
 

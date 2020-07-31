@@ -1,17 +1,16 @@
 import React from 'react';
-import { fabric } from 'fabric';
+import {fabric} from 'fabric';
 import { v4 as uuid } from 'uuid';
-import {connect} from 'react-redux';
 
-import { SidebarItem } from "../../../assets/styles/SidebarItem.style";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {SidebarItem} from "../../../assets/styles/SidebarItem.style";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-const Circle = ({ handleAdd, panningPosition }) => {
+const Circle = ({handleAdd}) => {
     const handleClick = () => {
         const circle = new fabric.Circle({
             id: uuid(),
-            top: -panningPosition.y + 100,
-            left: -panningPosition.x + 100,
+            top: 100,
+            left: 100,
             radius: 30,
             fill: '#FFFFFF',
             stroke: '#000000',
@@ -35,11 +34,5 @@ const Circle = ({ handleAdd, panningPosition }) => {
     );
 };
 
-const mapStateToProps = state => {
-    return {
-        coords: state.coords
-    };
-};
 
-
-export default connect(mapStateToProps)(Circle);
+export default Circle;
