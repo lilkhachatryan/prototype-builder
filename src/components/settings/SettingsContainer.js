@@ -46,6 +46,7 @@ class SettingsContainer extends React.Component {
                 {settings
                     ? <div className="objAlignBtns">
                         <button className="primary" onClick={this.props.bringToTop}>Bring forward</button>
+                        <button className="primary" onClick={this.props.sendToBack}>Send back</button>
                         <button className="primary" onClick={() => this.props.center('H')}>Center horizontally</button>
                         <button className="primary" onClick={() => this.props.center('V')}>Center vertically</button>
                     </div> : null}

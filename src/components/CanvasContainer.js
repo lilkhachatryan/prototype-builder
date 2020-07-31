@@ -52,7 +52,7 @@ class CanvasContainer extends React.Component {
         this.canvas = new fabric.Canvas('canvas', {
             backgroundColor: '#FFFFFF',
             preserveObjectStacking: true,
-            hoverCursor: 'pointer'
+            hoverCursor: 'pointer',
         });
         initAligningGuidelines(this.canvas);
         centeringGuildelines(this.canvas);
@@ -209,6 +209,10 @@ class CanvasContainer extends React.Component {
         const activeObj = this.canvas.getActiveObject();
         activeObj.bringToFront();
     };
+    handleSendToBack = () => {
+        const activeObj = this.canvas.getActiveObject();
+        activeObj.sendToBack();
+    };
     handleCenter = (type) => {
         if (type === 'H') {
             const activeObj = this.canvas.getActiveObject();
@@ -244,10 +248,11 @@ class CanvasContainer extends React.Component {
                         handleUnGroupObjects={this.handleUnGroupObjects}
                         handleObjectsGroup={this.handleObjectsGroup}
                         bringToTop={this.handleBringToTop}
+                        sendToBack={this.handleSendToBack}
                         center={this.handleCenter} />
                     <canvas
                         className='canvas'
-                        height={500}
+                        height={700}
                         width={600}
                         id='canvas'>
                     </canvas>
@@ -258,6 +263,7 @@ class CanvasContainer extends React.Component {
                     elementChange={this.handleElementPropChange}
                     groupElementChange={this.handleGroupPropChange}
                     bringToTop={this.handleBringToTop}
+                    sendToBack={this.handleSendToBack}
                     center={this.handleCenter}
                     changeCanvasBg={this.handleCanvasBgChange}
                     canvas={canvas}

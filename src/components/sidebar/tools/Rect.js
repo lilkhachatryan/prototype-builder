@@ -14,7 +14,7 @@ const Rect = ({ handleAdd, panningPosition }) => {
             left: -panningPosition.x + 75,
             width: 450,
             height: 50,
-            fill: '#FFFFFF',
+            fill: 'transparent',
             stroke: '#000000',
             strokeWidth: 1,
             rx: 0,
