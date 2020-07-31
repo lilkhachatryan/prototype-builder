@@ -221,7 +221,13 @@ class CanvasContainer extends React.Component {
         }
     };
 
+    handleCanvasBgChange = (value) => {
+        this.canvas.setBackgroundColor(value);
+        this.canvas.renderAll();
+    }
+
     render() {
+        let canvas = this.canvas ? this.canvas.toObject() : null;
         return (
             <div className="workspaceWrapper">
                 <SidebarContainer handleAdd={this.handleAdd} />
@@ -253,6 +259,8 @@ class CanvasContainer extends React.Component {
                     groupElementChange={this.handleGroupPropChange}
                     bringToTop={this.handleBringToTop}
                     center={this.handleCenter}
+                    changeCanvasBg={this.handleCanvasBgChange}
+                    canvas={canvas}
                 />
             </div>
         );
