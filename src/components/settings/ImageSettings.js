@@ -8,6 +8,8 @@ class ImageSettings extends React.Component {
             strokeWidth: this.props.currentElement.strokeWidth,
             stroke: this.props.currentElement.stroke,
             opacity: this.props.currentElement.opacity,
+            src: '',
+            file: ''
         }
     };
 
@@ -36,9 +38,32 @@ class ImageSettings extends React.Component {
         if (type === 'ry') {
             this.props.elementChange({ rx: value, ry: value })
         } else {
-            this.props.elementChange({ [type]:value })
+            this.props.elementChange({ [type]: value })
         }
     };
+
+    handleSrcInputChange = (event) => {
+        let newInputs = { ...this.state.inputs };
+        newInputs.src = event.target.value;
+        this.setState({ inputs: newInputs })
+    }
+
+    handleSrcChange = () => {
+        if (this.state.inputs.src) {
+            this.props.elementChange({ src: this.state.inputs.src })
+            let newInputs = { ...this.state.inputs };
+            newInputs.src = '';
+            this.setState({ inputs: newInputs })
+        }
+    }
+
+    handleFileChange = (event) => {
+        const file = event.target.files[0];
+        const url = URL.createObjectURL(file);
+        let newInputs = { ...this.state.inputs };
+        newInputs.src = url;
+        this.setState({ inputs: newInputs })
+    }
 
     render() {
         return (
@@ -47,7 +72,7 @@ class ImageSettings extends React.Component {
                     <label>Fill</label>
                     <input
                         type="color"
-                        onChange={(_) => this.handleChange(_, 'fill')}
+                        onChange={(_) => this.handleChange(_, 'backgroundColor')}
                         value={this.state.inputs.fill} />
                 </div>
                 <div>
@@ -74,6 +99,12 @@ class ImageSettings extends React.Component {
                         value={this.state.inputs.opacity}
                         onChange={(_) => this.handleChange(_, 'opacity')}
                     />
+                </div>
+                <div>
+                    <label>Image source</label>
+                    <input type="text" onChange={this.handleSrcInputChange} value={this.state.inputs.src} placeholder="Image url" />
+                    <input type="file" onChange={this.handleFileChange}/>
+                    <button onClick={this.handleSrcChange}>Update source</button>
                 </div>
             </div>
         );

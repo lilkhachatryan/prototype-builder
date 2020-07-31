@@ -28,7 +28,9 @@ class SettingsContainer extends React.Component {
         if (!SettingsComponent) {
             return (
                 <div className="settingsContainer">
-                    <CanvasSettings canvas={this.props.canvas} changeCanvasBg={this.props.changeCanvasBg}/>
+                    <CanvasSettings canvas={this.props.canvas}
+                                    changeCanvasBg={this.props.changeCanvasBg}
+                                    changeCanvasBgImage={this.props.changeCanvasBgImage}/>
                 </div>
             );
         }
@@ -41,6 +43,7 @@ class SettingsContainer extends React.Component {
                     groupElementChange={groupElementChange} />
                 <div className="objAlignBtns">
                     <button className="settingsButton" onClick={this.props.bringToTop}>Bring forward</button>
+                    <button className="settingsButton" onClick={this.props.sendToBack}>Send back</button>
                     <button className="settingsButton" onClick={() => this.props.center('H')}>Center horizontally</button>
                     <button className="settingsButton" onClick={() => this.props.center('V')}>Center vertically</button>
                 </div>

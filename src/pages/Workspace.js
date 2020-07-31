@@ -5,7 +5,6 @@ import ConnectedLogin from "./auth/Login";
 const Workspace = () => {
     return (
         <PageLayout />
-        // <ConnectedLogin/>
     );
 };
 

@@ -2,14 +2,26 @@ import * as actionTypes from './actionTypes';
 
 export const updateElement = (canvas, obj) => {
     const newCurrentElement = canvas.getActiveObject();
-    newCurrentElement.set({ ...obj });
-    canvas.renderAll();
+
+    if (obj.src) {
+        // newCurrentElement.setSrc('');
+        newCurrentElement.setSrc(obj.src, () => {
+            // canvas.discardActiveObject();
+            // canvas.setActiveObject(newCurrentElement);
+            canvas.renderAll();
+
+        });
+    } else {
+        newCurrentElement.set({ ...obj });
+        canvas.renderAll();
+    }
 
     return {
         type: actionTypes.UPDATE_OBJECT,
         payload: newCurrentElement.toObject()
     };
 };
+
 export const updateGroupElement = (canvas, obj) => {
     const newCurrentElement = canvas.getActiveObject();
     if (obj.fill) {
