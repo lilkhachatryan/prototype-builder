@@ -28,7 +28,9 @@ class SettingsContainer extends React.Component {
         if (!SettingsComponent) {
             return (
                 <div className="settingsContainer">
-                    <CanvasSettings canvas={this.props.canvas} changeCanvasBg={this.props.changeCanvasBg}/>
+                    <CanvasSettings canvas={this.props.canvas}
+                                    changeCanvasBg={this.props.changeCanvasBg}
+                                    changeCanvasBgImage={this.props.changeCanvasBgImage}/>
                 </div>
             );
         }

@@ -3,7 +3,6 @@ import UploadImageByUrl from "./UploadImageByUrl/UploadImageByUrl";
 import UploadImageFromPC from "./UploadImageFromPC/UploadImageFromPC";
 import UploadToggler from "./UploadToggler/UploadToggler";
 
-
 const UploadImage = (props) => {
 
     const [state, setState] = useState({
