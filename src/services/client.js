@@ -17,7 +17,10 @@ export function loginUserService(user) {
 
 export function loadCanvasesService() {
     const token = returnToken();
-    return Axios.get(canvasesURL, {headers: {token}});
+    console.log(token);
+    return Axios.get(canvasesURL, {headers: {
+            'Bearer': `${token}`
+        }});
 }
 
 export function loadCanvasWithIdService(id) {
@@ -27,9 +30,10 @@ export function loadCanvasWithIdService(id) {
 
 export function postCanvas(canvas) {
     const token = returnToken();
-    return Axios.post(postCanvasURL, canvas, {headers: {token}});
+    return Axios.post(postCanvasURL, canvas, {headers: {
+            'Authorization': `Bearer ${token}`
+        }});
 }
-
 
 
 
