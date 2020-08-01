@@ -1,7 +1,7 @@
-import React, {useRef} from 'react';
 import {fabric} from 'fabric';
+import React, {useRef} from 'react';
 
-import "./UploadImageByUrl.scss";
+import './UploadImageByUrl.scss';
 
 const UploadImageByUrl = ({handleAdd}) => {
     const ref = useRef();
@@ -30,12 +30,12 @@ const UploadImageByUrl = ({handleAdd}) => {
     };
 
     return (
-        <form className='formWrapper' onSubmit={handleSubmit} >
+        <form className='formWrapper d-flex justify-content-center align-items-center' onSubmit={handleSubmit} >
             <input className='formWrapper__input'
                 ref={ref}
                 placeholder='URL...'
-                type="text"/>
-                <button className='formWrapper__button' type='submit'>
+                type='text'/>
+                <button className='formWrapper__button btn' type='submit'>
                     ADD
                 </button>
         </form>

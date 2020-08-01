@@ -1,24 +1,30 @@
-.formWrapper{
+.formWrapper {
   padding: 5px;
   margin: 5px;
 
-  .formWrapper__input{
+  &__input {
     border-radius: 5px;
-    border: 5px solid bisque;
-    width: 125px;
-  }
-  .formWrapper__input:focus{
-    outline: bisque;
+    border: 5px solid var(--main-theme-color);
+    width: 150px;
   }
 
-  .formWrapper__button{
+  &__input:focus {
+    outline: var(--main-theme-color);
+  }
+
+  &__button {
     font-size: 1em;
     font-weight: 700;
     margin: 5px;
     padding: 5px;
-    background-color: bisque;
+    background-color: var(--main-theme-color);
     width: 60px;
     border: none;
     border-radius: 10px;
+    color: var(--white);
+  }
+
+  &__button:hover {
+    color: var(--white);
   }
 }

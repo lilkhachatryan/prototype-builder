@@ -1,4 +1,39 @@
 .sidebarWrapper {
-    width: 20%;
-    padding: 20px;
+  padding: 20px;
+  display: flex;
+  overflow: hidden;
+  top: 60px;
+  width: 280px;
+  position: fixed;
+  height: calc(100vh - 60px);
+  box-shadow: 7px 0 60px var(--box-shadow-2);
+  flex-direction: column;
+  transition: all .3s ease;
+
+  &__content {
+    flex-grow: 1;
+    display: flex;
+    width: 100%;
+    background: var(--white);
+    flex-direction: column;
+    justify-content: space-between;
+
+    .accordion-button, .accordion-button:hover, .accordion-button:focus {
+      color: var(--black);
+      box-shadow: none;
+      text-decoration: none;
+
+      i {
+        padding-right: 7px;
+      }
+    }
+
+    .accordion-button:hover {
+      color: var(--black-with-opacity);
+    }
+
+    .accordion-collapse {
+      padding-left: 35px;
+    }
+  }
 }

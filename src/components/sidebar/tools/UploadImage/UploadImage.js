@@ -1,7 +1,8 @@
-import React, {useState} from "react";
-import UploadImageByUrl from "./UploadImageByUrl/UploadImageByUrl";
-import UploadImageFromPC from "./UploadImageFromPC/UploadImageFromPC";
-import UploadToggler from "./UploadToggler/UploadToggler";
+import React, {useState} from 'react';
+
+import UploadImageFromPC from './UploadImageFromPC/UploadImageFromPC';
+import UploadImageByUrl from './UploadImageByUrl/UploadImageByUrl';
+import UploadToggler from './UploadToggler/UploadToggler';
 
 const UploadImage = (props) => {
 

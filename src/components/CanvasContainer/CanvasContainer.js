@@ -1,9 +1,9 @@
 import React from 'react';
-import { fabric } from 'fabric';
+import {fabric} from 'fabric';
 import 'fabric-history';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import saveAs from 'file-saver';
-import { changeDpiDataUrl } from "changedpi/src";
+import {changeDpiDataUrl} from "changedpi/src";
 
 import SidebarContainer from "../sidebar/SidebarContainer";
 import SettingsContainer from "../settings/SettingsContainer";
@@ -12,6 +12,7 @@ import './CanvasContainer.scss';
 import initAligningGuidelines from "../../utils/fabric/aligning_guidelines";
 import initCenteringGuidelines from "../../utils/fabric/centering_guidelines";
 import * as actions from '../../actions/canvasActions';
+import Footer from "../Layout/Footer/Footer";
 
 class CanvasContainer extends React.Component {
 
@@ -22,9 +23,10 @@ class CanvasContainer extends React.Component {
         isPanning: false,
         sendCoords: false,
         canvasSize: {
-            height: 600,
-            width: 800
-        }
+            height: 500,
+            width: 650
+        },
+        isDesktopView: false,
     };
 
     deleteHandler = (event) => {
@@ -45,14 +47,14 @@ class CanvasContainer extends React.Component {
     };
     handleSave = (type) => {
         if (type === 'png') {
-            let urlData = this.canvas.toDataURL({ format: 'png', multiplier: 4 });
+            let urlData = this.canvas.toDataURL({format: 'png', multiplier: 4});
             let changedDpi = changeDpiDataUrl(urlData, 5000);
             saveAs(changedDpi);
         }
     };
 
     componentDidMount() {
-        if (!this.state.isDesktopView){
+        if (!this.state.isDesktopView) {
             this.setState({
                 canvasSize: {
                     height: 600,
@@ -104,14 +106,14 @@ class CanvasContainer extends React.Component {
     };
 
     handlePan = () => {
-        let move = { x: 0, y: 0 };
+        let move = {x: 0, y: 0};
         this.canvas.on('mouse:move', (event) => {
             if (this.state.panningMode) {
                 this.canvas.setCursor('grab');
             }
             if (this.state.isPanning && this.state.panningMode) {
                 this.canvas.setCursor('grab');
-                const { e: { movementX, movementY } } = event;
+                const {e: {movementX, movementY}} = event;
                 const delta = new fabric.Point(movementX, movementY);
                 this.canvas.relativePan(delta);
                 move.x += movementX;
@@ -259,41 +261,59 @@ class CanvasContainer extends React.Component {
         });
     };
 
+    deviceViewHandler = (isDesktopView) => {
+        this.canvasRef = null;
+        this.setState({isDesktopView: isDesktopView});
+    };
+
     render() {
         let canvas = this.canvas ? this.canvas.toObject() : null;
+        const canvasSize = {
+            height: 500,
+            width: 650
+        };
+        if (!this.state.isDesktopView) {
+            canvasSize.height = 500;
+            canvasSize.width = 300;
+        }
         return (
             <>
-                <HeaderContainer
-                    handleSave={this.handleSave}
-                    panningMode={this.state.panningMode}
-                    handlePanningMode={this.handlePanningMode}
-                    handleUndoAndRedo={this.handleUndoAndRedo}
-                    currentElement={this.props.currentElement}
-                    handleRemove={this.handleRemove}
-                    handleClone={this.handleClone}
-                    handleUnGroupObjects={this.handleUnGroupObjects}
-                    handleObjectsGroup={this.handleObjectsGroup}
-                    bringToTop={this.handleBringToTop}
-                    center={this.handleCenter} />
-                <div className="mainContainer">
-                    <SidebarContainer handleAdd={this.handleAdd} />
-                    <canvas
-                        className='canvas'
-                        height={this.state.canvasSize.height}
-                        width={this.state.canvasSize.width}
-                        id='canvas'>
-                    </canvas>
-                    <SettingsContainer
-                        currentElement={this.props.currentElement}
-                        elementChange={this.handleElementPropChange}
-                        groupElementChange={this.handleGroupPropChange}
-                        bringToTop={this.handleBringToTop}
-                        sendToBack={this.handleSendToBack}
-                        center={this.handleCenter}
-                        changeCanvasBg={this.handleCanvasBgChange}
-                        changeCanvasBgImage={this.handleCanvasBgImageChange}
-                        canvas={canvas}
-                    />
+                <SidebarContainer handleAdd={this.handleAdd}/>
+                <div className="main-container">
+                    <div>
+                        <HeaderContainer
+                            handleSave={this.handleSave}
+                            panningMode={this.state.panningMode}
+                            handlePanningMode={this.handlePanningMode}
+                            handleUndoAndRedo={this.handleUndoAndRedo}
+                            currentElement={this.props.currentElement}
+                            handleRemove={this.handleRemove}
+                            handleClone={this.handleClone}
+                            handleUnGroupObjects={this.handleUnGroupObjects}
+                            handleObjectsGroup={this.handleObjectsGroup}
+                            bringToTop={this.handleBringToTop}
+                            center={this.handleCenter}/>
+                        <div className='main-container__canvas-section'>
+                            <canvas
+                                className='canvas'
+                                height={this.state.canvasSize.height}
+                                width={this.state.canvasSize.width}
+                                id='canvas'>
+                            </canvas>
+                            <SettingsContainer
+                                currentElement={this.props.currentElement}
+                                elementChange={this.handleElementPropChange}
+                                groupElementChange={this.handleGroupPropChange}
+                                bringToTop={this.handleBringToTop}
+                                sendToBack={this.handleSendToBack}
+                                center={this.handleCenter}
+                                changeCanvasBg={this.handleCanvasBgChange}
+                                changeCanvasBgImage={this.handleCanvasBgImageChange}
+                                canvas={canvas}
+                            />
+                        </div>
+                    </div>
+                    <Footer viewChanged={(event) => this.deviceViewHandler(event)}/>
                 </div>
             </>
         );

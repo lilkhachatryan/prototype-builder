@@ -4,7 +4,7 @@ import {withFormik} from "formik";
 import Field from "./Field";
 import {connect} from "react-redux";
 import {login} from "../../actions/UserActions";
-import Add from "./add";
+
 
 
 const Login = ({values, handleChange, errors, touched, handleBlur, submitForm}) => {
@@ -40,7 +40,6 @@ const Login = ({values, handleChange, errors, touched, handleBlur, submitForm}) 
                 type='button'>
                 Log in
             </button>
-            <Add/>
         </form>
     );
 };

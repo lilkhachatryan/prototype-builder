@@ -1,13 +1,14 @@
 import React from 'react';
 import {fabric} from 'fabric';
+import {v4 as uuid} from 'uuid';
+import {faUpload} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+
 import './UploadImageFromPC.scss';
-import {faUpload} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {v4 as uuid} from "uuid";
 
 class UploadImageFromPC extends React.Component {
     state = {
-        labelName: "Choose a file...",
+        labelName: 'Choose a file...',
         chooseFiles: [],
         filePath: ''
     };
@@ -27,7 +28,7 @@ class UploadImageFromPC extends React.Component {
             this.setState({
                 filePath: '',
                 chooseFiles: [],
-                labelName: "Choose a file..."
+                labelName: 'Choose a file...'
             });
         };
         const { panningPosition } = this.props;
@@ -69,19 +70,19 @@ class UploadImageFromPC extends React.Component {
     render() {
         let id = uuid();
         return (
-            <div>
+            <div className='d-flex justify-content-center align-items-center'>
                 <input value={this.state.filePath}
                        onChange={this.handleChange}
-                       type="file"
-                       name="file"
+                       type='file'
+                       name='file'
                        id={id}
-                       className="inputfile"/>
-                <div className="labelContainer">
+                       className='inputfile'/>
+                <div className='labelContainer'>
                     <FontAwesomeIcon icon={faUpload} />
                     <label htmlFor={id}>{this.state.labelName}</label>
                 </div>
 
-                <button className='inputButton' onClick={this.handleClick}>ADD</button>
+                <button className='inputButton btn' onClick={this.handleClick}>ADD</button>
             </div>
         );
     }
