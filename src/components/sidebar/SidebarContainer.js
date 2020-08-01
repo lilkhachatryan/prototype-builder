@@ -1,12 +1,13 @@
 import {connect} from 'react-redux';
-import React, {Fragment} from 'react';
+import React, { Fragment, Suspense, lazy } from 'react';
 import Button from 'react-bootstrap/Button';
 import 'font-awesome/css/font-awesome.min.css';
 import Accordion from 'react-bootstrap/Accordion';
+import './Sidebar.scss';
 
+// import Triangle from './tools/Triangle';
 import UploadImage from './tools/UploadImage/UploadImage';
 import ShareIcons from './tools/ShareIcons';
-// import Triangle from './tools/Triangle';
 import ButtonCustom from './tools/Button';
 import TextBox from './tools/TextBox';
 import Divider from './tools/Divider';
@@ -14,14 +15,8 @@ import Circle from './tools/Circle';
 import Header from './tools/Header';
 import Footer from './tools/Footer';
 import Rect from './tools/Rect';
-import './Sidebar.scss';
-
 
 class SidebarContainer extends React.Component {
-    componentDidMount() {
-        console.log(this.props.panningPosition, 'PAN');
-    }
-
     render() {
         const {handleAdd} = this.props;
         return (

@@ -1,13 +1,20 @@
-import React from 'react';
-
-import ButtonSettings from './ButtonSettings/ButtonSettings';
-import ShapeSettings from './ShapeSettings/ShapeSettings';
-import LineSettings from './LineSettings/LineSettings';
-import TextSettings from './TextSettings/TextSettings';
-import ShareIconsSettings from './ShareIconsSettings';
-import CanvasSettings from './CanvasSettings';
-import ImageSettings from './ImageSettings';
+import React, {lazy, Suspense} from 'react';
 import './SettingsContainer.scss';
+import CanvasSettings from './CanvasSettings';
+
+const ButtonSettings = lazy(() => import('./ButtonSettings/ButtonSettings'));
+const ShapeSettings = lazy(() => import('./ShapeSettings/ShapeSettings'));
+const LineSettings = lazy(() => import('./LineSettings/LineSettings'));
+const TextSettings = lazy(() => import('./TextSettings/TextSettings'));
+const ShareIconsSettings = lazy(() => import('./ShareIconsSettings'));
+const ImageSettings = lazy(() => import('./ImageSettings'));
+
+// import ButtonSettings from './ButtonSettings/ButtonSettings';
+// import ShapeSettings from './ShapeSettings/ShapeSettings';
+// import LineSettings from './LineSettings/LineSettings';
+// import TextSettings from './TextSettings/TextSettings';
+// import ShareIconsSettings from './ShareIconsSettings';
+// import ImageSettings from './ImageSettings';
 
 export const Settings = Object.freeze({
     image: ImageSettings,
@@ -37,10 +44,12 @@ class SettingsContainer extends React.Component {
 
         return (
             <div className='settings-container'>
-                <SettingsComponent
-                    elementChange={elementChange}
-                    currentElement={currentElement}
-                    groupElementChange={groupElementChange}/>
+                <Suspense fallback={<div>Loading...</div>}>
+                    <SettingsComponent
+                        elementChange={elementChange}
+                        currentElement={currentElement}
+                        groupElementChange={groupElementChange}/>
+                </Suspense>
                 <hr className='dropdown-divider'/>
                 <div>
                     <button className='settings-button btn' onClick={() => this.props.center('V')}>Center vertically
