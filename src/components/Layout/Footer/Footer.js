@@ -8,38 +8,38 @@ const FooterContainer = (props) => {
             <div className='footer-container__team-resources d-flex'>
                 <div>
                     <span className='footer-container__member'>Armen Petrosyan</span>
-                    <a href='https://github.com/armen558' target='_blank'>
+                    <a href='https://github.com/armen558' target='_blank' rel="noopener noreferrer">
                         <Icon icon='github' size='1.5em'/>
                     </a>
-                    <a href='https://www.linkedin.com/in/armen558/' target='_blank'>
+                    <a href='https://www.linkedin.com/in/armen558/' target='_blank' rel="noopener noreferrer">
                         <Icon icon='linkedin-one' size='1.5em'/>
                     </a>
                 </div>
                 <div>
                     <span className='footer-container__member'>Lilit Khachatryan</span>
-                    <a href='https://github.com/Lilkhachatryan' target='_blank'>
+                    <a href='https://github.com/Lilkhachatryan' target='_blank' rel="noopener noreferrer">
                         <Icon icon='github' size='1.5em'/>
                     </a>
-                    <a href='https://www.linkedin.com/in/lilit-khachatryan-25a919197/' target='_blank'>
+                    <a href='https://www.linkedin.com/in/lilit-khachatryan-25a919197/' target='_blank' rel="noopener noreferrer">
                         <Icon icon='linkedin-one' size='1.5em'/>
                     </a>
                 </div>
                 <div>
                     <span className='footer-container__member'>Vardges Mushegyan</span>
-                    <a href='https://github.com/vardges-musheghyan' target='_blank'>
+                    <a href='https://github.com/vardges-musheghyan' target='_blank' rel="noopener noreferrer">
                         <Icon icon='github' size='1.5em'/>
                     </a>
-                    <a href='http://linkedin.com/in/vardges-musheghyan-a462b9154' target='_blank'>
+                    <a href='http://linkedin.com/in/vardges-musheghyan-a462b9154' target='_blank' rel="noopener noreferrer">
                         <Icon icon='linkedin-one' size='1.5em'/>
                     </a>
                 </div>
                 <div>
                     <span className='footer-container__member'>Aleksandr Martirosyan</span>
-                    <a href='https://github.com/al-mart' target='_blank'>
+                    <a href='https://github.com/al-mart' target='_blank' rel="noopener noreferrer">
                         <Icon icon='github' size='1.5em'/>
 
                     </a>
-                    <a href='https://www.linkedin.com/in/aleksandr-martirosyan/' target='_blank'>
+                    <a href='https://www.linkedin.com/in/aleksandr-martirosyan/' target='_blank' rel="noopener noreferrer">
                         <Icon icon='linkedin-one' size='1.5em'/>
                     </a>
                 </div>

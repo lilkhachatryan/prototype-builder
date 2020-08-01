@@ -1,6 +1,6 @@
 import React from 'react';
 import {withFormik} from "formik";
-import Field from "./Field";
+import Field from "../../components/Field";
 import * as YUP from 'yup';
 import {connect} from 'react-redux';
 import {passwordValidator} from "../../utils/validators";

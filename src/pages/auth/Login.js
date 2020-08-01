@@ -1,7 +1,7 @@
 import React from 'react';
 import * as YUP from 'yup';
 import {withFormik} from "formik";
-import Field from "./Field";
+import Field from "../../components/Field";
 import {connect} from "react-redux";
 import {handleLoginUser} from "../../actions/UserActions";
 import Account from "./Account";
@@ -49,7 +49,7 @@ const Login = ({values, handleChange, errors, touched, handleBlur, submitForm, i
             />
             <Field
                 type='checkbox'
-                labelText='remember me'
+                labelText='Remember me'
                 errorText={errors.rememberMe}
                 name='rememberMe'
                 onChange={handleChange}
@@ -85,7 +85,8 @@ const WithLoginForm = withFormik({
     handleSubmit(values, {props, ...rest}) {
         rest.setSubmitting(true);
         const {rememberMe, ...user} = values;
-        props.dispatch(handleLoginUser(user,
+        props.dispatch(handleLoginUser(
+            user,
             () => {
                 rest.resetForm();
                 rest.setSubmitting(false);

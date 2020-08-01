@@ -1,6 +1,5 @@
 import React from 'react';
 import { fabric } from 'fabric';
-import { v4 as uuid } from 'uuid';
 
 import { SidebarItem } from "../../../assets/styles/SidebarItem.style";
 
