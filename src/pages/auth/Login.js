@@ -5,8 +5,6 @@ import Field from "./Field";
 import {connect} from "react-redux";
 import {login} from "../../actions/UserActions";
 
-
-
 const Login = ({values, handleChange, errors, touched, handleBlur, submitForm}) => {
     function getTouchedAndError(fieldName) {
         return touched[fieldName] && errors[fieldName];
@@ -40,6 +38,7 @@ const Login = ({values, handleChange, errors, touched, handleBlur, submitForm}) 
                 type='button'>
                 Log in
             </button>
+            <Add/>
         </form>
     );
 };

@@ -1,3 +1,4 @@
+
 import * as fromActionTypes from './actionTypes';
 
 
@@ -15,7 +16,6 @@ export function loginUserSuccess(payload) {
 export function registerUser(user) {
     return (dispatch) => {
         const {email, password} = user;
-
     };
 }
 

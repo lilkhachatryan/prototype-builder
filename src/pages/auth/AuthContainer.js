@@ -9,5 +9,3 @@ const AuthContainer = ({children}) => {
 };
 
 export default AuthContainer;
-
-

@@ -5,6 +5,7 @@ import { createStore } from 'redux';
 import {BrowserRouter as Router} from "react-router-dom";
 
 
+
 import './index.css';
 import '././assets/styles/global.scss';
 import './plugins/fontawesome';
