@@ -18,6 +18,9 @@ import './Sidebar.scss';
 
 
 class SidebarContainer extends React.Component {
+    componentDidMount() {
+        console.log(this.props.panningPosition, 'PAN');
+    }
 
     render() {
         const {handleAdd} = this.props;
@@ -91,7 +94,7 @@ class SidebarContainer extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        panningPosition: state.panningPosition
+        panningPosition: state.canvas.panningPosition
     };
 };
 
