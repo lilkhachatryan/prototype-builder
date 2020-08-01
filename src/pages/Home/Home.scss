@@ -21,6 +21,18 @@
             }
         }
     }
+
+    .imgContainer {
+        text-align: center;
+        margin: 30px auto;
+        img {
+            display: block;
+            margin: auto;
+            width: 700px;
+            max-width: 100%;
+        }
+    }
+
     h1 {
         color: #663399;
         font-size: 40px;
