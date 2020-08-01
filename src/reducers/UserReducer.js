@@ -51,7 +51,8 @@ export function login(state = initialLoginState, action) {
                ...state,
                loading: true,
                loaded: false,
-               error: ''
+               error: '',
+               token: null
            };
        }
        case fromActionTypes.LOGIN_USER_SUCCESS: {

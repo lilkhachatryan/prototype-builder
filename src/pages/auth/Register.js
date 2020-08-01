@@ -4,14 +4,14 @@ import Field from "./Field";
 import * as YUP from 'yup';
 import {connect} from 'react-redux';
 import {passwordValidator} from "../../utils/validators";
-import {handleRegisterUSer} from "../../actions/UserActions";
+import {handleRegisterUser} from "../../actions/UserActions";
 
 
 const passwordValidationText = 'Password should contain at least one uppercase letter, should consist of 5 or more characters';
 const confirmPasswordValidationMessage = 'field password and confirm password are not matching!';
 
 
-const Register = ({values, handleChange, handleBlur, errors, touched, submitForm}) => {
+const Register = ({values, handleChange, handleBlur, errors, touched, submitForm, isSubmitting}) => {
     function getTouchedAndError(fieldName) {
         return touched[fieldName] && errors[fieldName];
     }
@@ -68,7 +68,7 @@ const Register = ({values, handleChange, handleBlur, errors, touched, submitForm
                 />
                 <button
                     onClick={handleSubmit}
-
+                    disabled={isSubmitting}
                     type='button'>
                     Submit
                 </button>
@@ -97,8 +97,12 @@ const WithRegisterForm = withFormik({
         } ).required()
     }),
     handleSubmit(values, {props, ...rest}){
+        rest.setSubmitting(true);
         const {confirmPassword, ...user} = values;
-        props.dispatch(handleRegisterUSer(user));
+        props.dispatch(handleRegisterUser(user,
+            () => {rest.setSubmitting(false); rest.resetForm(); props.history.push('/');},
+            () => {rest.setSubmitting(false); })
+            );
     }
 })(Register);
 
