@@ -121,6 +121,7 @@ class ShapeSettings extends React.Component {
                         <label>Vertical</label>
                         <input type="number" className="field-styling" onChange={(_) => this.handleShadowChange(_, 'offsetY')} value={this.state.inputs.shadow.offsetY} />
                     </div>
+                    <div id="color-picker-1" class="mx-auto"></div>
                 </div>
             </div>
         );

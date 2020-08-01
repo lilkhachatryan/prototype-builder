@@ -10,13 +10,7 @@ export const updateElement = (canvas, obj) => {
             // canvas.setActiveObject(newCurrentElement);
         });
     } else if (obj.shadow) {
-        console.log(obj)
-        newCurrentElement.setShadow({
-            color: obj.shadow.color,
-            blur: +obj.shadow.blur,
-            offsetX: +obj.shadow.offsetX,
-            offsetY: +obj.shadow.offsetX
-          });
+        newCurrentElement.setShadow({ ...obj.shadow });
     } else {
         newCurrentElement.set({ ...obj });
     }
