@@ -3,6 +3,7 @@ import {registerService} from "../services/client";
 import {loginUserService} from "../services/client";
 import { setStorage } from "../utils/storage";
 import { notifyError } from "../plugins/notify";
+import {removeToken} from "../utils/helpers";
 
 // register user
 
@@ -78,6 +79,13 @@ export function handleLoginUser(user, cb, scb, rememberMe) {
             cb();
             dispatch(loginUserFail(err.response.data.message));
         } );
+    };
+}
+
+export function handleUserLogOut(cb) {
+    return (dispatch) => {
+        removeToken();
+        cb();
     };
 }
 

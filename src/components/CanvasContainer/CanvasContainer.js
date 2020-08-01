@@ -275,7 +275,7 @@ class CanvasContainer extends React.Component {
 
     handlePostCanvas = () => {
         const canvas = this.state.canvas;
-        this.props.onPostCanvas(this.state.canvas);
+        this.props.onPostCanvas({canvas});
     };
 
     deviceViewHandler = (isDesktopView) => {

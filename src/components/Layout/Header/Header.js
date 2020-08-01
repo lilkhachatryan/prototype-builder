@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import {connect} from 'react-redux';
 import { ReactComponent as Rects } from '../../../assets/images/rects.svg';
+import {withRouter} from 'react-router-dom';
 
 import './Header.scss';
+import {handleUserLogOut} from "../../../actions/UserActions";
 
 
-const Header = () => {
+const Header = ({history, dispatch}) => {
     const handleLogOut = () => {
-
+        dispatch(handleUserLogOut( () => history.push('/login') ));
     };
     return (
         <div className='app-header'>
@@ -29,7 +31,7 @@ const Header = () => {
                     </div>
                 } id='basic-nav-dropdown'>
 
-                    <NavDropdown.Item onclick={handleLogOut} >
+                    <NavDropdown.Item onClick={handleLogOut} >
                         Log out
                     </NavDropdown.Item>
                 </NavDropdown>
@@ -41,4 +43,4 @@ const Header = () => {
 
 const ConnectedHeader = connect()(Header);
 
-export default ConnectedHeader;
+export default withRouter(ConnectedHeader);
