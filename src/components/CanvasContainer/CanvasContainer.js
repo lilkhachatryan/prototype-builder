@@ -322,7 +322,7 @@ class CanvasContainer extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        currentElement: state.currentElement
+        currentElement: state.canvas.currentElement
     };
 };
 

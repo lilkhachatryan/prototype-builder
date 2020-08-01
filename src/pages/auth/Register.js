@@ -4,7 +4,7 @@ import Field from "./Field";
 import * as YUP from 'yup';
 import {connect} from 'react-redux';
 import {passwordValidator} from "../../utils/validators";
-import {registerUser} from "../../actions/UserActions";
+import {handleRegisterUSer} from "../../actions/UserActions";
 
 
 const passwordValidationText = 'Password should contain at least one uppercase letter, should consist of 5 or more characters';
@@ -31,21 +31,21 @@ const Register = ({values, handleChange, handleBlur, errors, touched, submitForm
                     labelText='please enter your e-mail'
                 />
                 <Field
-                    errorText={errors.firstName}
-                    hasError={getTouchedAndError('firstName')}
+                    errorText={errors.first_name}
+                    hasError={getTouchedAndError('first_name')}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.firstName}
-                    name='firstName'
+                    value={values.first_name}
+                    name='first_name'
                     labelText='please enter your first name'
                 />
                 <Field
-                    errorText={errors.lastName}
-                    hasError={getTouchedAndError('lastName')}
+                    errorText={errors.last_name}
+                    hasError={getTouchedAndError('last_name')}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.lastName}
-                    name='lastName'
+                    value={values.last_name}
+                    name='last_name'
                     labelText='please enter your last name'
                 />
                 <Field
@@ -83,14 +83,14 @@ const WithRegisterForm = withFormik({
             email: '',
             password: '',
             confirmPassword: '',
-            firstName: '',
-            lastName: ''
+            first_name: '',
+            last_name: ''
         };
     },
     validationSchema: YUP.object().shape({
         email: YUP.string().email().required(),
-        firstName: YUP.string().required(),
-        lastName: YUP.string().required(),
+        first_name: YUP.string().required(),
+        last_name: YUP.string().required(),
         password: YUP.string().test('password validator', passwordValidationText, passwordValidator).required(),
         confirmPassword: YUP.string().test( 'match', confirmPasswordValidationMessage, function (value) {
             return value && value === this.parent.password;
@@ -98,13 +98,17 @@ const WithRegisterForm = withFormik({
     }),
 
     handleSubmit(values, {props, ...rest}){
-        console.log(values);
-        props.dispatch(registerUser(values));
+        const {confirmPassword, ...user} = values;
+        props.dispatch(handleRegisterUSer(user));
     }
 })(Register);
 
 
-const ConnectedRegister = connect()(WithRegisterForm);
+const ConnectedRegister = connect( state => ({
+    loading: state.register.loading,
+    loaded: state.register.loaded,
+    error: state.register.error,
+}) )(WithRegisterForm);
 
 export default ConnectedRegister;
 

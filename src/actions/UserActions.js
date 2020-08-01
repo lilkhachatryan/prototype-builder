@@ -1,28 +1,44 @@
-
 import * as fromActionTypes from './actionTypes';
+import {registerService} from "../services/client";
 
 
-export function loginUserSuccess(payload) {
+// register user
+
+export function registerUser() {
     return {
-        type: fromActionTypes.LOGIN_USER_SUCCESS,
+        type: fromActionTypes.REGISTER_USER
+    };
+}
+
+export function registerUserSuccess() {
+    return {
+        type: fromActionTypes.REGISTER_USER_SUCCESS
+    };
+}
+
+export function registerUserFail(payload) {
+    return {
+        type: fromActionTypes.REGISTER_USER_FAIL,
         payload
     };
 }
 
 
 
-
-
-export function registerUser(user) {
+export function handleRegisterUSer(newUser) {
     return (dispatch) => {
-        const {email, password} = user;
+        dispatch(registerUser());
+        return registerService(newUser).then( (response) => {
+            console.log('user created successfulley', response);
+            dispatch(registerUserSuccess());
+        } ).catch(err => {
+            console.error(err);
+            dispatch(registerUserFail(err.message));
+        });
     };
 }
 
 
-export function login(userInfo) {
-    const {email, password} = userInfo;
-    return (dispatch) => {
 
-    };
-}
+
+

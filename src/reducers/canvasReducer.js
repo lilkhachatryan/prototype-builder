@@ -5,7 +5,7 @@ const initialState = {
     panningPosition: { x: 0, y: 0 }
 };
 
-const reducer = (state = initialState, action) => {
+const canvas = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.UPDATE_CURRENT_OBJECT:
             return {
@@ -38,4 +38,4 @@ const reducer = (state = initialState, action) => {
     }
 };
 
-export default reducer;
+export default canvas;
