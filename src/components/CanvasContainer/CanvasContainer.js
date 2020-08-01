@@ -23,7 +23,7 @@ class CanvasContainer extends React.Component {
         sendCoords: false,
         canvasSize: {
             height: 600,
-            width: 800
+            width: 700
         }
     };
 
