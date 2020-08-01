@@ -29,7 +29,7 @@ const Header = () => {
                     </div>
                 } id='basic-nav-dropdown'>
 
-                    <NavDropdown.Item onclick={handleLogOut}  >
+                    <NavDropdown.Item onclick={handleLogOut} >
                         Log out
                     </NavDropdown.Item>
                 </NavDropdown>

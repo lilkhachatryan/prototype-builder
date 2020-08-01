@@ -14,11 +14,14 @@ import initCenteringGuidelines from "../../utils/fabric/centering_guidelines";
 import * as actions from '../../actions/canvasActions';
 import Footer from "../Layout/Footer/Footer";
 import {handleLoadCanvases} from "../../actions/canvasActions";
+import {handleAddCanvas} from "../../actions/canvasActions";
+
 
 class CanvasContainer extends React.Component {
 
 
     state = {
+        canvas: null,
         // currentElement: {},
         panningMode: false,
         isPanning: false,
@@ -261,6 +264,20 @@ class CanvasContainer extends React.Component {
             backgroundImageStretch: false
         });
     };
+    handleAddCanvas = () => {
+        this.props.onPostCanvas(this.state.canvas);
+    };
+    handleClick = () => {
+        this.setState({
+            canvas: this.canvas.toJSON()
+        }, () => {
+            this.canvas.clear();
+        });
+    };
+
+    handlePostCanvas = () => {
+        this.props.onPostCanvas(this.state.canvas);
+    };
 
     deviceViewHandler = (isDesktopView) => {
         this.canvasRef = null;
@@ -320,6 +337,12 @@ class CanvasContainer extends React.Component {
                     <button onClick={this.props.onLoadCanvases}>
                         Click
                     </button>
+                    <button onClick={this.handleClick} >
+                        add canvas
+                    </button>
+                    <button onClick={this.handlePostCanvas} >
+                        Post cnavas
+                    </button>
                 </div>
             </>
         );
@@ -335,6 +358,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        onPostCanvas: (canvas) => dispatch(handleAddCanvas(canvas)),
         onLoadCanvases: () => dispatch(handleLoadCanvases()),
         onCurrentObjectUpdate: (obj) => dispatch(actions.updateCurrentObject(obj)),
         onDeleteObject: (canvas, obj) => dispatch(actions.deleteObject(canvas, obj)),

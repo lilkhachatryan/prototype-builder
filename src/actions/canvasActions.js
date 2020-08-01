@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import {loadCanvasesService} from "../services/client";
+import {loadCanvasesService, postCanvas} from "../services/client";
 
 export const updateElement = (canvas, obj) => {
     const newCurrentElement = canvas.getActiveObject();
@@ -104,6 +104,15 @@ export function handleLoadCanvases() {
         return loadCanvasesService().then( (response) => {
             dispatch(loadCanvasesSuccess(response.data));
         } );
+    };
+}
+
+
+export function handleAddCanvas(canvas) {
+    return (dispatch) => {
+        return postCanvas(canvas).then(res => {
+            console.log(res, 'Canvas');
+        });
     };
 }
 
