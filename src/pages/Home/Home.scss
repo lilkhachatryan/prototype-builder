@@ -1,0 +1,67 @@
+.homepage {
+    .headingContainer {
+        position: relative;
+
+        svg {
+            width: 160px;
+            position: absolute;
+            right: -15px;
+            top: 0;
+            z-index: -1;
+
+            .rects rect {
+                opacity: 0;
+                animation: fadeIn 0.5s 2s forwards;
+            }
+            .rects rect:nth-child(2) {
+                animation: fadeIn 0.5s 2.15s forwards;
+            }
+            .rects rect:nth-child(3) {
+                animation: fadeIn 0.5s 2.3s forwards;
+            }
+        }
+    }
+    h1 {
+        color: #663399;
+        font-size: 40px;
+        line-height: 40px;
+        font-weight: 600;
+        text-align: center;
+        margin: 0 0 20px 0;
+        letter-spacing: 1px;
+    }
+    h3 {
+        color: var(--main-theme-color);
+        font-size: 20px;
+        line-height: 30px;
+        font-weight: normal;
+        text-align: center;
+        margin: 0 0 40px 0;
+        max-width: 550px;
+        margin: auto;
+    }
+
+    .btnContainer {
+        text-align: center;
+        margin-top: 40px;
+        a {
+            padding: 12px 25px;
+            line-height: 1;
+            background-color: var(--main-theme-color);
+            color: #ffffff;
+            margin: 0 15px;
+            font-size: 20px;
+            font-weight: normal;
+            display: inline-block;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+    }
+}
+
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
