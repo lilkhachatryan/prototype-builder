@@ -1,8 +1,12 @@
 import './Header.scss';
 import React from 'react';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import {connect} from 'react-redux';
 
 const Header = () => {
+    const handleLogOut = () => {
+
+    };
     return (
         <div className='app-header'>
             <header className='app-header__headings'>
@@ -14,12 +18,8 @@ const Header = () => {
                             alt='user pic' className='user-avatar'/>
                     </div>
                 } id='basic-nav-dropdown'>
-                    <NavDropdown.Item>
-                        Canvas 1
-                    </NavDropdown.Item>
-                    <NavDropdown.Divider/>
-                    <NavDropdown.Item>
-                        Canvas 2
+                    <NavDropdown.Item onclick={handleLogOut}  >
+                        Log out
                     </NavDropdown.Item>
                 </NavDropdown>
             </header>
@@ -27,4 +27,7 @@ const Header = () => {
     );
 };
 
-export default Header;
+
+const ConnectedHeader = connect()(Header);
+
+export default ConnectedHeader;

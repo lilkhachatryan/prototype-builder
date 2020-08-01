@@ -29,6 +29,8 @@ export const POST_CANVAS = 'POST_CANVAS';
 export const POST_CANVAS_SUCCESS = 'POST_CANVAS_SUCCESS';
 export const POST_CANVAS_FAIL = 'POST_CANVAS_FAIL';
 
+export const LOG_OUT = 'LOG_OUT';
+
 
 
 
