@@ -23,16 +23,10 @@ class CanvasContainer extends React.Component {
         isPanning: false,
         sendCoords: false,
         canvasSize: {
-<<<<<<< HEAD
-            height: 600,
-            width: 700
-        }
-=======
             height: 500,
             width: 650
         },
         isDesktopView: false,
->>>>>>> 77e9b5811823a96b23b51ee88d587eded0273d85
     };
 
     deleteHandler = (event) => {
@@ -45,6 +39,7 @@ class CanvasContainer extends React.Component {
     };
 
     updateSelection = () => {
+        // console.log(this.canvas.getActiveObject().shadow)
         return this.props.onCurrentObjectUpdate(this.canvas.getActiveObject().toObject(['id', 'colors', 'fillName']))
     };
 
@@ -273,6 +268,8 @@ class CanvasContainer extends React.Component {
     };
 
     render() {
+        console.log(this.props.currentElement)
+
         let canvas = this.canvas ? this.canvas.toObject() : null;
         const canvasSize = {
             height: 500,
@@ -302,8 +299,8 @@ class CanvasContainer extends React.Component {
                         <div className='main-container__canvas-section'>
                             <canvas
                                 className='canvas'
-                                height={this.state.canvasSize.height}
-                                width={this.state.canvasSize.width}
+                                height="500"//{this.state.canvasSize.height}
+                                width="650"//{this.state.canvasSize.width}
                                 id='canvas'>
                             </canvas>
                             <SettingsContainer

@@ -8,13 +8,19 @@ export const updateElement = (canvas, obj) => {
         newCurrentElement.setSrc(obj.src, () => {
             // canvas.discardActiveObject();
             // canvas.setActiveObject(newCurrentElement);
-            canvas.renderAll();
-
         });
+    } else if (obj.shadow) {
+        console.log(obj)
+        newCurrentElement.setShadow({
+            color: obj.shadow.color,
+            blur: +obj.shadow.blur,
+            offsetX: +obj.shadow.offsetX,
+            offsetY: +obj.shadow.offsetX
+          });
     } else {
         newCurrentElement.set({ ...obj });
-        canvas.renderAll();
     }
+    canvas.renderAll();
 
     return {
         type: actionTypes.UPDATE_OBJECT,
