@@ -11,14 +11,18 @@ const Login = ({values, handleChange, errors, touched, handleBlur, submitForm, i
     function getTouchedAndError(fieldName) {
         return touched[fieldName] && errors[fieldName];
     }
+
     function handleSubmit() {
         submitForm();
     }
 
     return (
-        <form>
+        <form className='login-form'>
+            <div className='avatar-icon'>
+                <img src="https://i.stack.imgur.com/l60Hf.png" alt=""/>
+            </div>
             <Account
-                linkText='do not have an account ? just register'
+                linkText='Do not have an account? just register'
                 pathToNavigate='/register'
             />
             <Field
@@ -26,6 +30,7 @@ const Login = ({values, handleChange, errors, touched, handleBlur, submitForm, i
                 labelText='login'
                 errorText={errors.email}
                 name='email'
+                className='field-styling'
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.email}
@@ -36,6 +41,7 @@ const Login = ({values, handleChange, errors, touched, handleBlur, submitForm, i
                 labelText='password'
                 errorText={errors.password}
                 name='password'
+                className='field-styling'
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.password}
@@ -49,9 +55,11 @@ const Login = ({values, handleChange, errors, touched, handleBlur, submitForm, i
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.rememberMe}
+                className='checkbox'
                 hasError={getTouchedAndError('rememberMe')}
             />
             <button
+                className='btn'
                 disabled={isSubmitting}
                 onClick={handleSubmit}
                 type='button'>
@@ -78,7 +86,10 @@ const WithLoginForm = withFormik({
         rest.setSubmitting(true);
         const {rememberMe, ...user} = values;
         props.dispatch(handleLoginUser(user,
-            () => {rest.resetForm(); rest.setSubmitting(false);},
+            () => {
+                rest.resetForm();
+                rest.setSubmitting(false);
+            },
             () => props.history.push('/workspace'),
             rememberMe));
     }

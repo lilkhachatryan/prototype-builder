@@ -1,0 +1,79 @@
+.auth__container {
+  min-height: 100vh;
+  padding: 100px 0;
+  background: var(--main-theme-color-opacity);
+}
+
+.login-form, .form__container {
+  width: 450px;
+  margin: 0 auto;
+  background: var(--white);
+  position: relative;
+  padding: 90px 20px 20px;
+  box-shadow: 0 0 10px var(--main-theme-color);
+
+  .avatar-icon {
+    position: absolute;
+    top: -70px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    width: 140px;
+
+    img {
+      border-radius: 50%;
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      box-shadow: 0 1px 7px rgb(179, 161, 226)
+    }
+  }
+
+  .field-styling {
+    width: 100%;
+  }
+
+  .checkbox {
+    margin-left: 7px;
+  }
+
+  .btn, .btn:focus, .btn:hover {
+    background-color: var(--main-theme-color);
+    color: var(--white);
+    outline: var(--main-theme-color);
+  }
+
+  .field-info-link {
+    padding: 20px 0;
+
+    a {
+      color: var(--main-theme-color);
+    }
+  }
+
+  .register-title {
+    position: relative;
+    padding-bottom: 20px;
+
+    hr {
+      border-color: var(--main-theme-color);
+    }
+
+    h4 {
+      position: absolute;
+      top: -18px;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      text-align: center;
+      background: white;
+      width: fit-content;
+      padding: 0 20px;
+      color: var(--main-theme-color);
+    }
+  }
+}
+
+.form__container {
+  padding-top: 50px;
+}

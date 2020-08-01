@@ -15,11 +15,13 @@ import '././assets/styles/global.scss';
 import './plugins/fontawesome';
 import App from './App';
 import canvas from './reducers/canvasReducer';
+import {canvases} from "./reducers/canvasReducer";
 
 export const reducers = combineReducers({
     canvas,
     register,
-    login
+    login,
+    canvases
 });
 
 export const middleware = applyMiddleware(thunk.default);

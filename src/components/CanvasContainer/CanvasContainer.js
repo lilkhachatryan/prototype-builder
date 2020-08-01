@@ -13,6 +13,7 @@ import initAligningGuidelines from "../../utils/fabric/aligning_guidelines";
 import initCenteringGuidelines from "../../utils/fabric/centering_guidelines";
 import * as actions from '../../actions/canvasActions';
 import Footer from "../Layout/Footer/Footer";
+import {handleLoadCanvases} from "../../actions/canvasActions";
 
 class CanvasContainer extends React.Component {
 
@@ -39,7 +40,6 @@ class CanvasContainer extends React.Component {
     };
 
     updateSelection = () => {
-        // console.log(this.canvas.getActiveObject().shadow)
         return this.props.onCurrentObjectUpdate(this.canvas.getActiveObject().toObject(['id', 'colors', 'fillName']))
     };
 
@@ -317,6 +317,9 @@ class CanvasContainer extends React.Component {
                         </div>
                     </div>
                     <Footer viewChanged={(event) => this.deviceViewHandler(event)}/>
+                    {/*<button onClick={this.props.onLoadCanvases} >*/}
+                    {/*    Click*/}
+                    {/*</button>*/}
                 </div>
             </>
         );
@@ -325,12 +328,14 @@ class CanvasContainer extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        currentElement: state.canvas.currentElement
+        currentElement: state.canvas.currentElement,
+        canvases: state.canvases.canvases
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        onLoadCanvases: () => dispatch(handleLoadCanvases()),
         onCurrentObjectUpdate: (obj) => dispatch(actions.updateCurrentObject(obj)),
         onDeleteObject: (canvas, obj) => dispatch(actions.deleteObject(canvas, obj)),
         onElementPropChange: (canvas, obj) => dispatch(actions.updateElement(canvas, obj)),
@@ -340,5 +345,3 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CanvasContainer);
-
-

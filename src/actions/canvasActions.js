@@ -1,4 +1,5 @@
 import * as actionTypes from './actionTypes';
+import {loadCanvasesService} from "../services/client";
 
 export const updateElement = (canvas, obj) => {
     const newCurrentElement = canvas.getActiveObject();
@@ -71,4 +72,49 @@ export const updatePanningPosition = (data) => {
         payload: data
     };
 };
+
+
+
+// Load canvases
+
+
+export function loadCanvases() {
+    return {
+        type: actionTypes.LOAD_CANVASES
+    };
+}
+
+export function loadCanvasesSuccess(payload) {
+    return {
+        type: actionTypes.LOAD_CANVASES_SUCCESS,
+        payload
+    };
+}
+
+export function loadCanvasesFail(payload) {
+    return {
+        type: actionTypes.LOAD_CANVASES_FAIL,
+        payload
+    };
+}
+
+export function handleLoadCanvases() {
+    return (dispatch) => {
+        dispatch(loadCanvases());
+        return loadCanvasesService().then( (response) => {
+            console.log(response, 'LOad canvases success');
+            dispatch(loadCanvasesSuccess(response.data));
+        } );
+    };
+}
+
+
+
+
+
+
+
+
+
+
 
