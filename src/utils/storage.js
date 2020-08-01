@@ -1,4 +1,4 @@
-import { warn } from './logger';
+import { warn } from './loger';
 let memoryStorage = {};
 
 export const setStorage = (storage, key, value) => {
@@ -37,3 +37,7 @@ export const clearStorage = (storage) => {
         warn(`Error on clearing sessionStorage!`);
     }
 };
+
+export function returnToken() {
+    return window.localStorage.getItem('token') || window.sessionStorage.getItem('token');
+}

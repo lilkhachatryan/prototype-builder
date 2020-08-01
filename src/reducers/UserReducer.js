@@ -4,7 +4,8 @@ import * as fromActionTypes from '../actions/actionTypes';
 
 const initialState = {
     user: {},
-    canvas: []
+    canvases: []
+
 };
 
 

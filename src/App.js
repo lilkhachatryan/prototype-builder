@@ -1,44 +1,32 @@
 import React from 'react';
 import './App.scss';
-import { Workspace, ConnectedLogin, ConnectedRegister } from "./pages";
+import {Authenticate} from "./pages/Authenticate";
+import { ConnectedLogin, ConnectedRegister } from "./pages";
+import AuthContainer from "./pages/auth/AuthContainer";
+import {Switch, Route} from "react-router-dom";
+import PageLayout from "./components/Layout/PageLayout";
+import PageNotFound from "./pages/PageNotFound";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect
-} from "react-router-dom";
 
-export const Routes = Object.freeze({
-  Root: '/',
-  Workspace: '/workspace',
-  Login: '/login',
-  Register: '/register',
-  NotFoundPage: '*'
-});
-
-const NotFound = ({ location }) => (
-    <div>
-      <strong>Error!</strong> No route found matching:
-      <div>
-        <code>{location.pathname}</code>
-      </div>
-    </div>
-);
 
 function App() {
   return (
-      <Router>
-          <Switch>
-              <Route path={Routes.Workspace} component={Workspace} />
-              <Route path={Routes.Login} component={ConnectedLogin} />
-              <Route path={Routes.Register} component={ConnectedRegister} />
-              <Route exact render={() => (
-                  <Redirect to={Routes.Workspace} />
-              )} />
-              <Route path={Routes.NotFoundPage} component={NotFound}/>
-          </Switch>
-      </Router>
+      <Switch>
+          <Route path={['/workspace']}>
+              {
+                  Authenticate(PageLayout)
+              }
+          </Route>
+          <Route path={['/register', '/']}>
+              <AuthContainer>
+                  <Switch>
+                      <Route path='/register' component={ConnectedRegister}/>
+                      <Route path='/' exact component={ConnectedLogin}/>
+                      <Route component={PageNotFound} />
+                  </Switch>
+              </AuthContainer>
+          </Route>
+      </Switch>
   );
 }
 

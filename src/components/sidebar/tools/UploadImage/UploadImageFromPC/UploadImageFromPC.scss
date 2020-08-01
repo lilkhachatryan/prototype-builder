@@ -5,25 +5,18 @@
   overflow: hidden;
   position: absolute;
   z-index: -1;
-
 }
 
 .inputfile + div {
   font-size: 1em;
   font-weight: 700;
-  color: white;
-  background-color: bisque;
+  color: var(--white);
+  background-color: var(--main-theme-color);
   display: inline-block;
   padding: 5px;
   margin: 5px;
   border-radius: 4px;
   cursor: pointer;
-
-}
-
-.inputfile:focus + div {
-  outline: 1px dotted #000;
-  outline: -webkit-focus-ring-color auto 5px;
 }
 
 .inputButton {
@@ -31,13 +24,32 @@
   font-weight: 700;
   margin: 5px;
   padding: 5px;
-  background-color: bisque;
+  background-color: var(--main-theme-color);
   width: 60px;
   border: none;
   border-radius: 10px;
+  color: var(--white);
+
+  &:hover {
+    color: var(--white);
+  }
+
 }
 
-.labelContainer{
+.labelContainer {
   width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  label {
+    margin: 0;
+    cursor: pointer;
+  }
 }
 

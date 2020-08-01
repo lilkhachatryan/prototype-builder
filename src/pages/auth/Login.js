@@ -4,8 +4,6 @@ import {withFormik} from "formik";
 import Field from "./Field";
 import {connect} from "react-redux";
 import {login} from "../../actions/UserActions";
-import Add from "./add";
-
 
 const Login = ({values, handleChange, errors, touched, handleBlur, submitForm}) => {
     function getTouchedAndError(fieldName) {
