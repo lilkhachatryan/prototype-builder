@@ -6,6 +6,7 @@ import AuthContainer from "./pages/auth/AuthContainer";
 import {Switch, Route} from "react-router-dom";
 import PageLayout from "./components/Layout/PageLayout";
 import PageNotFound from "./pages/PageNotFound";
+import Home from "./pages/Home";
 
 
 
@@ -17,11 +18,12 @@ function App() {
                   Authenticate(PageLayout)
               }
           </Route>
-          <Route path={['/register', '/']}>
+          <Route path={['/register', '/login', '/']}>
               <AuthContainer>
                   <Switch>
-                      <Route path='/register' component={ConnectedRegister}/>
-                      <Route path='/' exact component={ConnectedLogin}/>
+                      <Route path='/register' exact component={ConnectedRegister}/>
+                      <Route path='/login' exact component={ConnectedLogin}/>
+                      <Route exact path='/' component={Home}/>
                       <Route component={PageNotFound} />
                   </Switch>
               </AuthContainer>

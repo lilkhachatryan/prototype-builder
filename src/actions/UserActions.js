@@ -69,9 +69,9 @@ export function handleLoginUser(user, cb, scb, rememberMe) {
         dispatch(loginUser());
         return loginUserService(user).then( (response) => {
             const {token, user} = response.data;
-            dispatch(loginUserSuccess(token));
             cb();
             scb();
+            dispatch(loginUserSuccess(token));
             setToken(token, rememberMe);
         } ).catch( err => {
             console.error(err);

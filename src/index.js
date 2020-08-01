@@ -33,13 +33,11 @@ export const middleware = applyMiddleware(thunk.default);
 const store = createStore(reducers, middleware);
 
 ReactDOM.render(
-  <React.StrictMode>
     <Provider store={store}>
         <Router>
       <App />
         </Router>
-    </Provider>
-  </React.StrictMode>,
+    </Provider>,
   document.getElementById('root')
 );
 

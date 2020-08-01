@@ -268,7 +268,7 @@ class CanvasContainer extends React.Component {
     };
 
     render() {
-        console.log(this.props.currentElement)
+        console.log(this.props.currentElement);
 
         let canvas = this.canvas ? this.canvas.toObject() : null;
         const canvasSize = {
