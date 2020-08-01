@@ -6,7 +6,7 @@ import AuthContainer from "./pages/auth/AuthContainer";
 import {Switch, Route} from "react-router-dom";
 import PageLayout from "./components/Layout/PageLayout";
 import PageNotFound from "./pages/PageNotFound";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 
 
 
