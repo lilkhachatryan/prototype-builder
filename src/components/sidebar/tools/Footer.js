@@ -75,8 +75,8 @@ const Footer = ({ handleAdd, panningPosition }) => {
 
         linkedIn.set({ left: 80, fill: '#0e76a8' });
         const rect = new fabric.Rect({
-            width: 600,
-            // height: rectHeight,
+            width: 650,
+            height: 180,
             originX: 'left',
             originY: 'center',
             fill: '#FFFFFF',
@@ -84,8 +84,10 @@ const Footer = ({ handleAdd, panningPosition }) => {
             strokeWidth: 0,
             rx: 0,
             ry: 0,
+            left: 0,
+            top: 45,
             strokeUniform: true,
-            shadow: '0px 0px 5px rgba(0,0,0,0.2)',
+            shadow: '0px 0px 7px rgba(0,0,0,0.2)',
             borderColor: 'gray',
             borderDashArray: [4, 3],
             cornerColor: '#49f500',
@@ -155,7 +157,7 @@ Email: placeholder@email.com`, {
                 stroke: '#000000',
                 selectable: true,
                 top: 100,
-                left: 200,
+                left: 240,
                 borderColor: 'gray',
                 borderDashArray: [4, 3],
                 cornerColor: '#49f500',
@@ -169,7 +171,7 @@ Email: placeholder@email.com`, {
 
         let header = new fabric.Group([rect, logo, menu, shareIcons, contact, copyright], {
             left: -panningPosition.x,
-            top: -panningPosition.y + 360,
+            top: -panningPosition.y + 320,
             borderColor: 'gray',
             borderDashArray: [4, 3],
             cornerColor: '#49f500',
