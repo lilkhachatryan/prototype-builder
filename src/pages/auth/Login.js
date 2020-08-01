@@ -4,6 +4,7 @@ import {withFormik} from "formik";
 import Field from "./Field";
 import {connect} from "react-redux";
 import {handleLoginUser} from "../../actions/UserActions";
+import Account from "./Account";
 
 
 const Login = ({values, handleChange, errors, touched, handleBlur, submitForm, isSubmitting}) => {
@@ -16,6 +17,10 @@ const Login = ({values, handleChange, errors, touched, handleBlur, submitForm, i
 
     return (
         <form>
+            <Account
+                linkText='do not have an account ? just register'
+                pathToNavigate='/register'
+            />
             <Field
                 type='text'
                 labelText='login'
