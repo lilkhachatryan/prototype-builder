@@ -60,7 +60,6 @@ const Login = ({values, handleChange, errors, touched, handleBlur, submitForm, i
             />
             <button
                 className='btn'
-                hasError={getTouchedAndError('rememberMe')}
                 disabled={isSubmitting}
                 onClick={handleSubmit}
                 type='button'>
