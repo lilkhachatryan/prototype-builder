@@ -96,7 +96,6 @@ const WithRegisterForm = withFormik({
             return value && value === this.parent.password;
         } ).required()
     }),
-
     handleSubmit(values, {props, ...rest}){
         const {confirmPassword, ...user} = values;
         props.dispatch(handleRegisterUSer(user));

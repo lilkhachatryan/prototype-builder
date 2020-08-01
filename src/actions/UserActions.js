@@ -29,10 +29,8 @@ export function handleRegisterUSer(newUser) {
     return (dispatch) => {
         dispatch(registerUser());
         return registerService(newUser).then( (response) => {
-            console.log('user created successfulley', response);
             dispatch(registerUserSuccess());
         } ).catch(err => {
-            console.error(err);
             dispatch(registerUserFail(err.message));
         });
     };
