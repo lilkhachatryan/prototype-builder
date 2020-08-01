@@ -3,9 +3,10 @@ import * as YUP from 'yup';
 import {withFormik} from "formik";
 import Field from "./Field";
 import {connect} from "react-redux";
+import {handleLoginUser} from "../../actions/UserActions";
 
 
-const Login = ({values, handleChange, errors, touched, handleBlur, submitForm}) => {
+const Login = ({values, handleChange, errors, touched, handleBlur, submitForm, isSubmitting}) => {
     function getTouchedAndError(fieldName) {
         return touched[fieldName] && errors[fieldName];
     }
@@ -16,6 +17,7 @@ const Login = ({values, handleChange, errors, touched, handleBlur, submitForm}) 
     return (
         <form>
             <Field
+                type='text'
                 labelText='login'
                 errorText={errors.email}
                 name='email'
@@ -25,6 +27,7 @@ const Login = ({values, handleChange, errors, touched, handleBlur, submitForm}) 
                 hasError={getTouchedAndError('email')}
             />
             <Field
+                type='password'
                 labelText='password'
                 errorText={errors.password}
                 name='password'
@@ -33,7 +36,18 @@ const Login = ({values, handleChange, errors, touched, handleBlur, submitForm}) 
                 value={values.password}
                 hasError={getTouchedAndError('password')}
             />
+            <Field
+                type='checkbox'
+                labelText='remember me'
+                errorText={errors.rememberMe}
+                name='rememberMe'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.rememberMe}
+                hasError={getTouchedAndError('rememberMe')}
+            />
             <button
+                disabled={isSubmitting}
                 onClick={handleSubmit}
                 type='button'>
                 Log in
@@ -46,19 +60,30 @@ const WithLoginForm = withFormik({
     mapPropsToValues() {
         return {
             email: '',
-            password: ''
+            password: '',
+            rememberMe: false
         };
     },
     validationSchema: YUP.object().shape({
         email: YUP.string().email().required(),
-        password: YUP.string().required()
+        password: YUP.string().required(),
+        rememberMe: YUP.boolean()
     }),
     handleSubmit(values, {props, ...rest}) {
-
+        rest.setSubmitting(true);
+        const {rememberMe, ...user} = values;
+        props.dispatch(handleLoginUser(user,
+            () => {rest.resetForm(); rest.setSubmitting(false);},
+            () => props.history.push('/workspace'),
+            rememberMe));
     }
 })(Login);
 
 
-const ConnectedLogin = connect()(WithLoginForm);
+const ConnectedLogin = connect(state => ({
+    loading: state.login.loading,
+    loaded: state.login.loaded,
+    error: state.login.error
+}))(WithLoginForm);
 
 export default ConnectedLogin;
