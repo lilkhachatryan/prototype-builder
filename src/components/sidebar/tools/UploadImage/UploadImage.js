@@ -10,9 +10,9 @@ const UploadImage = (props) => {
         uploadFromPc: true
     });
 
-    const toggleChangeHandler = () => {
+    const toggleChangeHandler = (bool) => {
         let newState = {
-            uploadFromPc: !state.uploadFromPc
+            uploadFromPc: bool
         };
         setState(newState);
     };

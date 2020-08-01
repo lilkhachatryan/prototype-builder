@@ -40,7 +40,7 @@ class CanvasContainer extends React.Component {
     };
 
     updateSelection = () => {
-        return this.props.onCurrentObjectUpdate(this.canvas.getActiveObject().toObject(['id', 'colors', 'fillName']));
+        return this.props.onCurrentObjectUpdate(this.canvas.getActiveObject().toObject(['id', 'colors', 'fillName']))
     };
 
     removeSelection = () => {
@@ -268,6 +268,8 @@ class CanvasContainer extends React.Component {
     };
 
     render() {
+        console.log(this.props.currentElement)
+
         let canvas = this.canvas ? this.canvas.toObject() : null;
         const canvasSize = {
             height: 500,
@@ -297,8 +299,8 @@ class CanvasContainer extends React.Component {
                         <div className='main-container__canvas-section'>
                             <canvas
                                 className='canvas'
-                                height={this.state.canvasSize.height}
-                                width={this.state.canvasSize.width}
+                                height="500"//{this.state.canvasSize.height}
+                                width="650"//{this.state.canvasSize.width}
                                 id='canvas'>
                             </canvas>
                             <SettingsContainer

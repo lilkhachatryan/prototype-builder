@@ -9,13 +9,13 @@ export const updateElement = (canvas, obj) => {
         newCurrentElement.setSrc(obj.src, () => {
             // canvas.discardActiveObject();
             // canvas.setActiveObject(newCurrentElement);
-            canvas.renderAll();
-
         });
+    } else if (obj.shadow) {
+        newCurrentElement.setShadow({ ...obj.shadow });
     } else {
         newCurrentElement.set({ ...obj });
-        canvas.renderAll();
     }
+    canvas.renderAll();
 
     return {
         type: actionTypes.UPDATE_OBJECT,
