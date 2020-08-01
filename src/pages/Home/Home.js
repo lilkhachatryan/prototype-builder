@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { ReactComponent as Rects } from '../../assets/images/rects.svg';
+import gifSrc from '../../assets/images/projectGif.gif';
 
 import './Home.scss';
 
@@ -16,7 +17,7 @@ const Home = props => {
                     <Rects />
                 </div>
                 <div className="imgContainer">
-
+                    <img src={gifSrc} alt="gif" />
                 </div>
                 <div className="btnContainer">
                     <Link className="btn" to="/workspace">Get started</Link>
