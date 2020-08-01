@@ -28,7 +28,7 @@ const Register = ({values, handleChange, handleBlur, errors, touched, submitForm
             </div>
             <Account
                 linkText='Already have an account? just login'
-                pathToNavigate='/'
+                pathToNavigate='/login'
             />
             <form>
                 <Field
@@ -111,7 +111,7 @@ const WithRegisterForm = withFormik({
         rest.setSubmitting(true);
         const {confirmPassword, ...user} = values;
         props.dispatch(handleRegisterUser(user,
-            () => {rest.setSubmitting(false); rest.resetForm(); props.history.push('/');},
+            () => {rest.setSubmitting(false); rest.resetForm(); props.history.push('/login');},
             () => {rest.setSubmitting(false); })
             );
     }
