@@ -317,9 +317,9 @@ class CanvasContainer extends React.Component {
                         </div>
                     </div>
                     <Footer viewChanged={(event) => this.deviceViewHandler(event)}/>
-                    {/*<button onClick={this.props.onLoadCanvases} >*/}
-                    {/*    Click*/}
-                    {/*</button>*/}
+                    <button onClick={this.props.onLoadCanvases}>
+                        Click
+                    </button>
                 </div>
             </>
         );

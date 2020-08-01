@@ -1,8 +1,8 @@
 import * as fromActionTypes from './actionTypes';
 import {registerService} from "../services/client";
 import {loginUserService} from "../services/client";
-import {setToken} from "../utils/storage";
-
+import { setStorage } from "../utils/storage";
+import { notifyError } from "../plugins/notify";
 
 // register user
 
@@ -31,11 +31,11 @@ export function handleRegisterUser(newUser, scb, fcb) {
     return (dispatch) => {
         dispatch(registerUser());
         return registerService(newUser).then( (response) => {
-            console.log(response);
             dispatch(registerUserSuccess());
             scb();
         } ).catch(err => {
-            dispatch(registerUserFail(err.message));
+            notifyError(err.response.data.message);
+            dispatch(registerUserFail(err.response.data.message));
             fcb();
         });
     };
@@ -69,14 +69,14 @@ export function handleLoginUser(user, cb, scb, rememberMe) {
         dispatch(loginUser());
         return loginUserService(user).then( (response) => {
             const {token, user} = response.data;
+            rememberMe ? setStorage('localStorage', 'token', token) : setStorage('sessionStorage', 'token', token);
+            dispatch(loginUserSuccess(token));
             cb();
             scb();
-            dispatch(loginUserSuccess(token));
-            setToken(token, rememberMe);
-        } ).catch( err => {
-            console.error(err);
+        } ).catch(err => {
+            notifyError(err.response.data.message);
             cb();
-            dispatch(loginUserFail(err.message));
+            dispatch(loginUserFail(err.response.data.message));
         } );
     };
 }

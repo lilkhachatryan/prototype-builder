@@ -1,15 +1,16 @@
-import { getStorage } from "../utils/storage";
-import {Routes} from "../App";
 import { notifyError } from "./notify";
+import { returnToken } from "../utils/helpers";
+import { removeStorage } from "../utils/storage";
 
 const axios = require('axios').create({
-    baseURL: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN
+    baseURL: process.env.REACT_APP_API_URL
 });
 
 axios.interceptors.request.use(config => {
-    let accessToken = getStorage('localStorage', 'token'); // or sessionStorage
+    let accessToken = returnToken();
     if (accessToken) {
-        config.headers['token'] = accessToken;
+        config.headers['Authorization'] = `Bearer ${accessToken}`;
+        config.headers['token'] = `Bearer ${accessToken}`;
     }
 
     return config;
@@ -17,13 +18,14 @@ axios.interceptors.request.use(config => {
 
 export const setupInterceptors = (history) => {
     axios.interceptors.response.use(res => res, e => {
-
         if (!e.response || !e.response.status)
             return Promise.reject(e);
 
         switch (e.response.status) {
             case 401:
-                // history.push(Routes.Login);
+                removeStorage('localStorage', 'token');
+                removeStorage('sessionStorage', 'token');
+                history.push('/login');
                 notifyError('Session expired');
                 break;
             default: notifyError(e.response.data);
