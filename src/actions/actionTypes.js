@@ -17,6 +17,21 @@ export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
 export const REGISTER_USER_FAIL = 'REGISTER_USER_FAIL';
 
 
+// user-canvas actions
+
+
+export const LOAD_CANVASES = 'LOAD_CANVASES';
+export const LOAD_CANVASES_SUCCESS = 'LOAD_CANVASES_SUCCESS';
+export const LOAD_CANVASES_FAIL = 'LOAD_CANVASES_FAIL';
+
+
+export const POST_CANVAS = 'POST_CANVAS';
+export const POST_CANVAS_SUCCESS = 'POST_CANVAS_SUCCESS';
+export const POST_CANVAS_FAIL = 'POST_CANVAS_FAIL';
+
+
+
+
 
 
 

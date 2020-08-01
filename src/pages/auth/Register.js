@@ -5,6 +5,7 @@ import * as YUP from 'yup';
 import {connect} from 'react-redux';
 import {passwordValidator} from "../../utils/validators";
 import {handleRegisterUser} from "../../actions/UserActions";
+import Account from "./Account";
 
 
 const passwordValidationText = 'Password should contain at least one uppercase letter, should consist of 5 or more characters';
@@ -20,6 +21,10 @@ const Register = ({values, handleChange, handleBlur, errors, touched, submitForm
     }
     return (
         <div className='form__container'>
+            <Account
+                linkText='already have an account? just login'
+                pathToNavigate='/'
+            />
             <form>
                 <Field
                     errorText={errors.email}
