@@ -4,16 +4,27 @@ import Field from "./Field";
 import * as YUP from 'yup';
 import {connect} from 'react-redux';
 import {passwordValidator} from "../../utils/validators";
+import {handleRegisterUser} from "../../actions/UserActions";
+import Account from "./Account";
+
 
 const passwordValidationText = 'Password should contain at least one uppercase letter, should consist of 5 or more characters';
 const confirmPasswordValidationMessage = 'field password and confirm password are not matching!';
 
-const Register = ({values, handleChange, handleBlur, errors, touched}) => {
+
+const Register = ({values, handleChange, handleBlur, errors, touched, submitForm, isSubmitting}) => {
     function getTouchedAndError(fieldName) {
         return touched[fieldName] && errors[fieldName];
     }
+    function handleSubmit() {
+        submitForm();
+    }
     return (
         <div className='form__container'>
+            <Account
+                linkText='already have an account? just login'
+                pathToNavigate='/'
+            />
             <form>
                 <Field
                     errorText={errors.email}
@@ -25,21 +36,21 @@ const Register = ({values, handleChange, handleBlur, errors, touched}) => {
                     labelText='please enter your e-mail'
                 />
                 <Field
-                    errorText={errors.firstName}
-                    hasError={getTouchedAndError('firstName')}
+                    errorText={errors.first_name}
+                    hasError={getTouchedAndError('first_name')}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.firstName}
-                    name='firstName'
+                    value={values.first_name}
+                    name='first_name'
                     labelText='please enter your first name'
                 />
                 <Field
-                    errorText={errors.lastName}
-                    hasError={getTouchedAndError('lastName')}
+                    errorText={errors.last_name}
+                    hasError={getTouchedAndError('last_name')}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.lastName}
-                    name='lastName'
+                    value={values.last_name}
+                    name='last_name'
                     labelText='please enter your last name'
                 />
                 <Field
@@ -61,6 +72,8 @@ const Register = ({values, handleChange, handleBlur, errors, touched}) => {
                     labelText='please confirm the created password'
                 />
                 <button
+                    onClick={handleSubmit}
+                    disabled={isSubmitting}
                     type='button'>
                     Submit
                 </button>
@@ -75,25 +88,35 @@ const WithRegisterForm = withFormik({
             email: '',
             password: '',
             confirmPassword: '',
-            firstName: '',
-            lastName: ''
+            first_name: '',
+            last_name: ''
         };
     },
     validationSchema: YUP.object().shape({
         email: YUP.string().email().required(),
-        firstName: YUP.string().required(),
-        lastName: YUP.string().required(),
+        first_name: YUP.string().required(),
+        last_name: YUP.string().required(),
         password: YUP.string().test('password validator', passwordValidationText, passwordValidator).required(),
         confirmPassword: YUP.string().test( 'match', confirmPasswordValidationMessage, function (value) {
             return value && value === this.parent.password;
         } ).required()
     }),
-    handleSubmit({values, ...rest}){
+    handleSubmit(values, {props, ...rest}){
+        rest.setSubmitting(true);
+        const {confirmPassword, ...user} = values;
+        props.dispatch(handleRegisterUser(user,
+            () => {rest.setSubmitting(false); rest.resetForm(); props.history.push('/');},
+            () => {rest.setSubmitting(false); })
+            );
     }
 })(Register);
 
 
-const ConnectedRegister = connect()(WithRegisterForm);
+const ConnectedRegister = connect( state => ({
+    loading: state.register.loading,
+    loaded: state.register.loaded,
+    error: state.register.error,
+}) )(WithRegisterForm);
 
 export default ConnectedRegister;
 

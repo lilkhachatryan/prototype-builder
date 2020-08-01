@@ -1,21 +1,23 @@
-.header-container{
-  display: flex;
+.header-container {
   flex-flow: column;
-  margin: 0 0 20px 0;
-  .header-container__actionButtons{
-    margin: auto;
+  padding: 30px 0 0 65px;
 
-    .fontAwesome__override{
+  .header-container__actionButtons {
+
+    .fontAwesome__override {
       width: 60px !important;
       height: 40px;
       margin: 5px;
-      border: 0 ;
+      border: 0;
       padding: 5px 12px !important;
       box-sizing: border-box;
       cursor: pointer;
+      color: var(--main-theme-color);
     }
-    .fontAwesome__override:hover{
-      border: 2px solid azure;
+
+    .additional-btn {
+      color: var(--canvas-header-btn);
+      border-color: var(--canvas-header-btn);
     }
   }
 }

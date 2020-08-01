@@ -1,57 +1,53 @@
 .footer-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: bisque;
-  padding: 10px;
-  margin: 5px 10px;
-  border-radius: 25px;
-  height: 125px;
-  width: calc(100% - 20px);
-  bottom: 0;
-  position: absolute;
-  .teamMemberesAndResources {
-    display: flex;
+  background-color: var(--partials-bg-color);
+  padding: 20px 10px;
+
+  &__team-resources {
     flex-flow: column;
     width: 400px;
     padding: 0 10px;
-    .linksContainer{
-      align-items: center;
-      display: flex;
-      flex-flow: column;
-    }
-    .memberName{
-      color:white;
-      display: inline-flex;
-      width: 200px;
-      justify-content: center;
-      font-weight: bold;
-    }
-    a{
+
+    a {
       padding: 0 5px;
       margin: 0 5px;
-      color: deepskyblue;
+      color: var(--black);
       text-decoration: none;
     }
-    a:hover{
-      color: black;
+
+    a:hover {
+      color: var(--black);
     }
   }
 
-  .icons-container {
-    display: flex;
+  &__member {
+    color: var(--black);
+    display: inline-flex;
+    width: 200px;
+    justify-content: center;
+    font-weight: bold;
+  }
+
+  &__links-container {
     flex-flow: column;
-    align-items: center;
-    .footerIconsContainer {
-      display: flex;
-      .footerIconsContainerItem {
+
+    a {
+      color: var(--main-theme-color);
+    }
+  }
+
+  &__icons-container {
+    flex-flow: column;
+
+    .footer-icons-container {
+      .footer-icons-container-item {
         padding: 10px;
         margin: 10px;
-      }
-      .footerIconsContainerItem:hover{
-        background-color: #61dafb;
-        border-radius: 30px;
-        cursor: pointer;
+
+        &:hover {
+          background-color: var(--main-theme-color);
+          border-radius: 30px;
+          cursor: pointer;
+        }
       }
     }
   }

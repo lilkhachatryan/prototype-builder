@@ -1,7 +1,7 @@
 import React from 'react';
-import "./PanningMode.scss";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faHandRock} from "@fortawesome/free-solid-svg-icons";
+import './PanningMode.scss';
+import {faHandRock} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 const PanningModeButton = ({handlePanningMode, panningMode}) => {
     return (
