@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {passwordValidator} from "../../utils/validators";
 import {handleRegisterUser} from "../../actions/UserActions";
 import Account from "./Account";
+import './LoginStyles.scss';
 
 
 const passwordValidationText = 'Password should contain at least one uppercase letter, should consist of 5 or more characters';
@@ -21,8 +22,12 @@ const Register = ({values, handleChange, handleBlur, errors, touched, submitForm
     }
     return (
         <div className='form__container'>
+            <div className='register-title'>
+                <hr className='dropdown-divider d-block'/>
+                <h4 className=''>Register</h4>
+            </div>
             <Account
-                linkText='already have an account? just login'
+                linkText='Already have an account? just login'
                 pathToNavigate='/'
             />
             <form>
@@ -72,6 +77,7 @@ const Register = ({values, handleChange, handleBlur, errors, touched, submitForm
                     labelText='please confirm the created password'
                 />
                 <button
+                    className='btn'
                     onClick={handleSubmit}
                     disabled={isSubmitting}
                     type='button'>
