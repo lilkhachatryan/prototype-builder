@@ -102,7 +102,6 @@ export function handleLoadCanvases() {
     return (dispatch) => {
         dispatch(loadCanvases());
         return loadCanvasesService().then( (response) => {
-            console.log(response, 'LOad canvases success');
             dispatch(loadCanvasesSuccess(response.data));
         } );
     };

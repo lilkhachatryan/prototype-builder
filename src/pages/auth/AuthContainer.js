@@ -1,7 +1,7 @@
 import React from 'react';
 import './LoginStyles.scss';
-import {returnToken} from "../../utils/storage";
-import {Redirect} from 'react-router-dom';
+import {returnToken } from "../../utils/helpers";
+import { Redirect } from 'react-router-dom';
 
 const AuthContainer = ({children}) => {
     if (returnToken()){
