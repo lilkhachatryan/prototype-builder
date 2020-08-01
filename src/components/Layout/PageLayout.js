@@ -1,18 +1,14 @@
 import React from 'react';
 import Header from './Header/Header';
-import CanvasContainer from '../CanvasContainer/CanvasContainer';
 
-class PageLayout extends React.Component {
-
-    render() {
-        return (
-            <div>
-                <Header/>
-                <CanvasContainer/>
-            </div>
-        );
-    }
-}
+const PageLayout = ({children}) => {
+    return (
+        <div>
+            <Header/>
+            {children}
+        </div>
+    );
+};
 
 export default PageLayout;
 

@@ -1,16 +1,13 @@
 import React from 'react';
 
-export class Test extends React.Component{
-    componentDidMount() {
+const AuthContainer = ({children}) => {
+    return (
+        <div className='auth__container' >
+        {children}
+        </div>
+    );
+};
 
-    }
+export default AuthContainer;
 
-    render() {
-        return (
-            <div>
-                asas
-            </div>
-        );
-    }
-}
-export default Test;
+
