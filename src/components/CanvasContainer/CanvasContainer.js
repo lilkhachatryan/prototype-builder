@@ -264,18 +264,17 @@ class CanvasContainer extends React.Component {
             backgroundImageStretch: false
         });
     };
-    handleAddCanvas = () => {
-        this.props.onPostCanvas(this.state.canvas);
-    };
     handleClick = () => {
+        const canvas = this.canvas.toJSON();
         this.setState({
-            canvas: this.canvas.toJSON()
+            canvas
         }, () => {
             this.canvas.clear();
         });
     };
 
     handlePostCanvas = () => {
+        const canvas = this.state.canvas;
         this.props.onPostCanvas(this.state.canvas);
     };
 
@@ -335,10 +334,10 @@ class CanvasContainer extends React.Component {
                     </div>
                     <Footer viewChanged={(event) => this.deviceViewHandler(event)}/>
                     <button onClick={this.props.onLoadCanvases}>
-                        Click
+                        load canvas from back
                     </button>
                     <button onClick={this.handleClick} >
-                        add canvas
+                        add canvas to state
                     </button>
                     <button onClick={this.handlePostCanvas} >
                         Post cnavas
