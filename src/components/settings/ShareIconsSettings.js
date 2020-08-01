@@ -15,7 +15,7 @@ class ShapeSettings extends React.Component {
             colors: this.props.currentElement.colors || 'official',
             fill: this.props.currentElement.fillName || '',
         };
-        this.setState({ inputs: newAtts });
+        this.setState({inputs: newAtts});
     };
 
     componentDidUpdate = (prevProps) => {
@@ -25,36 +25,36 @@ class ShapeSettings extends React.Component {
                 colors: this.props.currentElement.colors,
                 fill: this.props.currentElement.fillName,
             };
-            this.setState({ inputs: newAtts });
+            this.setState({inputs: newAtts});
         }
     };
 
     handleChange = (event, type) => {
-        const newInputs = { ...this.state.inputs, [type]: event.target.value };
-        this.props.groupElementChange({ [type]: event.target.value });
-        this.setState({ inputs: newInputs });
+        const newInputs = {...this.state.inputs, [type]: event.target.value};
+        this.props.groupElementChange({[type]: event.target.value});
+        this.setState({inputs: newInputs});
     };
 
     render() {
         return (
             <div>
-
-                <div>
-                    <label>Icons color</label>
-                    <select onChange={(_) => this.handleChange(_, 'colors')} value={this.state.inputs.colors}>
-                        <option value="official">Official</option>
-                        <option value="custom">Custom</option>
+                <div className='mb-3 flexInput'>
+                    <label className='mb-0'>Icons color</label>
+                    <select className='field-styling' onChange={(_) => this.handleChange(_, 'colors')}
+                            value={this.state.inputs.colors}>
+                        <option value='official'>Official</option>
+                        <option value='custom'>Custom</option>
                     </select>
                 </div>
                 {
                     this.state.inputs.colors !== 'custom'
                         ? null
-                        : <div>
+                        : <div className='mb-3 flexInput'>
                             <label>Fill</label>
                             <input
-                                type="color"
+                                type='color'
                                 onChange={(_) => this.handleChange(_, 'fill')}
-                                value={this.state.inputs.fill} />
+                                value={this.state.inputs.fill}/>
                         </div>
                 }
 

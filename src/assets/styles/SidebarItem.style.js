@@ -6,6 +6,6 @@ export const SidebarItem = styled.div`
     cursor: pointer;
     padding: 10px 0;
      &:hover {
-        color: #5CDB95
+        color: rgb(179, 161, 226)
      }
 `;

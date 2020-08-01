@@ -1,12 +1,12 @@
 import React from 'react';
 
-import CanvasSettings from './CanvasSettings';
-import ImageSettings from './ImageSettings';
+import ButtonSettings from './ButtonSettings/ButtonSettings';
+import ShapeSettings from './ShapeSettings/ShapeSettings';
 import LineSettings from './LineSettings/LineSettings';
 import TextSettings from './TextSettings/TextSettings';
-import ShapeSettings from './ShapeSettings/ShapeSettings';
-import ButtonSettings from "./ButtonSettings/ButtonSettings";
-import ShareIconsSettings from "./ShareIconsSettings";
+import ShareIconsSettings from './ShareIconsSettings';
+import CanvasSettings from './CanvasSettings';
+import ImageSettings from './ImageSettings';
 import './SettingsContainer.scss';
 
 export const Settings = Object.freeze({
@@ -22,12 +22,12 @@ export const Settings = Object.freeze({
 
 class SettingsContainer extends React.Component {
     render() {
-        const { currentElement, elementChange, groupElementChange } = this.props;
+        const {currentElement, elementChange, groupElementChange} = this.props;
         let SettingsComponent = Settings[currentElement.type];
 
         if (!SettingsComponent) {
             return (
-                <div className="settingsContainer">
+                <div className='settings-container'>
                     <CanvasSettings canvas={this.props.canvas}
                                     changeCanvasBg={this.props.changeCanvasBg}
                                     changeCanvasBgImage={this.props.changeCanvasBgImage}/>
@@ -36,16 +36,19 @@ class SettingsContainer extends React.Component {
         }
 
         return (
-            <div className="settingsContainer">
+            <div className='settings-container'>
                 <SettingsComponent
                     elementChange={elementChange}
                     currentElement={currentElement}
-                    groupElementChange={groupElementChange} />
-                <div className="objAlignBtns">
-                    <button className="settingsButton" onClick={this.props.bringToTop}>Bring forward</button>
-                    <button className="settingsButton" onClick={this.props.sendToBack}>Send back</button>
-                    <button className="settingsButton" onClick={() => this.props.center('H')}>Center horizontally</button>
-                    <button className="settingsButton" onClick={() => this.props.center('V')}>Center vertically</button>
+                    groupElementChange={groupElementChange}/>
+                <hr className='dropdown-divider'/>
+                <div>
+                    <button className='settings-button btn' onClick={() => this.props.center('V')}>Center vertically
+                    </button>
+                    <button className='settings-button btn' onClick={() => this.props.center('H')}>Center horizontally
+                    </button>
+                    <button className='settings-button btn' onClick={this.props.bringToTop}>Bring forward</button>
+                    <button className='settings-button btn' onClick={this.props.sendToBack}>Send back</button>
                 </div>
             </div>
         );

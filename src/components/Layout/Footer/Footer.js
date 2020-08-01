@@ -1,68 +1,73 @@
+import './Footer.scss';
 import React from 'react';
-import "./Footer.scss";
-import {Icon} from "react-svg-library";
+import {Icon} from 'react-svg-library';
 
 const FooterContainer = (props) => {
     return (
-        <div className="footer-container">
-            <div className="teamMemberesAndResources">
+        <div className='footer-container d-flex justify-content-between align-items-center'>
+            <div className='footer-container__team-resources d-flex'>
                 <div>
-                    <span className="memberName">Armen Petrosyan</span>
-                    <a href="https://github.com/armen558" target="_blank">
-                        <Icon icon="github" size='1.5em'></Icon>
+                    <span className='footer-container__member'>Armen Petrosyan</span>
+                    <a href='https://github.com/armen558' target='_blank'>
+                        <Icon icon='github' size='1.5em'/>
                     </a>
-                    <a href="https://www.linkedin.com/in/armen558/" target="_blank">
-                        <Icon icon="linkedin-one" size='1.5em'></Icon>
+                    <a href='https://www.linkedin.com/in/armen558/' target='_blank'>
+                        <Icon icon='linkedin-one' size='1.5em'/>
                     </a>
                 </div>
                 <div>
-                    <span className="memberName">Lilit Khachatryan</span>
-                    <a href="https://github.com/Lilkhachatryan" target="_blank">
-                        <Icon icon="github" size='1.5em'></Icon>
+                    <span className='footer-container__member'>Lilit Khachatryan</span>
+                    <a href='https://github.com/Lilkhachatryan' target='_blank'>
+                        <Icon icon='github' size='1.5em'/>
                     </a>
-                    <a href="https://www.linkedin.com/in/lilit-khachatryan-25a919197/" target="_blank">
-                        <Icon icon="linkedin-one" size='1.5em'></Icon>
-                    </a>
-                </div>
-                <div>
-                    <span className="memberName">Vardges Mushegyan</span>
-                    <a href="https://github.com/vardges-musheghyan" target="_blank">
-                        <Icon icon="github" size='1.5em'></Icon>
-                    </a>
-                    <a href="http://linkedin.com/in/vardges-musheghyan-a462b9154" target="_blank">
-                        <Icon icon="linkedin-one" size='1.5em'></Icon>
+                    <a href='https://www.linkedin.com/in/lilit-khachatryan-25a919197/' target='_blank'>
+                        <Icon icon='linkedin-one' size='1.5em'/>
                     </a>
                 </div>
                 <div>
-                    <span className="memberName">Aleksandr Martirosyan</span>
-                    <a href="https://github.com/al-mart" target="_blank">
-                        <Icon icon="github" size='1.5em'></Icon>
+                    <span className='footer-container__member'>Vardges Mushegyan</span>
+                    <a href='https://github.com/vardges-musheghyan' target='_blank'>
+                        <Icon icon='github' size='1.5em'/>
+                    </a>
+                    <a href='http://linkedin.com/in/vardges-musheghyan-a462b9154' target='_blank'>
+                        <Icon icon='linkedin-one' size='1.5em'/>
+                    </a>
+                </div>
+                <div>
+                    <span className='footer-container__member'>Aleksandr Martirosyan</span>
+                    <a href='https://github.com/al-mart' target='_blank'>
+                        <Icon icon='github' size='1.5em'/>
 
                     </a>
-                    <a href="https://www.linkedin.com/in/aleksandr-martirosyan/" target="_blank">
-                        <Icon icon="linkedin-one" size='1.5em'></Icon>
+                    <a href='https://www.linkedin.com/in/aleksandr-martirosyan/' target='_blank'>
+                        <Icon icon='linkedin-one' size='1.5em'/>
                     </a>
                 </div>
             </div>
-            <div className="icons-container">
+            <div className='footer-container__icons-container d-flex align-items-center'>
                 <span>Toggle Canvas View</span>
-                <div className="footerIconsContainer">
-                    <div className="footerIconsContainerItem" onClick={() => props.viewChanged(true)}>
-                        <Icon icon="website" size="2em"/>
+                <div className='footer-icons-container d-flex'>
+                    <div className='footer-icons-container-item' onClick={() => props.viewChanged(true)}>
+                        <Icon icon='website' size='2em'/>
                     </div>
-                    <div className="footerIconsContainerItem" onClick={() => props.viewChanged(false)}>
-                        <Icon icon="phone" size="2em"/>
+                    <div className='footer-icons-container-item' onClick={() => props.viewChanged(false)}>
+                        <Icon icon='phone' size='2em'/>
                     </div>
                 </div>
-                <span>All Rights Reserved To Team Add Objects</span>
+                <span>© 2020 Copyright: Add Objects Team</span>
             </div>
-            <div className="teamMemberesAndResources">
-                <div className="linksContainer">
-                    <a href="">React</a>
-                    <a href="">Font Awesome</a>
-                    <a href="">Axios</a>
-                    <a href="">Fabric</a>
-                    <a href="">Express</a>
+            <div className='footer-container__team-resources d-flex'>
+                <div className='footer-container__links-container d-flex align-items-center'>
+                    <a href='https://reactjs.org/docs/getting-started.html' target='_blank'
+                       rel='noopener noreferrer'>React</a>
+                    <a href='https://fontawesome.com/' target='_blank'
+                       rel='noopener noreferrer'>Font Awesome</a>
+                    <a href='https://github.com/axios/axios' target='_blank'
+                       rel='noopener noreferrer'>Axios</a>
+                    <a href='http://fabricjs.com/' target='_blank'
+                       rel='noopener noreferrer'>Fabric</a>
+                    <a href='https://expressjs.com/' target='_blank'
+                       rel='noopener noreferrer'>Express</a>
                 </div>
             </div>
         </div>

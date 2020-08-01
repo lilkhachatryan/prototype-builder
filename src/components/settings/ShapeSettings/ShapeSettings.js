@@ -21,46 +21,48 @@ class ShapeSettings extends React.Component {
                 opacity: this.props.currentElement.opacity,
                 ry: this.props.currentElement.ry,
             };
-            this.setState({ inputs: newAtts });
+            this.setState({inputs: newAtts});
         }
     };
 
     handleChange = (event, type) => {
         let value = event.target.value;
-        let newInputs = { ...this.state.inputs };
+        let newInputs = {...this.state.inputs};
         newInputs[type] = value;
-        this.setState({ inputs: newInputs });
+        this.setState({inputs: newInputs});
 
         if (type === 'opacity' || type === 'strokeWidth') {
             value = +value;
         }
         if (type === 'ry') {
-            this.props.elementChange({ rx: value, ry: value });
+            this.props.elementChange({rx: value, ry: value});
         } else {
-            this.props.elementChange({ [type]:value });
+            this.props.elementChange({[type]: value});
         }
     };
 
     render() {
         return (
             <div>
-                <div>
+                <div className='mb-3 flexInput'>
                     <label>Fill</label>
                     <input
                         type="color"
                         onChange={(_) => this.handleChange(_, 'fill')}
-                        value={this.state.inputs.fill} />
+                        value={this.state.inputs.fill}/>
                 </div>
-                <div>
+                <div className='mb-3 flexInput'>
                     <label>Stroke Width (px)</label>
-                    <input type="number" step="1" value={this.state.inputs.strokeWidth} onChange={(_) => this.handleChange(_, 'strokeWidth')} />
+                    <input className='field-styling' type="number" step="1" value={this.state.inputs.strokeWidth}
+                           onChange={(_) => this.handleChange(_, 'strokeWidth')}/>
                 </div>
-                {this.props.currentElement.type !== 'rect' ? null : <div>
+                {this.props.currentElement.type !== 'rect' ? null : <div className='mb-3 flexInput'>
                     <label>Border radius (px)</label>
-                    <input type="number" value={this.state.inputs.ry} onChange={(_) => this.handleChange(_, 'ry')} />
+                    <input className='field-styling' type="number" value={this.state.inputs.ry}
+                           onChange={(_) => this.handleChange(_, 'ry')}/>
                 </div>}
 
-                <div>
+                <div className='mb-3 flexInput'>
                     <label>Stroke Color</label>
                     <input
                         type="color"
@@ -68,7 +70,7 @@ class ShapeSettings extends React.Component {
                         value={this.state.inputs.stroke}
                     />
                 </div>
-                <div>
+                <div className='mb-3 flexInput'>
                     <label>Opacity:</label>
                     <input
                         type="range"

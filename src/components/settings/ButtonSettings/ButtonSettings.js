@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 class ButtonSettings extends Component {
     state = {
@@ -11,28 +11,28 @@ class ButtonSettings extends Component {
     };
 
     handleTextChange = (event, type) => {
-        let newInputs = { ...this.state.text };
+        let newInputs = {...this.state.text};
         let value = event.target.value;
         newInputs[type] = value;
-        this.setState({ text: newInputs });
+        this.setState({text: newInputs});
 
         if (type === 'fontSize' || type === 'strokeWidth' || type === 'fontWeight' || type === 'lineHeight') {
             value = +value;
         }
 
         if (type === 'textDecoration') {
-            this.props.elementChange({ 'underline': false, 'linethrough': false, 'overline': false });
+            this.props.elementChange({'underline': false, 'linethrough': false, 'overline': false});
             type = value;
             value = true;
         }
-        this.props.elementChange({ [type]: value });
+        this.props.elementChange({[type]: value});
     };
 
     handleRectChange = (event, type) => {
-        let newInputs = { ...this.state.rect };
+        let newInputs = {...this.state.rect};
         let value = event.target.value;
         newInputs[type] = value;
-        this.setState({ rect: newInputs });
+        this.setState({rect: newInputs});
 
         // if (type === 'fill') {
         //     this.setState({ text : {...this.state.text, fill: value }});
@@ -44,44 +44,48 @@ class ButtonSettings extends Component {
         }
 
         if (type === 'textDecoration') {
-            this.props.elementChange({ 'underline': false, 'linethrough': false, 'overline': false });
+            this.props.elementChange({'underline': false, 'linethrough': false, 'overline': false});
             type = value;
             value = true;
         }
-        this.props.elementChange({ [type]: value });
+        this.props.elementChange({[type]: value});
     };
 
     render() {
         return (
             <div>
-                <p>Button styles</p>
-                <div>
-                    <label>Fill</label>
+                <div className='mb-3 flexInput'>
+                    <label>Fill &nbsp;</label>
                     <input
                         type="color"
                         onChange={(_) => this.handleRectChange(_, 'fill')}
-                        value={this.state.rect.fill} />
+                        value={this.state.rect.fill}/>
                 </div>
-                <div>
+                <div className='mb-3 flexInput'>
                     <label>Stroke Width (px)</label>
-                    <input type="number" step="1" value={this.state.rect.strokeWidth} onChange={(_) => this.handleRectChange(_, 'strokeWidth')} />
+                    <input
+                        className='field-styling' type="number" step="1" value={this.state.rect.strokeWidth}
+                        onChange={(_) => this.handleRectChange(_, 'strokeWidth')}/>
                 </div>
-                {this.props.currentElement.type !== 'rect' ? null : <div>
+                {this.props.currentElement.type !== 'rect' ? null : <div className='mb-3 flexInput'>
                     <label>Border radius (px)</label>
-                    <input type="number" value={this.state.rect.ry} onChange={(_) => this.handleRectChange(_, 'ry')} />
+                    <input
+                        className='field-styling' type="number" value={this.state.rect.ry}
+                        onChange={(_) => this.handleRectChange(_, 'ry')}/>
                 </div>}
 
-                <div>
-                    <label>Stroke Color</label>
+                <div className='mb-3 flexInput'>
+                    <label>Stroke Color &nbsp;</label>
                     <input
                         type="color"
                         onChange={(_) => this.handleRectChange(_, 'stroke')}
                         value={this.state.rect.stroke}
                     />
                 </div>
-                <div>
+                <div className='mb-3 flexInput'>
                     <label>Opacity:</label>
                     <input
+                        className='field-styling'
                         type="range"
                         name="opacity"
                         min="0"
@@ -92,32 +96,40 @@ class ButtonSettings extends Component {
                     />
                 </div>
                 <p className="mt-3">Text styles</p>
-                <div>
+                <div className='mb-3 flexInput'>
                     <label>Text Color</label>
                     <input
                         type="color"
                         onChange={(_) => this.handleTextChange(_, 'fill')}
-                        value={this.state.text.fill} />
+                        value={this.state.text.fill}/>
                 </div>
-                <div>
+                <div className='mb-3 flexInput'>
                     <label>Font Size (px)</label>
-                    <input type="number" value={this.state.text.fontSize} onChange={(_) => this.handleTextChange(_, 'fontSize')} />
+                    <input
+                        className='field-styling' type="number" value={this.state.text.fontSize}
+                        onChange={(_) => this.handleTextChange(_, 'fontSize')}/>
                 </div>
-                <div>
+                <div className='mb-3 flexInput'>
                     <label>Line height (em)</label>
-                    <input type="number" step="0.1" value={this.state.text.lineHeight} onChange={(_) => this.handleTextChange(_, 'lineHeight')} />
+                    <input
+                        className='field-styling' type="number" step="0.1" value={this.state.text.lineHeight}
+                        onChange={(_) => this.handleTextChange(_, 'lineHeight')}/>
                 </div>
-                <div>
+                <div className='mb-3 flexInput'>
                     <label>Font Family</label>
-                    <select onChange={(_) => this.handleTextChange(_, 'fontFamily')} value={this.state.text.fontFamily}>
+                    <select
+                        className='field-styling' onChange={(_) => this.handleTextChange(_, 'fontFamily')}
+                        value={this.state.text.fontFamily}>
                         <option value="">Choose font family</option>
                         <option value="Arial">Arial</option>
                         <option value="Times New Roman">Times New Roman</option>
                     </select>
                 </div>
-                <div>
+                <div className='mb-3 flexInput'>
                     <label>Font Weight</label>
-                    <select onChange={(_) => this.handleTextChange(_, 'fontWeight')} value={this.state.text.fontWeight}>
+                    <select
+                        className='field-styling' onChange={(_) => this.handleTextChange(_, 'fontWeight')}
+                        value={this.state.text.fontWeight}>
                         <option value="0"></option>
                         <option value="300">300</option>
                         <option value="400">400</option>
@@ -127,7 +139,7 @@ class ButtonSettings extends Component {
                         <option value="900">900</option>
                     </select>
                 </div>
-                <div>
+                <div className='mb-3 flexInput'>
                     <p>Text Align</p>
                     <div>
                         <div>
@@ -137,7 +149,7 @@ class ButtonSettings extends Component {
                                 value="left"
                                 id="left"
                                 onChange={(_) => this.handleTextChange(_, 'textAlign')}
-                                checked={this.state.text.textAlign === 'left'} />
+                                checked={this.state.text.textAlign === 'left'}/>
                             <label htmlFor="left">Left</label>
                         </div>
                         <div>
@@ -147,7 +159,7 @@ class ButtonSettings extends Component {
                                 value="center"
                                 id="center"
                                 onChange={(_) => this.handleTextChange(_, 'textAlign')}
-                                checked={this.state.text.textAlign === 'center'} />
+                                checked={this.state.text.textAlign === 'center'}/>
                             <label htmlFor="center">Center</label>
                         </div>
                         <div>
@@ -157,7 +169,7 @@ class ButtonSettings extends Component {
                                 value="right"
                                 id="right"
                                 onChange={(_) => this.handleTextChange(_, 'textAlign')}
-                                checked={this.state.text.textAlign === 'right'} />
+                                checked={this.state.text.textAlign === 'right'}/>
                             <label htmlFor="right">Right</label>
                         </div>
                         <div>
@@ -167,32 +179,38 @@ class ButtonSettings extends Component {
                                 value="justify"
                                 id="justify"
                                 onChange={(_) => this.handleTextChange(_, 'textAlign')}
-                                checked={this.state.text.textAlign === 'justify'} />
+                                checked={this.state.text.textAlign === 'justify'}/>
                             <label htmlFor="justify">Justify</label>
                         </div>
                     </div>
                 </div>
-                <div>
+                <div className='mb-3 flexInput'>
                     <label>Text Decoration</label>
-                    <select onChange={(_) => this.handleTextChange(_, 'textDecoration')} value={this.state.text.textDecoration}>
+                    <select
+                        className='field-styling' onChange={(_) => this.handleTextChange(_, 'textDecoration')}
+                        value={this.state.text.textDecoration}>
                         <option value="">None</option>
                         <option value="underline">Underline</option>
                         <option value="linethrough">Linethrough</option>
                         <option value="overline">Overline</option>
                     </select>
                 </div>
-                <div>
+                <div className='mb-3 flexInput'>
                     <label>Font Style</label>
-                    <select onChange={(_) => this.handleTextChange(_, 'fontStyle')} value={this.state.text.fontStyle}>
+                    <select
+                        className='field-styling' onChange={(_) => this.handleTextChange(_, 'fontStyle')}
+                        value={this.state.text.fontStyle}>
                         <option value="normal">Normal</option>
                         <option value="italic">Italic</option>
                     </select>
                 </div>
-                <div>
+                <div className='mb-3 flexInput'>
                     <label>Stroke Width (px)</label>
-                    <input type="number" step="0.1" value={this.state.text.strokeWidth} onChange={(_) => this.handleTextChange(_, 'strokeWidth')} />
+                    <input
+                        className='field-styling' type="number" step="0.1" value={this.state.text.strokeWidth}
+                        onChange={(_) => this.handleTextChange(_, 'strokeWidth')}/>
                 </div>
-                <div>
+                <div className='mb-3 flexInput'>
                     <label>Stroke Color</label>
                     <input
                         type="color"

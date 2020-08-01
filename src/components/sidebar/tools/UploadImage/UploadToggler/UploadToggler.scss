@@ -1,23 +1,24 @@
-.buttons-wrapper{
-  width: 150px;
-  border:  2px solid blanchedalmond;
+.buttons-wrapper {
+  border: 2px solid var(--main-theme-color);
   border-radius: 10px;
-  margin: 5px auto;
-  .buttons-wrapper__item{
+  margin: 5px 10px;
+
+  &__item {
     width: 50%;
     box-sizing: border-box;
     padding: 0 10px;
-    margin:  0;
+    margin: 0;
     background: none;
     border: none;
     border-radius: 10px;
-  }
-  .buttons-wrapper__item:focus{
-    outline: none;
-  }
 
-  .buttons-wrapper__item-selected{
-    background-color: #61dafb;
-    outline: 0;
+    &:focus {
+      outline: none;
+    }
+
+    &-selected {
+      background-color: var(--upload-selected-option);
+      outline: 0;
+    }
   }
 }
