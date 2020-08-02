@@ -15,16 +15,6 @@ class TextSettings extends React.Component {
     };
 
     componentDidUpdate = (prevProps) => {
-
-        let textDecoration = '';
-        if (this.props.currentElement.underline) {
-            textDecoration = 'underline';
-        } else if (this.props.currentElement.linethrough) {
-            textDecoration = 'linethrough';
-        } else if (this.props.currentElement.overline) {
-            textDecoration = 'overline';
-        }
-
         if (prevProps.currentElement !== this.props.currentElement) {
             const newAtts = {
                 ...this.props.currentElement
@@ -41,16 +31,16 @@ class TextSettings extends React.Component {
 
         if (type === 'fontSize' || type === 'strokeWidth' || type === 'fontWeight' || type === 'lineHeight') {
             value = +value;
-        };
+        }
         if (type === 'charSpacing') {
-            value = +value * 25
-        };
+            value = +value * 25;
+        }
 
         if (type === 'textDecoration') {
             this.props.elementChange({ 'underline': false, 'linethrough': false, 'overline': false });
             type = value;
             value = true;
-        };
+        }
         this.props.elementChange({ [type]: value });
 
     };

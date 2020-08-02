@@ -16,10 +16,9 @@ class LineSettings extends React.Component {
                 strokeWidth: this.props.currentElement.strokeWidth,
                 stroke: this.props.currentElement.stroke,
                 opacity: this.props.currentElement.opacity
-            }
-            this.setState({inputs: newAtts})
+            };
+            this.setState({inputs: newAtts});
         }
-        ;
     };
 
     handleChange = (event, type) => {

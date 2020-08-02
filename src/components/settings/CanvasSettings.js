@@ -23,7 +23,6 @@ class CanvasSettings extends React.Component {
     };
 
     handleAdd = (image) => {
-        console.log('image', image);
         this.props.changeCanvasBgImage(image);
         this.setState(image);
     };

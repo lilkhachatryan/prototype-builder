@@ -1,7 +1,6 @@
 import { notifyError } from "./notify";
 import { returnToken, removeToken } from "../utils/helpers";
-import { LOG_OUT } from "../actions/actionTypes";
-import { handleUserLogOut } from "../actions/UserActions";
+import { handleTokenUpdate } from "../actions/UserActions";
 
 const axios = require('axios').create({
     baseURL: process.env.REACT_APP_API_URL
@@ -26,9 +25,8 @@ export const setupInterceptors = (store) => {
         switch (e.response.status) {
             case 401:
                 removeToken();
-                // window.location.href = 'login';
                 // history.push('/login');
-                store.dispatch(handleUserLogOut());
+                store.dispatch(handleTokenUpdate());
                 notifyError('Session expired');
                 break;
             default: notifyError(e.response.data);

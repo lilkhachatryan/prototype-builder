@@ -74,7 +74,7 @@ export function login(state = initialLoginState, action) {
        case fromActionTypes.LOG_OUT: {
            return {
                ...state,
-               token: null
+               token: action.payload
            };
        }
        default : return state;

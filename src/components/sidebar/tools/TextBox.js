@@ -3,7 +3,6 @@ import { fabric } from 'fabric';
 import { v4 as uuid } from 'uuid';
 
 import {SidebarItem} from "../../../assets/styles/SidebarItem.style";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const TextBox = ({ handleAdd, fontSize, name, panningPosition }) => {
     const handleClick = () => {

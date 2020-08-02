@@ -20,21 +20,19 @@ class ImageSettings extends React.Component {
                 strokeWidth: this.props.currentElement.strokeWidth,
                 stroke: this.props.currentElement.stroke,
                 opacity: this.props.currentElement.opacity,
-            }
-            this.setState({inputs: newAtts})
+            };
+            this.setState({inputs: newAtts});
         }
-        ;
     };
 
     handleChange = (event, type) => {
-        console.log(type, ':', event.target.value)
         let value = event.target.value;
         let newInputs = {...this.state.inputs};
         newInputs[type] = value;
         this.setState({inputs: newInputs});
 
         if (type === 'opacity' || type === 'strokeWidth') {
-            value = +value
+            value = +value;
         }
         if (type === 'ry') {
             this.props.elementChange({rx: value, ry: value})

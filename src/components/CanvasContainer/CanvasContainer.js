@@ -16,7 +16,6 @@ import Footer from "../Layout/Footer/Footer";
 
 class CanvasContainer extends React.Component {
     state = {
-        // currentElement: {},
         currentlyEditingCanvasId: '',
         panningMode: false,
         isPanning: false,
@@ -207,11 +206,6 @@ class CanvasContainer extends React.Component {
     };
 
     handleElementPropChange = (obj, index) => {
-        // const newCurrentElement = this.canvas.getActiveObject();
-        // newCurrentElement.set({ ...obj });
-        // this.canvas.renderAll();
-        // console.log(newCurrentElement === this.state.currentElement);
-        // this.setState({ currentElement: newCurrentElement.toObject() });
         this.props.onElementPropChange(this.canvas, obj, index);
     };
 
