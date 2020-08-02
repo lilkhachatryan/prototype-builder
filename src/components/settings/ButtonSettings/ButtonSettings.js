@@ -1,4 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { faAlignCenter, faAlignJustify, faAlignLeft, faAlignRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { fontFamily } from '../../../utils/helpers';
+
+import './ButtonSettings.scss';
 
 class ButtonSettings extends Component {
     state = {
@@ -10,78 +16,83 @@ class ButtonSettings extends Component {
         }
     };
 
-    handleTextChange = (event, type) => {
-        let newInputs = {...this.state.text};
-        let value = event.target.value;
-        newInputs[type] = value;
-        this.setState({text: newInputs});
+    componentDidUpdate = (prevProps) => {
 
-        if (type === 'fontSize' || type === 'strokeWidth' || type === 'fontWeight' || type === 'lineHeight') {
-            value = +value;
+        if (prevProps.currentElement !== this.props.currentElement) {
+            const newAtts = {
+                rect: {
+                    ...this.props.currentElement.objects[0]
+                },
+                text: {
+                    ...this.props.currentElement.objects[1]
+                }
+            };
+            this.setState({ ...newAtts });
         }
-
-        if (type === 'textDecoration') {
-            this.props.elementChange({'underline': false, 'linethrough': false, 'overline': false});
-            type = value;
-            value = true;
-        }
-        this.props.elementChange({[type]: value});
     };
 
-    handleRectChange = (event, type) => {
-        let newInputs = {...this.state.rect};
+    handleChange = (event, type, index) => {
         let value = event.target.value;
-        newInputs[type] = value;
-        this.setState({rect: newInputs});
-
-        // if (type === 'fill') {
-        //     this.setState({ text : {...this.state.text, fill: value }});
-        //     this.props.elementChange({ [type]: value });
-        // }
+        if (index === 0) {
+            let newInputs = { ...this.state.rect };
+            newInputs[type] = value;
+            this.setState({ rect: newInputs });
+        } else {
+            let newInputs = { ...this.state.text };
+            if (type === 'textDecoration') {
+                this.props.elementChange({ 'underline': false, 'linethrough': false, 'overline': false }, 1);
+                type = value;
+                value = true;
+            }
+            newInputs[type] = value;
+            this.setState({ text: newInputs });
+        }
 
         if (type === 'fontSize' || type === 'strokeWidth' || type === 'fontWeight' || type === 'lineHeight') {
             value = +value;
         }
-
-        if (type === 'textDecoration') {
-            this.props.elementChange({'underline': false, 'linethrough': false, 'overline': false});
-            type = value;
-            value = true;
+        if (type === 'charSpacing') {
+            value = +value * 25; 
         }
-        this.props.elementChange({[type]: value});
+
+        if (type === 'ry') {
+            this.props.elementChange({ rx: value, ry: value }, index);
+        } else {
+            this.props.elementChange({ [type]: value }, index);
+        }
     };
 
     render() {
         console.log(this.props.currentElement)
         return (
-            <div>
+            <div className="buttonSettings">
                 <div className='mb-3 flexInput'>
                     <label>Fill &nbsp;</label>
                     <input
                         type="color"
-                        onChange={(_) => this.handleRectChange(_, 'fill')}
-                        value={this.state.rect.fill}/>
+                        onChange={(_) => this.handleChange(_, 'fill', 0)}
+                        value={this.state.rect.fill} />
                 </div>
                 <div className='mb-3 flexInput'>
                     <label>Stroke Width (px)</label>
                     <input
                         className='field-styling' type="number" step="1" value={this.state.rect.strokeWidth}
-                        onChange={(_) => this.handleRectChange(_, 'strokeWidth')}/>
+                        onChange={(_) => this.handleChange(_, 'strokeWidth', 0)} />
                 </div>
-                {this.props.currentElement.type !== 'rect' ? null : <div className='mb-3 flexInput'>
-                    <label>Border radius (px)</label>
-                    <input
-                        className='field-styling' type="number" value={this.state.rect.ry}
-                        onChange={(_) => this.handleRectChange(_, 'ry')}/>
-                </div>}
 
                 <div className='mb-3 flexInput'>
                     <label>Stroke Color &nbsp;</label>
                     <input
                         type="color"
-                        onChange={(_) => this.handleRectChange(_, 'stroke')}
+                        onChange={(_) => this.handleChange(_, 'stroke', 0)}
                         value={this.state.rect.stroke}
                     />
+                </div>
+                <div className='mb-3 flexInput'>
+                    <label>Border radius (px)</label>
+                    <input
+                        className='field-styling' type="number" value={this.state.rect.ry}
+                        onChange={(_) => this.handleChange(_, 'ry', 0)} />
                 </div>
                 <div className='mb-3 flexInput'>
                     <label>Opacity:</label>
@@ -92,44 +103,54 @@ class ButtonSettings extends Component {
                         min="0"
                         max="1"
                         step="0.05"
-                        value={this.state.rect.opacity}
-                        onChange={(_) => this.handleRectChange(_, 'opacity')}
+                        value={this.props.currentElement.opacity}
+                        onChange={(_) => this.handleChange(_, 'opacity')}
                     />
                 </div>
-                <p className="mt-3">Text styles</p>
+                <h6 className="mt-3">Text styles</h6>
+                <div className="mb-3 flexInput">
+                    <label>{this.props.currentElement.type === 'button' ? 'Button text' : 'Placeholder'}</label>
+                    <input type="text" value={this.state.text.text} onChange={(_) => this.handleChange(_, 'text', 1)}/>
+                </div>
+
                 <div className='mb-3 flexInput'>
                     <label>Text Color</label>
                     <input
                         type="color"
-                        onChange={(_) => this.handleTextChange(_, 'fill')}
-                        value={this.state.text.fill}/>
+                        onChange={(_) => this.handleChange(_, 'fill', 1)}
+                        value={this.state.text.fill} />
                 </div>
                 <div className='mb-3 flexInput'>
                     <label>Font Size (px)</label>
                     <input
                         className='field-styling' type="number" value={this.state.text.fontSize}
-                        onChange={(_) => this.handleTextChange(_, 'fontSize')}/>
+                        onChange={(_) => this.handleChange(_, 'fontSize', 1)} />
                 </div>
                 <div className='mb-3 flexInput'>
                     <label>Line height (em)</label>
                     <input
                         className='field-styling' type="number" step="0.1" value={this.state.text.lineHeight}
-                        onChange={(_) => this.handleTextChange(_, 'lineHeight')}/>
+                        onChange={(_) => this.handleChange(_, 'lineHeight', 1)} />
+                </div>
+                <div className='mb-3 flexInput'>
+                    <label>Letter spacing</label>
+                    <input
+                        className='field-styling' type="number" step="1" value={this.state.text.charSpacing}
+                        onChange={(_) => this.handleChange(_, 'charSpacing', 1)} />
                 </div>
                 <div className='mb-3 flexInput'>
                     <label>Font Family</label>
-                    <select
-                        className='field-styling' onChange={(_) => this.handleTextChange(_, 'fontFamily')}
+                    <select className='field-styling' onChange={(_) => this.handleChange(_, 'fontFamily', 1)}
                         value={this.state.text.fontFamily}>
-                        <option value="">Choose font family</option>
-                        <option value="Arial">Arial</option>
-                        <option value="Times New Roman">Times New Roman</option>
+                        {fontFamily.map(el => (
+                            <option key={el} value={el} style={{ fontFamily: el }}>{el}</option>
+                        ))}
                     </select>
                 </div>
                 <div className='mb-3 flexInput'>
                     <label>Font Weight</label>
                     <select
-                        className='field-styling' onChange={(_) => this.handleTextChange(_, 'fontWeight')}
+                        className='field-styling' onChange={(_) => this.handleChange(_, 'fontWeight', 1)}
                         value={this.state.text.fontWeight}>
                         <option value="0"></option>
                         <option value="300">300</option>
@@ -140,55 +161,58 @@ class ButtonSettings extends Component {
                         <option value="900">900</option>
                     </select>
                 </div>
-                <div className='mb-3 flexInput'>
-                    <p>Text Align</p>
-                    <div>
+                {/* <div>
+                    <div className='textAlignSettings'>
                         <div>
                             <input
-                                type="radio"
-                                name="textAlign"
-                                value="left"
-                                id="left"
-                                onChange={(_) => this.handleTextChange(_, 'textAlign')}
-                                checked={this.state.text.textAlign === 'left'}/>
-                            <label htmlFor="left">Left</label>
+                                type='radio'
+                                name='textAlign'
+                                value='left'
+                                id='left'
+                                className='field-styling'
+                                onChange={(_) => this.handleChange(_, 'textAlign', 1)}
+                                checked={this.state.text.textAlign === 'left'} />
+                            <label htmlFor='left'><FontAwesomeIcon icon={faAlignLeft} /></label>
                         </div>
                         <div>
                             <input
-                                type="radio"
-                                name="textAlign"
-                                value="center"
-                                id="center"
-                                onChange={(_) => this.handleTextChange(_, 'textAlign')}
-                                checked={this.state.text.textAlign === 'center'}/>
-                            <label htmlFor="center">Center</label>
+                                type='radio'
+                                name='textAlign'
+                                value='center'
+                                id='center'
+                                className='field-styling'
+                                onChange={(_) => this.handleChange(_, 'textAlign', 1)}
+                                checked={this.state.text.textAlign === 'center'} />
+                            <label htmlFor='center'><FontAwesomeIcon icon={faAlignCenter} /></label>
                         </div>
                         <div>
                             <input
-                                type="radio"
-                                name="textAlign"
-                                value="right"
-                                id="right"
-                                onChange={(_) => this.handleTextChange(_, 'textAlign')}
-                                checked={this.state.text.textAlign === 'right'}/>
-                            <label htmlFor="right">Right</label>
+                                type='radio'
+                                name='textAlign'
+                                value='right'
+                                id='right'
+                                className='field-styling'
+                                onChange={(_) => this.handleChange(_, 'textAlign', 1)}
+                                checked={this.state.text.textAlign === 'right'} />
+                            <label htmlFor='right'><FontAwesomeIcon icon={faAlignRight} /></label>
                         </div>
                         <div>
                             <input
-                                type="radio"
-                                name="textAlign"
-                                value="justify"
-                                id="justify"
-                                onChange={(_) => this.handleTextChange(_, 'textAlign')}
-                                checked={this.state.text.textAlign === 'justify'}/>
-                            <label htmlFor="justify">Justify</label>
+                                type='radio'
+                                name='textAlign'
+                                value='justify'
+                                id='justify'
+                                className='field-styling'
+                                onChange={(_) => this.handleChange(_, 'textAlign', 1)}
+                                checked={this.state.text.textAlign === 'justify'} />
+                            <label htmlFor='justify'><FontAwesomeIcon icon={faAlignJustify} /></label>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div className='mb-3 flexInput'>
                     <label>Text Decoration</label>
                     <select
-                        className='field-styling' onChange={(_) => this.handleTextChange(_, 'textDecoration')}
+                        className='field-styling' onChange={(_) => this.handleChange(_, 'textDecoration', 1)}
                         value={this.state.text.textDecoration}>
                         <option value="">None</option>
                         <option value="underline">Underline</option>
@@ -199,17 +223,17 @@ class ButtonSettings extends Component {
                 <div className='mb-3 flexInput'>
                     <label>Font Style</label>
                     <select
-                        className='field-styling' onChange={(_) => this.handleTextChange(_, 'fontStyle')}
+                        className='field-styling' onChange={(_) => this.handleChange(_, 'fontStyle', 1)}
                         value={this.state.text.fontStyle}>
                         <option value="normal">Normal</option>
                         <option value="italic">Italic</option>
                     </select>
                 </div>
-                <div className='mb-3 flexInput'>
+                {/* <div className='mb-3 flexInput'>
                     <label>Stroke Width (px)</label>
                     <input
                         className='field-styling' type="number" step="0.1" value={this.state.text.strokeWidth}
-                        onChange={(_) => this.handleTextChange(_, 'strokeWidth')}/>
+                        onChange={(_) => this.handleTextChange(_, 'strokeWidth')} />
                 </div>
                 <div className='mb-3 flexInput'>
                     <label>Stroke Color</label>
@@ -218,7 +242,7 @@ class ButtonSettings extends Component {
                         onChange={(_) => this.handleTextChange(_, 'stroke')}
                         value={this.state.text.stroke}
                     />
-                </div>
+                </div> */}
             </div>
         );
     }

@@ -1,21 +1,23 @@
-import {connect} from 'react-redux';
 import React, { Fragment, Suspense, lazy } from 'react';
-import Button from 'react-bootstrap/Button';
-import 'font-awesome/css/font-awesome.min.css';
 import Accordion from 'react-bootstrap/Accordion';
-import './Sidebar.scss';
+import Button from 'react-bootstrap/Button';
+import {connect} from 'react-redux';
 
 // import Triangle from './tools/Triangle';
-import UploadImage from './tools/UploadImage/UploadImage';
-import ShareIcons from './tools/ShareIcons';
 import ButtonCustom from './tools/Button';
-import TextBox from './tools/TextBox';
-import Divider from './tools/Divider';
 import Circle from './tools/Circle';
-import Header from './tools/Header';
-import Footer from './tools/Footer';
-import Rect from './tools/Rect';
 import ConnectedCanvasesList from "./CanvasesList";
+import Divider from './tools/Divider';
+import Footer from './tools/Footer';
+import Header from './tools/Header';
+import Input from './tools/Input';
+import Rect from './tools/Rect';
+import ShareIcons from './tools/ShareIcons';
+import TextBox from './tools/TextBox';
+import UploadImage from './tools/UploadImage/UploadImage';
+
+import './Sidebar.scss';
+import 'font-awesome/css/font-awesome.min.css';
 
 class SidebarContainer extends React.Component {
     render() {
@@ -74,6 +76,7 @@ class SidebarContainer extends React.Component {
                             <Accordion.Collapse eventKey='3' className='accordion-collapse'>
                                 <Fragment>
                                     <Divider handleAdd={handleAdd} panningPosition={this.props.panningPosition}/>
+                                    <Input handleAdd={handleAdd} panningPosition={this.props.panningPosition}/>
                                     <ButtonCustom handleAdd={handleAdd} panningPosition={this.props.panningPosition}/>
                                     <ShareIcons handleAdd={handleAdd} panningPosition={this.props.panningPosition}/>
                                 </Fragment>
