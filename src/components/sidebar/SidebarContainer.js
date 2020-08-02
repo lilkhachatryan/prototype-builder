@@ -15,6 +15,7 @@ import Circle from './tools/Circle';
 import Header from './tools/Header';
 import Footer from './tools/Footer';
 import Rect from './tools/Rect';
+import ConnectedCanvasesList from "./CanvasesList";
 
 class SidebarContainer extends React.Component {
     render() {
@@ -80,6 +81,10 @@ class SidebarContainer extends React.Component {
                         </Accordion>
                     </div>
                     <UploadImage handleAdd={handleAdd} panningPosition={this.props.panningPosition}/>
+                    <ConnectedCanvasesList
+                        currentlyEditingCanvasId={this.props.currentlyEditingCanvasId}
+                        handleLoadCanvas={this.props.handleLoadCanvas}
+                    />
                 </div>
             </div>
         );

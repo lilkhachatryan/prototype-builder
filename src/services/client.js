@@ -14,7 +14,9 @@ export const loadCanvasesService = () => axios.get(canvasesURL);
 
 export const loadCanvasWithIdService = (id) => axios.get(`${loadCanvasWithIdURL}/${id}`);
 
-export const postCanvas = (canvas) => axios.post(postCanvasURL, canvas);
+export const postCanvasService = (canvas) => axios.post(postCanvasURL, {canvas});
+
+export const updateCanvasService = (id, canvas) => axios.patch(`${postCanvasURL}/${id}`, {canvas});
 
 
 

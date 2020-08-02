@@ -71,6 +71,18 @@ export const canvases = (state = initialCanvasesState, action) => {
                 error: action.payload
             };
         }
+        case actionTypes.POST_CANVAS_SUCCESS: {
+            return {
+                ...state,
+                canvases: [...state.canvases, action.payload]
+            };
+        }
+        case actionTypes.UPDATE_CANVAS_SUCCESS: {
+            return {
+                ...state,
+                canvases: state.canvases.map(c => c._id === action.payload._id ? action.payload : c)
+            };
+        }
         default: return state;
     }
 };
