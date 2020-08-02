@@ -14,6 +14,8 @@ export const loadCanvasesService = () => axios.get(canvasesURL);
 
 export const loadCanvasWithIdService = (id) => axios.get(`${loadCanvasWithIdURL}/${id}`);
 
+export const deleteCanvasWithIdService = (id) => axios.delete(`${postCanvasURL}/${id}`);
+
 export const postCanvasService = (canvas) => axios.post(postCanvasURL, {canvas});
 
 export const updateCanvasService = (id, canvas) => axios.patch(`${postCanvasURL}/${id}`, {canvas});
