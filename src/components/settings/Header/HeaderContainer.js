@@ -28,7 +28,7 @@ const HeaderContainer = ({
                 <PanningModeButton
                     panningMode={panningMode}
                     handlePanningMode={handlePanningMode}/>
-                <button
+                <button disabled={_.isEmpty(currentElement)}
                     className='btn additional-btn ml-2'
                     onClick={handleClone}
                 ><FontAwesomeIcon icon={faClone}/></button>
