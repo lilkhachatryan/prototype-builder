@@ -130,7 +130,7 @@ class ButtonSettings extends Component {
                 <div className='mb-3 flexInput'>
                     <label>Letter spacing</label>
                     <input
-                        className='field-styling' type="number" step="1" value={this.state.text.charSpacing}
+                        className='field-styling' type="number" step="1" value={this.state.text.charSpacing / 25}
                         onChange={(_) => this.handleChange(_, 'charSpacing', 1)} />
                 </div>
                 <div className='mb-3 flexInput'>
