@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import CanvasSettings from './CanvasSettings';
 
 import './SettingsContainer.scss';
+import './TextSettings/TextSettings.scss';
 
 const ButtonSettings = lazy(() => import('./ButtonSettings/ButtonSettings'));
 const ImageSettings = lazy(() => import('./ImageSettings'));

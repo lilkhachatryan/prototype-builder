@@ -84,11 +84,6 @@ class SidebarContainer extends React.Component {
                         </Accordion>
                     </div>
                     <UploadImage handleAdd={handleAdd} panningPosition={this.props.panningPosition}/>
-                    <ConnectedCanvasesList
-                        handleDeleteCanvasWithId={this.props.handleDeleteCanvasWithId}
-                        currentlyEditingCanvasId={this.props.currentlyEditingCanvasId}
-                        handleLoadCanvas={this.props.handleLoadCanvas}
-                    />
                 </div>
             </div>
         );

@@ -323,13 +323,13 @@ class CanvasContainer extends React.Component {
         return (
             <>
                 <SidebarContainer
-                    handleDeleteCanvasWithId={this.handleDeleteCanvasWithId}
-                    currentlyEditingCanvasId={this.state.currentlyEditingCanvasId}
-                    handleLoadCanvas={this.handleLoadCanvas}
                     handleAdd={this.handleAdd}/>
                 <div className="main-container">
                     <div>
                         <HeaderContainer
+                            handleDeleteCanvasWithId={this.handleDeleteCanvasWithId}
+                            currentlyEditingCanvasId={this.state.currentlyEditingCanvasId}
+                            handleLoadCanvas={this.handleLoadCanvas}
                             handleCreateNewCanvas={this.handleCreateNewCanvas}
                             handleSave={this.handleSave}
                             panningMode={this.state.panningMode}

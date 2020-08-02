@@ -32,6 +32,7 @@ const Header = ({history, dispatch}) => {
                 } id='basic-nav-dropdown'>
 
                     <NavDropdown.Item onClick={handleLogOut} >
+                        <i className="fa fa-sign-out" aria-hidden="true"/> &nbsp;
                         Log out
                     </NavDropdown.Item>
                 </NavDropdown>
