@@ -1,13 +1,14 @@
 import React, {lazy, Suspense} from 'react';
-import './SettingsContainer.scss';
 import CanvasSettings from './CanvasSettings';
 
+import './SettingsContainer.scss';
+
 const ButtonSettings = lazy(() => import('./ButtonSettings/ButtonSettings'));
-const ShapeSettings = lazy(() => import('./ShapeSettings/ShapeSettings'));
-const LineSettings = lazy(() => import('./LineSettings/LineSettings'));
-const TextSettings = lazy(() => import('./TextSettings/TextSettings'));
-const ShareIconsSettings = lazy(() => import('./ShareIconsSettings'));
 const ImageSettings = lazy(() => import('./ImageSettings'));
+const LineSettings = lazy(() => import('./LineSettings/LineSettings'));
+const ShareIconsSettings = lazy(() => import('./ShareIconsSettings'));
+const ShapeSettings = lazy(() => import('./ShapeSettings/ShapeSettings'));
+const TextSettings = lazy(() => import('./TextSettings/TextSettings'));
 
 // import ButtonSettings from './ButtonSettings/ButtonSettings';
 // import ShapeSettings from './ShapeSettings/ShapeSettings';
@@ -17,14 +18,15 @@ const ImageSettings = lazy(() => import('./ImageSettings'));
 // import ImageSettings from './ImageSettings';
 
 export const Settings = Object.freeze({
-    image: ImageSettings,
     button: ButtonSettings,
-    textbox: TextSettings,
-    rect: ShapeSettings,
     circle: ShapeSettings,
-    triangle: ShapeSettings,
+    image: ImageSettings,
+    input: ButtonSettings,
     line: LineSettings,
-    shareIcons: ShareIconsSettings
+    rect: ShapeSettings,
+    shareIcons: ShareIconsSettings,
+    textbox: TextSettings,
+    triangle: ShapeSettings,
 });
 
 class SettingsContainer extends React.Component {

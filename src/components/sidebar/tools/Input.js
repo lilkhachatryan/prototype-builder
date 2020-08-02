@@ -6,16 +6,16 @@ import { SidebarItem } from "../../../assets/styles/SidebarItem.style";
 const Button = ({ handleAdd, panningPosition }) => {
     const defaultPadding = {
         top: 7,
-        right: 25,
+        right: 80,
         bottom: 7,
         left: 25
     };
 
     const handleClick = () => {
-        const text = new fabric.Text("Submit", {
-            originX: 'center',
+        const text = new fabric.Text("Email", {
+            // originX: 'center',
             originY: 'center',
-            fill: "#1a70cb",
+            fill: "#aaaaaa",
             fontFamily: 'Times New Roman',
             fontSize: 18,
             fontWeight: 'normal',
@@ -24,8 +24,9 @@ const Button = ({ handleAdd, panningPosition }) => {
             textBackgroundColor: 'transparent',
             strokeWidth: 0,
             stroke: '#000000',
-            top: 0,
-            left: 0,
+            // top: 15,
+            left: 15,
+            width: 200
         });
 
         let textWidth = Math.ceil(text.calcTextWidth());
@@ -34,22 +35,24 @@ const Button = ({ handleAdd, panningPosition }) => {
         let rectHeight = textHeight + defaultPadding.top + defaultPadding.bottom;
 
         const rect = new fabric.Rect({
-            width: rectWidth,
-            height: rectHeight,
-            originX: 'center',
+            width: 200,
+            height: textHeight + 14,
+            // originX: 'center',
             originY: 'center',
             fill: '#FFFFFF',
-            stroke: '#1a70cb',
+            stroke: '#333333',
             strokeWidth: 1,
             rx: 5,
             ry: 5,
             strokeUniform: true,
             top: 0,
-            left: 0
+            left: 0,
         });
 
         let button = new fabric.Group([rect, text], {
-            type: 'button',
+            originX: 'center',
+            originY: 'center',
+            type: 'input',
             left: -panningPosition.x + 150,
             top: -panningPosition.y + 100,
             borderColor: 'gray',
@@ -59,6 +62,7 @@ const Button = ({ handleAdd, panningPosition }) => {
             cornerStyle: 'circle',
             transparentCorners: false,
             cornerStrokeColor: '#aaaaaa',
+            width: 200,
         });
         handleAdd(button);
 
@@ -101,7 +105,7 @@ const Button = ({ handleAdd, panningPosition }) => {
 
     return (
         <SidebarItem onClick={handleClick}>
-            <span>Button</span>
+            <span>Input</span>
         </SidebarItem>
     );
 };

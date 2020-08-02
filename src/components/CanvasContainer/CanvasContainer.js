@@ -206,13 +206,13 @@ class CanvasContainer extends React.Component {
         });
     };
 
-    handleElementPropChange = (obj) => {
+    handleElementPropChange = (obj, index) => {
         // const newCurrentElement = this.canvas.getActiveObject();
         // newCurrentElement.set({ ...obj });
         // this.canvas.renderAll();
         // console.log(newCurrentElement === this.state.currentElement);
         // this.setState({ currentElement: newCurrentElement.toObject() });
-        this.props.onElementPropChange(this.canvas, obj);
+        this.props.onElementPropChange(this.canvas, obj, index);
     };
 
     handleGroupPropChange = (obj) => {
@@ -362,7 +362,7 @@ const mapDispatchToProps = dispatch => {
         onPostCanvas: (canvas, cb) => dispatch(actions.handlePostCanvas(canvas, cb)),
         onCurrentObjectUpdate: (obj) => dispatch(actions.updateCurrentObject(obj)),
         onDeleteObject: (canvas, obj) => dispatch(actions.deleteObject(canvas, obj)),
-        onElementPropChange: (canvas, obj) => dispatch(actions.updateElement(canvas, obj)),
+        onElementPropChange: (canvas, obj, index) => dispatch(actions.updateElement(canvas, obj, index)),
         onGroupPropChange: (canvas, obj) => dispatch(actions.updateGroupElement(canvas, obj)),
         onUpdatePanningPosition: (data) => dispatch(actions.updatePanningPosition(data))
     };

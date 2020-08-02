@@ -1,7 +1,8 @@
 import * as actionTypes from './actionTypes';
-import {loadCanvasesService, postCanvasService, updateCanvasService} from "../services/client";
+import { loadCanvasesService, postCanvasService, updateCanvasService } from "../services/client";
+import { faExternalLinkSquareAlt } from '@fortawesome/free-solid-svg-icons';
 
-export const updateElement = (canvas, obj) => {
+export const updateElement = (canvas, obj, index) => {
     const newCurrentElement = canvas.getActiveObject();
 
     if (obj.src) {
@@ -12,9 +13,26 @@ export const updateElement = (canvas, obj) => {
         });
     } else if (obj.shadow) {
         newCurrentElement.setShadow({ ...obj.shadow });
+    } else if (index !== undefined) {
+        newCurrentElement.getObjects()[index].set({ ...obj });
+        if (obj.text || obj.fontSize || obj.lineHeight || obj.fontFamily || obj.charSpacing) {
+            let textWidth = newCurrentElement.getObjects()[1].width;
+            let textHeight = newCurrentElement.getObjects()[1].height;
+            let rectWidth = newCurrentElement.getObjects()[0].width;
+            let rectHeight = newCurrentElement.getObjects()[0].height;
+            if (newCurrentElement.type === 'input') {
+                newCurrentElement.getObjects()[0].set({ height: textHeight + 14 });
+                newCurrentElement.set({ height: textHeight + 14 });
+            } else {
+                newCurrentElement.getObjects()[0].set({ width: textWidth + 50, height: textHeight + 14 });
+                newCurrentElement.set({ width: textWidth + 50, height: textHeight + 14 });
+            }
+            newCurrentElement.setCoords();
+        }
     } else {
         newCurrentElement.set({ ...obj });
     }
+
     canvas.renderAll();
 
     return {
@@ -93,10 +111,10 @@ export function loadCanvasesSuccess(payload) {
 export function handleLoadCanvases() {
     return (dispatch) => {
         dispatch(loadCanvases());
-        return loadCanvasesService().then( (response) => {
+        return loadCanvasesService().then((response) => {
             console.log(response, 'RESPONSE');
             dispatch(loadCanvasesSuccess(response.data));
-        } );
+        });
     };
 }
 
@@ -112,10 +130,10 @@ export function postCanvasSuccess(payload) {
 
 export function handlePostCanvas(canvas, cb) {
     return (dispatch) => {
-        return postCanvasService(canvas).then( res => {
+        return postCanvasService(canvas).then(res => {
             dispatch(postCanvasSuccess(res.data));
             cb();
-        } );
+        });
     };
 }
 
@@ -130,10 +148,10 @@ export function updateCanvasSuccess(payload) {
 
 export function handleUpdateCanvas(id, canvas, cb) {
     return (dispatch) => {
-        return updateCanvasService(id, canvas).then( (res) => {
+        return updateCanvasService(id, canvas).then((res) => {
             cb();
             dispatch(updateCanvasSuccess(res.data));
-        } );
+        });
     };
 }
 
