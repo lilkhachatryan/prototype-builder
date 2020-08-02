@@ -38,7 +38,7 @@ class CanvasContainer extends React.Component {
     };
 
     updateSelection = () => {
-        return this.props.onCurrentObjectUpdate(this.canvas.getActiveObject().toObject(['id', 'colors', 'fillName']))
+        return this.props.onCurrentObjectUpdate(this.canvas.getActiveObject().toObject(['id', 'colors', 'fillName']));
     };
 
     removeSelection = () => {
