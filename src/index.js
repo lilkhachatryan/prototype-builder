@@ -18,6 +18,7 @@ import canvas from './reducers/canvasReducer';
 import {canvases} from "./reducers/canvasReducer";
 import 'react-notifications/lib/notifications.css';
 import {NotificationContainer} from "react-notifications";
+import { setupInterceptors } from "./plugins/axios";
 
 export const reducers = combineReducers({
     canvas,
@@ -29,6 +30,7 @@ export const reducers = combineReducers({
 export const middleware = applyMiddleware(thunk.default);
 
 const store = createStore(reducers, middleware);
+setupInterceptors(store);
 
 ReactDOM.render(
     <Provider store={store}>

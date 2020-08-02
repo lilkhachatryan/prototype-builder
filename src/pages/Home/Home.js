@@ -20,7 +20,7 @@ const Home = props => {
                     <img src={gifSrc} alt="gif" />
                 </div>
                 <div className="btnContainer">
-                    <Link className="btn" to="/workspace">Get started</Link>
+                    <Link className="btn" to="/register">Get started</Link>
                     {props.token ? null : <Link className="btn" to="/login">Log in</Link>}
                 </div>
             </div>
@@ -31,7 +31,7 @@ const Home = props => {
 const mapStateToProps = state => {
     return {
         token: state.login.token
-    }
-}
+    };
+};
 
 export default connect(mapStateToProps)(Home);

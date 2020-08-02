@@ -3,7 +3,7 @@ import {registerService} from "../services/client";
 import {loginUserService} from "../services/client";
 import { setStorage } from "../utils/storage";
 import { notifyError } from "../plugins/notify";
-import {removeToken} from "../utils/helpers";
+import {removeToken, returnToken} from "../utils/helpers";
 
 // register user
 
@@ -65,6 +65,13 @@ export function loginUserFail(payload) {
     };
 }
 
+export function logoutSuccess(payload) {
+    return {
+        type: fromActionTypes.LOG_OUT,
+        payload
+    };
+}
+
 export function handleLoginUser(user, cb, scb, rememberMe) {
     return (dispatch) => {
         dispatch(loginUser());
@@ -85,7 +92,12 @@ export function handleLoginUser(user, cb, scb, rememberMe) {
 export function handleUserLogOut(cb) {
     return (dispatch) => {
         removeToken();
-        cb();
+        console.log('dispatch returnToken()', returnToken())
+        if (cb) {
+            cb();
+        } else {
+            dispatch(logoutSuccess());
+        }
     };
 }
 

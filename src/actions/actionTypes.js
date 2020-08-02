@@ -16,6 +16,8 @@ export const REGISTER_USER = 'REGISTER_USER';
 export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
 export const REGISTER_USER_FAIL = 'REGISTER_USER_FAIL';
 
+export const LOG_OUT = 'LOG_OUT';
+
 
 // user-canvas actions
 
@@ -27,14 +29,3 @@ export const LOAD_CANVASES_FAIL = 'LOAD_CANVASES_FAIL';
 
 export const POST_CANVAS_SUCCESS = 'POST_CANVAS_SUCCESS';
 export const UPDATE_CANVAS_SUCCESS = 'UPDATE_CANVAS_SUCCESS';
-
-export const LOG_OUT = 'LOG_OUT';
-
-
-
-
-
-
-
-
-
