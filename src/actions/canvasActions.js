@@ -131,7 +131,6 @@ export function postCanvasSuccess(payload) {
 export function handlePostCanvas(canvas, cb) {
     return (dispatch) => {
         return postCanvasService(canvas).then(res => {
-            console.log(res, 'CANVAS SUCCESSFULLEY CREATED');
             dispatch(postCanvasSuccess(res.data.project));
             cb();
         });
