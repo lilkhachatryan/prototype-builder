@@ -1,9 +1,7 @@
 import React from 'react';
 import { fabric } from 'fabric';
-import { reduce } from 'lodash';
 import { v4 as uuid } from 'uuid';
 import {connect} from 'react-redux';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {SidebarItem} from "../../../assets/styles/SidebarItem.style";
 
 const Rect = ({ handleAdd, panningPosition }) => {

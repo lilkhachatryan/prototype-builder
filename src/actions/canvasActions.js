@@ -49,10 +49,9 @@ export const updateCurrentObject = (obj) => {
     };
 };
 
-export const deleteObject = (canvas, obj) => {
-    // const activeObj = canvas.getObjects().find(el => el.id === obj.id);
+export const deleteObject = (canvas) => {
     const activeObj = canvas.getActiveObject();
-    if(!activeObj.getObjects) {
+    if (!activeObj.getObjects) {
         canvas.remove(activeObj);
     } else {
         canvas.remove(activeObj);

@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import React, { Fragment, Suspense, lazy } from 'react';
+import React, { Fragment } from 'react';
 import Button from 'react-bootstrap/Button';
 import 'font-awesome/css/font-awesome.min.css';
 import Accordion from 'react-bootstrap/Accordion';

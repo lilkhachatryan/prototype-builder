@@ -63,11 +63,10 @@ const Footer = ({ handleAdd, panningPosition }) => {
                 width: 220,
             });
 
-        let textWidth = Math.ceil(logo.calcTextWidth());
-        let textHeight = Math.ceil(logo.calcTextHeight());
-        let rectWidth = textWidth + defaultPadding.right + defaultPadding.right;
-        let rectHeight = textHeight + defaultPadding.top + defaultPadding.bottom;
-
+        // let textWidth = Math.ceil(logo.calcTextWidth());
+        // let textHeight = Math.ceil(logo.calcTextHeight());
+        // let rectWidth = textWidth + defaultPadding.right + defaultPadding.right;
+        // let rectHeight = textHeight + defaultPadding.top + defaultPadding.bottom;
 
         facebook.set({ left: 0, fill: '#3b5998' });
 

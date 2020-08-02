@@ -154,10 +154,6 @@ class CanvasContainer extends React.Component {
 
     handleRemove = () => {
         this.props.onDeleteObject(this.canvas, this.props.currentElement);
-        // const activeObj = this.canvas.getObjects().find(el => el.id === obj.id);
-        // console.log(activeObj)
-        // this.canvas.remove(activeObj);
-        // this.setState({ currentElement: {} });
     };
 
     handleClone = () => {

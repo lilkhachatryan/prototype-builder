@@ -1,7 +1,7 @@
 import React from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faClone, faObjectGroup, faObjectUngroup, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
-
+import _ from 'lodash';
 import UndoAndRedo from './UndoRedoContainer/UndoRedoContainer';
 import PanningModeButton from './PanningModeButton/PanningMode';
 import SaveAs from './SaveAs/Save';
@@ -29,35 +29,34 @@ const HeaderContainer = ({
                     panningMode={panningMode}
                     handlePanningMode={handlePanningMode}/>
                 <button
-                    disabled={!Object.keys(currentElement).length > 0}
                     className='btn additional-btn ml-2'
                     onClick={handleClone}
                 ><FontAwesomeIcon icon={faClone}/></button>
                 <button
-                    disabled={!Object.keys(currentElement).length > 0}
                     className='btn additional-btn ml-3 mr-3'
                     onClick={handleObjectsGroup}
                 ><FontAwesomeIcon icon={faObjectGroup}/></button>
                 <button
-                    disabled={!Object.keys(currentElement).length > 0}
                     className='btn additional-btn mr-2'
                     onClick={handleUnGroupObjects}
                 ><FontAwesomeIcon icon={faObjectUngroup}/></button>
                 <SaveAs
                     disabled={currentlyEditingCanvasId}
                     handleSave={handleSave}/>
-                <FontAwesomeIcon disabled={!Object.keys(currentElement).length > 0}
-                                 className='btn fontAwesome__override'
-                                 onClick={() => handleRemove(currentElement)} icon={faTrashAlt}/>
-                                 <button
-                                     type='button'
-                                     onClick={ () => handleEdit(currentlyEditingCanvasId) }
-                                     disabled={!currentlyEditingCanvasId}>
-                                     Save Edit
-                                 </button>
-                                    <button onClick={handleCreateNewCanvas} >
-                                        CreateNewCanvas
-                                    </button>
+                <button disabled={_.isEmpty(currentElement)}
+                        className='btn mr-2 fontAwesome__override'
+                        onClick={() => handleRemove(currentElement)}>
+                    <FontAwesomeIcon icon={faTrashAlt}/>
+                </button>
+                <button
+                     type='button'
+                     onClick={ () => handleEdit(currentlyEditingCanvasId) }
+                     disabled={!currentlyEditingCanvasId}>
+                     Save Edit
+                </button>
+                <button onClick={handleCreateNewCanvas} >
+                    CreateNewCanvas
+                </button>
             </div>
         </div>
     );
