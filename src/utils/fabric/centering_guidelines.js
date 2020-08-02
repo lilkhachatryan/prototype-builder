@@ -40,8 +40,7 @@ export default function initCenteringGuidelines(canvas) {
         ctx.restore();
     }
 
-    let afterRenderActions = [],
-        isInVerticalCenter,
+    let isInVerticalCenter,
         isInHorizontalCenter;
 
     canvas.on('mouse:down', function () {

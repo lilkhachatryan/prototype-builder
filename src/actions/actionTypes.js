@@ -17,6 +17,7 @@ export const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
 export const REGISTER_USER_FAIL = 'REGISTER_USER_FAIL';
 
 
+
 // user-canvas actions
 
 
@@ -31,12 +32,3 @@ export const UPDATE_CANVAS_SUCCESS = 'UPDATE_CANVAS_SUCCESS';
 export const DELETE_CANVAS_WITH_ID_SUCCESS = 'DELETE_CANVAS_WITH_ID_SUCCESS';
 
 export const LOG_OUT = 'LOG_OUT';
-
-
-
-
-
-
-
-
-

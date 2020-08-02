@@ -46,9 +46,9 @@ const Header = ({ handleAdd, panningPosition }) => {
             width: 230
         });
 
-        let textWidth = Math.ceil(logo.calcTextWidth());
+        // let textWidth = Math.ceil(logo.calcTextWidth());
         let textHeight = Math.ceil(logo.calcTextHeight());
-        let rectWidth = textWidth + defaultPadding.right + defaultPadding.right;
+        // let rectWidth = textWidth + defaultPadding.right + defaultPadding.right;
         let rectHeight = textHeight + defaultPadding.top + defaultPadding.bottom;
 
         const rect = new fabric.Rect({

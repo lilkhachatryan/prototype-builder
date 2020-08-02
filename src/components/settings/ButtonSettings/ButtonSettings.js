@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { faAlignCenter, faAlignJustify, faAlignLeft, faAlignRight } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { fontFamily } from '../../../utils/helpers';
 
 import './ButtonSettings.scss';
@@ -17,7 +14,6 @@ class ButtonSettings extends Component {
     };
 
     componentDidUpdate = (prevProps) => {
-
         if (prevProps.currentElement !== this.props.currentElement) {
             const newAtts = {
                 rect: {
@@ -52,7 +48,7 @@ class ButtonSettings extends Component {
             value = +value;
         }
         if (type === 'charSpacing') {
-            value = +value * 25; 
+            value = +value * 25;
         }
 
         if (type === 'ry') {
@@ -63,7 +59,6 @@ class ButtonSettings extends Component {
     };
 
     render() {
-        console.log(this.props.currentElement)
         return (
             <div className="buttonSettings">
                 <div className='mb-3 flexInput'>
@@ -161,54 +156,6 @@ class ButtonSettings extends Component {
                         <option value="900">900</option>
                     </select>
                 </div>
-                {/* <div>
-                    <div className='textAlignSettings'>
-                        <div>
-                            <input
-                                type='radio'
-                                name='textAlign'
-                                value='left'
-                                id='left'
-                                className='field-styling'
-                                onChange={(_) => this.handleChange(_, 'textAlign', 1)}
-                                checked={this.state.text.textAlign === 'left'} />
-                            <label htmlFor='left'><FontAwesomeIcon icon={faAlignLeft} /></label>
-                        </div>
-                        <div>
-                            <input
-                                type='radio'
-                                name='textAlign'
-                                value='center'
-                                id='center'
-                                className='field-styling'
-                                onChange={(_) => this.handleChange(_, 'textAlign', 1)}
-                                checked={this.state.text.textAlign === 'center'} />
-                            <label htmlFor='center'><FontAwesomeIcon icon={faAlignCenter} /></label>
-                        </div>
-                        <div>
-                            <input
-                                type='radio'
-                                name='textAlign'
-                                value='right'
-                                id='right'
-                                className='field-styling'
-                                onChange={(_) => this.handleChange(_, 'textAlign', 1)}
-                                checked={this.state.text.textAlign === 'right'} />
-                            <label htmlFor='right'><FontAwesomeIcon icon={faAlignRight} /></label>
-                        </div>
-                        <div>
-                            <input
-                                type='radio'
-                                name='textAlign'
-                                value='justify'
-                                id='justify'
-                                className='field-styling'
-                                onChange={(_) => this.handleChange(_, 'textAlign', 1)}
-                                checked={this.state.text.textAlign === 'justify'} />
-                            <label htmlFor='justify'><FontAwesomeIcon icon={faAlignJustify} /></label>
-                        </div>
-                    </div>
-                </div> */}
                 <div className='mb-3 flexInput'>
                     <label>Text Decoration</label>
                     <select
@@ -229,20 +176,6 @@ class ButtonSettings extends Component {
                         <option value="italic">Italic</option>
                     </select>
                 </div>
-                {/* <div className='mb-3 flexInput'>
-                    <label>Stroke Width (px)</label>
-                    <input
-                        className='field-styling' type="number" step="0.1" value={this.state.text.strokeWidth}
-                        onChange={(_) => this.handleTextChange(_, 'strokeWidth')} />
-                </div>
-                <div className='mb-3 flexInput'>
-                    <label>Stroke Color</label>
-                    <input
-                        type="color"
-                        onChange={(_) => this.handleTextChange(_, 'stroke')}
-                        value={this.state.text.stroke}
-                    />
-                </div> */}
             </div>
         );
     }

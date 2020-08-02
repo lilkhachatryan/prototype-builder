@@ -47,8 +47,8 @@ class ShapeSettings extends React.Component {
                     </select>
                 </div>
                 {
-                    this.state.inputs.colors !== 'custom'
-                        ? null
+                    this.state.inputs.colors !== 'custom' ?
+                        null
                         : <div className='mb-3 flexInput'>
                             <label>Fill</label>
                             <input
@@ -57,7 +57,6 @@ class ShapeSettings extends React.Component {
                                 value={this.state.inputs.fill}/>
                         </div>
                 }
-
             </div>
         );
     }

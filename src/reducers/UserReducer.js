@@ -71,6 +71,12 @@ export function login(state = initialLoginState, action) {
                token: null
            };
        }
+       case fromActionTypes.LOG_OUT: {
+           return {
+               ...state,
+               token: action.payload
+           };
+       }
        default : return state;
    }
 }

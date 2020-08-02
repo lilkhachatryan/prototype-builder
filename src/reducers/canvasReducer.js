@@ -35,7 +35,6 @@ const canvas = (state = initialState, action) => {
                 currentElement: action.payload
             };
         case actionTypes.UPDATE_PANNING_POSITION:
-            console.log(action.payload);
             return {
                 ...state,
                 panningPosition: action.payload

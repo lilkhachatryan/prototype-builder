@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { cloneDeep } from 'lodash';
 import './ShapeSettings.scss';
 
 class ShapeSettings extends React.Component {
@@ -11,12 +11,7 @@ class ShapeSettings extends React.Component {
             stroke: this.props.currentElement.stroke,
             opacity: this.props.currentElement.opacity,
             ry: this.props.currentElement.ry,
-            shadow: {
-                color: 'rgba(0,0,0,0.3)',
-                blur: 0,
-                offsetX: 0,
-                offsetY: 0,
-            }
+            shadow: { ...this.props.currentElement.shadow }
         }
     };
 
@@ -32,12 +27,11 @@ class ShapeSettings extends React.Component {
             };
             this.setState({ inputs: newAtts });
         }
-        console.log(this.props.currentElement.shadow)
     };
 
     handleChange = (event, type) => {
         let value = event.target.value;
-        let newInputs = { ...this.state.inputs };
+        let newInputs = cloneDeep(this.state.inputs);
         newInputs[type] = value;
         this.setState({ inputs: newInputs });
 
@@ -52,15 +46,13 @@ class ShapeSettings extends React.Component {
     };
 
     handleShadowChange = (event, type) => {
-        let newInputs = { ...this.state.inputs };
+        let newInputs = cloneDeep(this.state.inputs);
         let newShadow = { ...this.state.inputs.shadow };
         newShadow[type] = event.target.value;
-        console.log(type)
         newInputs.shadow = newShadow;
-        console.log(newInputs)
         this.setState({ inputs: newInputs });
         this.props.elementChange({ shadow: newShadow });
-    }
+    };
 
     render() {
         return (
@@ -121,7 +113,7 @@ class ShapeSettings extends React.Component {
                         <label>Vertical</label>
                         <input type="number" className="field-styling" onChange={(_) => this.handleShadowChange(_, 'offsetY')} value={this.state.inputs.shadow.offsetY} />
                     </div>
-                    <div id="color-picker-1" className="mx-auto"></div>
+                    <div id="color-picker-1" className="mx-auto"/>
                 </div>
             </div>
         );

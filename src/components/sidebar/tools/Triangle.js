@@ -1,6 +1,5 @@
 import React from 'react';
 import { fabric } from 'fabric';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {SidebarItem} from "../../../assets/styles/SidebarItem.style";
 
 const Triangle = ({ handleAdd, panningPosition }) => {

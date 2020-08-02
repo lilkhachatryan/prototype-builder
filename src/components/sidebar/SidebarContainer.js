@@ -1,4 +1,4 @@
-import React, { Fragment, Suspense, lazy } from 'react';
+import React, { Fragment } from 'react';
 import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
 import {connect} from 'react-redux';

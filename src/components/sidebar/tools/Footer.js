@@ -5,13 +5,6 @@ import { SidebarItem } from "../../../assets/styles/SidebarItem.style";
 import { facebook, twitter, linkedIn } from './ShareIcons';
 
 const Footer = ({ handleAdd, panningPosition }) => {
-    const defaultPadding = {
-        top: 10,
-        right: 25,
-        bottom: 10,
-        left: 25
-    };
-
     const handleClick = () => {
         const logo = new fabric.Textbox("Logo", {
             originX: 'left',
@@ -62,11 +55,6 @@ const Footer = ({ handleAdd, panningPosition }) => {
                 cornerStrokeColor: '#aaaaaa',
                 width: 220,
             });
-
-        // let textWidth = Math.ceil(logo.calcTextWidth());
-        // let textHeight = Math.ceil(logo.calcTextHeight());
-        // let rectWidth = textWidth + defaultPadding.right + defaultPadding.right;
-        // let rectHeight = textHeight + defaultPadding.top + defaultPadding.bottom;
 
         facebook.set({ left: 0, fill: '#3b5998' });
 

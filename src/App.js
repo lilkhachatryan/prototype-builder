@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch, Route, BrowserRouter as Router} from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import './App.scss';
 import {Authenticate} from "./pages/Authenticate";
 import ConnectedLogin from "./pages/auth/Login";

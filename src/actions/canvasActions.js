@@ -7,11 +7,11 @@ import {
 } from "../services/client";
 import { faExternalLinkSquareAlt } from '@fortawesome/free-solid-svg-icons';
 
+
 export const updateElement = (canvas, obj, index) => {
     const newCurrentElement = canvas.getActiveObject();
 
     if (obj.src) {
-        // newCurrentElement.setSrc('');
         newCurrentElement.setSrc(obj.src, () => {
             // canvas.discardActiveObject();
             // canvas.setActiveObject(newCurrentElement);
@@ -23,8 +23,6 @@ export const updateElement = (canvas, obj, index) => {
         if (obj.text || obj.fontSize || obj.lineHeight || obj.fontFamily || obj.charSpacing) {
             let textWidth = newCurrentElement.getObjects()[1].width;
             let textHeight = newCurrentElement.getObjects()[1].height;
-            let rectWidth = newCurrentElement.getObjects()[0].width;
-            let rectHeight = newCurrentElement.getObjects()[0].height;
             if (newCurrentElement.type === 'input') {
                 newCurrentElement.getObjects()[0].set({ height: textHeight + 14 });
                 newCurrentElement.set({ height: textHeight + 14 });
@@ -58,7 +56,6 @@ export const updateGroupElement = (canvas, obj) => {
     }
 
     canvas.renderAll();
-    console.log(newCurrentElement.toObject(['colors', 'fillName', 'vertical', 'aaaaaaaa']));
     return {
         type: actionTypes.UPDATE_GROUP_OBJECT,
         payload: newCurrentElement.toObject(['colors', 'fillName', 'vertical'])
@@ -117,7 +114,6 @@ export function handleLoadCanvases() {
     return (dispatch) => {
         dispatch(loadCanvases());
         return loadCanvasesService().then((response) => {
-            console.log(response, 'RESPONSE');
             dispatch(loadCanvasesSuccess(response.data));
         });
     };

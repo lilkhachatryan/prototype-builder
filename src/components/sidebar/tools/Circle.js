@@ -4,7 +4,6 @@ import { v4 as uuid } from 'uuid';
 import {connect} from 'react-redux';
 
 import { SidebarItem } from "../../../assets/styles/SidebarItem.style";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Circle = ({ handleAdd, panningPosition }) => {
     const handleClick = () => {
