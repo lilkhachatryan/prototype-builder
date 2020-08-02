@@ -52,6 +52,7 @@ class ButtonSettings extends Component {
     };
 
     render() {
+        console.log(this.props.currentElement)
         return (
             <div>
                 <div className='mb-3 flexInput'>

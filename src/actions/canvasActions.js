@@ -15,6 +15,7 @@ export const updateElement = (canvas, obj) => {
     } else {
         newCurrentElement.set({ ...obj });
     }
+
     canvas.renderAll();
 
     return {
