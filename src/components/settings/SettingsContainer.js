@@ -1,4 +1,4 @@
-import React, {lazy, Suspense} from 'react';
+import React, { lazy, Suspense } from 'react';
 import CanvasSettings from './CanvasSettings';
 
 import './SettingsContainer.scss';
@@ -31,15 +31,19 @@ export const Settings = Object.freeze({
 
 class SettingsContainer extends React.Component {
     render() {
-        const {currentElement, elementChange, groupElementChange} = this.props;
-        let SettingsComponent = Settings[currentElement.type];
+        const { currentElement, elementChange, groupElementChange } = this.props;
+        let type = currentElement.type;
+        if (currentElement.type === 'group' && currentElement.customType) {
+            type = currentElement.customType
+        }
+        let SettingsComponent = Settings[type];
 
         if (!SettingsComponent) {
             return (
                 <div className='settings-container'>
                     <CanvasSettings canvas={this.props.canvas}
-                                    changeCanvasBg={this.props.changeCanvasBg}
-                                    changeCanvasBgImage={this.props.changeCanvasBgImage}/>
+                        changeCanvasBg={this.props.changeCanvasBg}
+                        changeCanvasBgImage={this.props.changeCanvasBgImage} />
                 </div>
             );
         }
@@ -50,9 +54,9 @@ class SettingsContainer extends React.Component {
                     <SettingsComponent
                         elementChange={elementChange}
                         currentElement={currentElement}
-                        groupElementChange={groupElementChange}/>
+                        groupElementChange={groupElementChange} />
                 </Suspense>
-                <hr className='dropdown-divider'/>
+                <hr className='dropdown-divider' />
                 <div>
                     <button className='settings-button btn' onClick={() => this.props.center('V')}>Center vertically
                     </button>

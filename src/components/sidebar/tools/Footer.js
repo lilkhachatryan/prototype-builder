@@ -88,7 +88,7 @@ const Footer = ({ handleAdd, panningPosition }) => {
             // top: -panningPosition.y + 100,
             originX: 'left',
             originY: 'center',
-            type: 'shareIcons',
+            customType: 'shareIcons',
             left: 400,
             top: 0,
             fillName: '',
@@ -158,7 +158,7 @@ Email: placeholder@email.com`, {
 
         let header = new fabric.Group([rect, logo, menu, shareIcons, contact, copyright], {
             left: -panningPosition.x,
-            top: -panningPosition.y + 320,
+            top: -panningPosition.y + 370,
             borderColor: 'gray',
             borderDashArray: [4, 3],
             cornerColor: '#49f500',

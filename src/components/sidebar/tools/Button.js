@@ -49,7 +49,7 @@ const Button = ({ handleAdd, panningPosition }) => {
         });
 
         let button = new fabric.Group([rect, text], {
-            type: 'button',
+            customType: 'button',
             left: -panningPosition.x + 150,
             top: -panningPosition.y + 100,
             borderColor: 'gray',

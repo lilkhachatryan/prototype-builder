@@ -23,7 +23,7 @@ class ShapeSettings extends React.Component {
                 stroke: this.props.currentElement.stroke,
                 opacity: this.props.currentElement.opacity,
                 ry: this.props.currentElement.ry,
-                shadow: { ...this.props.currentElement.shadow }
+                shadow: this.props.currentElement.shadow || {color: '#000000', blur: 0, offsetX: 0, offsetY: 0}
             };
             this.setState({ inputs: newAtts });
         }

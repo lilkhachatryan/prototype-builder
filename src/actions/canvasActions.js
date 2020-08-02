@@ -23,7 +23,7 @@ export const updateElement = (canvas, obj, index) => {
         if (obj.text || obj.fontSize || obj.lineHeight || obj.fontFamily || obj.charSpacing) {
             let textWidth = newCurrentElement.getObjects()[1].width;
             let textHeight = newCurrentElement.getObjects()[1].height;
-            if (newCurrentElement.type === 'input') {
+            if (newCurrentElement.customType === 'input') {
                 newCurrentElement.getObjects()[0].set({ height: textHeight + 14 });
                 newCurrentElement.set({ height: textHeight + 14 });
             } else {
@@ -40,7 +40,7 @@ export const updateElement = (canvas, obj, index) => {
 
     return {
         type: actionTypes.UPDATE_OBJECT,
-        payload: newCurrentElement.toObject()
+        payload: newCurrentElement.toObject(['customType'])
     };
 };
 
@@ -58,7 +58,7 @@ export const updateGroupElement = (canvas, obj) => {
     canvas.renderAll();
     return {
         type: actionTypes.UPDATE_GROUP_OBJECT,
-        payload: newCurrentElement.toObject(['colors', 'fillName', 'vertical'])
+        payload: newCurrentElement.toObject(['colors', 'fillName', 'vertical', 'customType'])
     };
 };
 

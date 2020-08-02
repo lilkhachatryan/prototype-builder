@@ -46,7 +46,7 @@ const ShareIcons = ({ handleAdd, panningPosition }) => {
         let shareIcons = new fabric.Group([facebook, twitter, linkedIn], {
             left: -panningPosition.x + 100,
             top: -panningPosition.y + 100,
-            type: 'shareIcons',
+            customType: 'shareIcons',
             fillName: '',
             colors: '',
             borderColor: 'gray',
