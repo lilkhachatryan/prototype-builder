@@ -1,5 +1,12 @@
 import * as actionTypes from './actionTypes';
-import { loadCanvasesService, postCanvasService, updateCanvasService } from "../services/client";
+import {
+    deleteCanvasWithIdService,
+    loadCanvasesService,
+    postCanvasService,
+    updateCanvasService
+} from "../services/client";
+import { faExternalLinkSquareAlt } from '@fortawesome/free-solid-svg-icons';
+
 
 export const updateElement = (canvas, obj, index) => {
     const newCurrentElement = canvas.getActiveObject();
@@ -140,12 +147,31 @@ export function updateCanvasSuccess(payload) {
     };
 }
 
+
 export function handleUpdateCanvas(id, canvas, cb) {
     return (dispatch) => {
         return updateCanvasService(id, canvas).then((res) => {
             cb();
             dispatch(updateCanvasSuccess(res.data));
         });
+    };
+}
+
+// delete canvas
+
+export function deleteCanvasWithIDSuccess(payload) {
+    return {
+        type: actionTypes.DELETE_CANVAS_WITH_ID_SUCCESS,
+        payload
+    };
+}
+
+
+export function handleDeleteCanvasWithId(id) {
+    return (dispatch) => {
+        return deleteCanvasWithIdService(id).then( (res) => {
+            dispatch(deleteCanvasWithIDSuccess(id));
+        } );
     };
 }
 

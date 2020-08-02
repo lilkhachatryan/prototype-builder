@@ -142,7 +142,6 @@ class CanvasContainer extends React.Component {
             });
         });
     };
-
     handleUndoAndRedo = (type) => {
         type === 'undo' ? this.canvas.undo() : this.canvas.redo();
     };
@@ -237,7 +236,6 @@ class CanvasContainer extends React.Component {
         this.canvas.setBackgroundColor(value);
         this.canvas.renderAll();
     };
-
     handleCanvasBgImageChange = (image) => {
         image.set({
             ...this.state.canvasSize,
@@ -284,6 +282,9 @@ class CanvasContainer extends React.Component {
         const canvas = this.canvas.toJSON();
         this.props.onPostCanvas(canvas, this.handleCreateNewCanvas);
     };
+    handleDeleteCanvasWithId = (id) => {
+        this.props.onDeleteCanvas(id);
+    };
     render() {
         let canvas = this.canvas ? this.canvas.toObject() : null;
         const canvasSize = {
@@ -297,6 +298,7 @@ class CanvasContainer extends React.Component {
         return (
             <>
                 <SidebarContainer
+                    handleDeleteCanvasWithId={this.handleDeleteCanvasWithId}
                     currentlyEditingCanvasId={this.state.currentlyEditingCanvasId}
                     handleLoadCanvas={this.handleLoadCanvas}
                     handleAdd={this.handleAdd}/>
@@ -343,15 +345,14 @@ class CanvasContainer extends React.Component {
         );
     }
 }
-
 const mapStateToProps = state => {
     return {
         currentElement: state.canvas.currentElement
     };
 };
-
 const mapDispatchToProps = dispatch => {
     return {
+        onDeleteCanvas: (id) => dispatch(actions.handleDeleteCanvasWithId(id)),
         onUpdateCanvas: (id, canvas, cb) => dispatch(actions.handleUpdateCanvas(id, canvas, cb)),
         onPostCanvas: (canvas, cb) => dispatch(actions.handlePostCanvas(canvas, cb)),
         onCurrentObjectUpdate: (obj) => dispatch(actions.updateCurrentObject(obj)),

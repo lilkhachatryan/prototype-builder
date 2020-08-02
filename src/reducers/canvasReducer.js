@@ -82,6 +82,12 @@ export const canvases = (state = initialCanvasesState, action) => {
                 canvases: state.canvases.map(c => c._id === action.payload._id ? action.payload : c)
             };
         }
+        case actionTypes.DELETE_CANVAS_WITH_ID_SUCCESS: {
+            return {
+                ...state,
+                canvases: state.canvases.filter(c => c._id !== action.payload)
+            };
+        }
         default: return state;
     }
 };
