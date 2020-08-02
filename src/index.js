@@ -15,7 +15,7 @@ import canvas from './reducers/canvasReducer';
 import {canvases} from "./reducers/canvasReducer";
 import 'react-notifications/lib/notifications.css';
 import {NotificationContainer} from "react-notifications";
-import { setupInterceptors } from "./plugins/axios";
+import { setupInterceptors } from "./utils/axios";
 import { handleTokenUpdate } from "./actions/UserActions";
 import { returnToken } from "./utils/helpers";
 

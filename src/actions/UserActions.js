@@ -2,7 +2,7 @@ import * as fromActionTypes from './actionTypes';
 import { registerService } from "../services/client";
 import { loginUserService } from "../services/client";
 import { setStorage } from "../utils/storage";
-import { notifyError } from "../plugins/notify";
+import { notifyError } from "../utils/notify";
 import { removeToken } from "../utils/helpers";
 
 // register user
@@ -35,8 +35,7 @@ export function handleRegisterUser(newUser, scb, fcb) {
             dispatch(registerUserSuccess());
             scb();
         } ).catch(err => {
-            notifyError(err.response?.data.message);
-            dispatch(registerUserFail(err.response?.data.message));
+            dispatch(registerUserFail(err.message));
             fcb();
         });
     };
@@ -82,9 +81,8 @@ export function handleLoginUser(user, cb, scb, rememberMe) {
             cb();
             scb();
         } ).catch(err => {
-            notifyError(err.response?.data.message);
             cb();
-            dispatch(loginUserFail(err.response?.data.message));
+            dispatch(loginUserFail(err.message));
         } );
     };
 }

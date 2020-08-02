@@ -1,6 +1,7 @@
 import { notifyError } from "./notify";
-import { returnToken, removeToken } from "../utils/helpers";
+import { returnToken, removeToken } from "./helpers";
 import { handleTokenUpdate } from "../actions/UserActions";
+import {log} from "./loger";
 
 const axios = require('axios').create({
     baseURL: process.env.REACT_APP_API_URL
@@ -19,20 +20,22 @@ axios.interceptors.request.use(config => {
 
 export const setupInterceptors = (store) => {
     axios.interceptors.response.use(res => res, e => {
+        console.log('e.response.status', e.response.status);
         if (!e.response || !e.response.status)
             return Promise.reject(e);
 
         switch (e.response.status) {
             case 401:
                 removeToken();
-                // history.push('/login');
                 store.dispatch(handleTokenUpdate());
                 notifyError('Session expired');
                 break;
-            default: notifyError(e.response.data);
+            default: {
+                notifyError(e.response?.data.message);
+            }
         }
 
-        return Promise.reject(e);
+        return Promise.reject(e.response?.data);
     });
 };
 

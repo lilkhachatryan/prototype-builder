@@ -9,7 +9,7 @@ import Account from "./Account";
 import './LoginStyles.scss';
 
 
-const passwordValidationText = 'Password should contain at least one uppercase letter, should consist of 5 or more characters';
+const passwordValidationText = 'Password should contain at least one uppercase letter, one lowercase letter, should consist of 5 or more characters';
 const confirmPasswordValidationMessage = 'field password and confirm password are not matching!';
 
 

@@ -1,4 +1,4 @@
-import axios from "../plugins/axios";
+import axios from "../utils/axios";
 
 const registerUserURL = 'users/register';
 const loginURL = 'users/login';
