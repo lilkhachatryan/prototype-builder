@@ -1,9 +1,10 @@
 import React from 'react';
+import {Switch, Route, BrowserRouter as Router} from "react-router-dom";
 import './App.scss';
 import {Authenticate} from "./pages/Authenticate";
-import { ConnectedLogin, ConnectedRegister } from "./pages";
+import ConnectedLogin from "./pages/auth/Login";
+import ConnectedRegister from "./pages/auth/Register";
 import AuthContainer from "./pages/auth/AuthContainer";
-import {Switch, Route, BrowserRouter as Router} from "react-router-dom";
 import PageLayout from "./components/Layout/PageLayout";
 import PageNotFound from "./pages/PageNotFound";
 import Home from "./pages/Home/Home";

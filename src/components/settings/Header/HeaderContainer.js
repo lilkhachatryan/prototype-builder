@@ -8,6 +8,9 @@ import SaveAs from './SaveAs/Save';
 import './HeaderContainer.scss';
 
 const HeaderContainer = ({
+                             handleCreateNewCanvas,
+                             handleEdit,
+                             currentlyEditingCanvasId,
                              currentElement,
                              handleRemove,
                              handleUndoAndRedo,
@@ -16,7 +19,7 @@ const HeaderContainer = ({
                              handleClone,
                              handleObjectsGroup,
                              handleUnGroupObjects,
-                             handleSave
+                             handleSave,
                          }) => {
     return (
         <div className='header-container d-flex'>
@@ -40,10 +43,21 @@ const HeaderContainer = ({
                     className='btn additional-btn mr-2'
                     onClick={handleUnGroupObjects}
                 ><FontAwesomeIcon icon={faObjectUngroup}/></button>
-                <SaveAs handleSave={handleSave}/>
+                <SaveAs
+                    disabled={currentlyEditingCanvasId}
+                    handleSave={handleSave}/>
                 <FontAwesomeIcon disabled={!Object.keys(currentElement).length > 0}
                                  className='btn fontAwesome__override'
                                  onClick={() => handleRemove(currentElement)} icon={faTrashAlt}/>
+                                 <button
+                                     type='button'
+                                     onClick={ () => handleEdit(currentlyEditingCanvasId) }
+                                     disabled={!currentlyEditingCanvasId}>
+                                     Save Edit
+                                 </button>
+                                    <button onClick={handleCreateNewCanvas} >
+                                        CreateNewCanvas
+                                    </button>
             </div>
         </div>
     );
