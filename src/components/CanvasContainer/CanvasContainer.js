@@ -300,7 +300,6 @@ class CanvasContainer extends React.Component {
         this.props.onPostCanvas(canvas, cb );
     };
     handleDeleteCanvasWithId = (id) => {
-        console.log(this.canvas.isEmpty());
         const cb = () => {
             notifyInfo('The canvas was deleted successfully', 'Canvas', CanvasNotifyTime);
             this.canvas.clear();
