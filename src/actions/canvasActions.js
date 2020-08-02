@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import {loadCanvasesService, postCanvas} from "../services/client";
+import {loadCanvasesService, postCanvasService, updateCanvasService} from "../services/client";
 
 export const updateElement = (canvas, obj) => {
     const newCurrentElement = canvas.getActiveObject();
@@ -91,30 +91,55 @@ export function loadCanvasesSuccess(payload) {
     };
 }
 
-export function loadCanvasesFail(payload) {
-    return {
-        type: actionTypes.LOAD_CANVASES_FAIL,
-        payload
-    };
-}
-
 export function handleLoadCanvases() {
     return (dispatch) => {
         dispatch(loadCanvases());
         return loadCanvasesService().then( (response) => {
+            console.log(response, 'RESPONSE');
             dispatch(loadCanvasesSuccess(response.data));
         } );
     };
 }
 
+// post canvas
 
-export function handleAddCanvas(canvas) {
-    return (dispatch) => {
-        return postCanvas(canvas).then(res => {
-            console.log(res, 'Canvas');
-        });
+export function postCanvasSuccess(payload) {
+    return {
+        type: actionTypes.POST_CANVAS_SUCCESS,
+        payload
     };
 }
+
+
+export function handlePostCanvas(canvas, cb) {
+    return (dispatch) => {
+        return postCanvasService(canvas).then( res => {
+            dispatch(postCanvasSuccess(res.data));
+            cb();
+        } );
+    };
+}
+
+
+
+export function updateCanvasSuccess(payload) {
+    return {
+        type: actionTypes.UPDATE_CANVAS_SUCCESS,
+        payload
+    };
+}
+
+export function handleUpdateCanvas(id, canvas, cb) {
+    return (dispatch) => {
+        return updateCanvasService(id, canvas).then( (res) => {
+            cb();
+            dispatch(updateCanvasSuccess(res.data));
+        } );
+    };
+}
+
+
+
 
 
 

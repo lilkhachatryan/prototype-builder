@@ -13,16 +13,11 @@ import initAligningGuidelines from "../../utils/fabric/aligning_guidelines";
 import initCenteringGuidelines from "../../utils/fabric/centering_guidelines";
 import * as actions from '../../actions/canvasActions';
 import Footer from "../Layout/Footer/Footer";
-import {handleLoadCanvases} from "../../actions/canvasActions";
-import {handleAddCanvas} from "../../actions/canvasActions";
-
 
 class CanvasContainer extends React.Component {
-
-
     state = {
-        canvas: null,
         // currentElement: {},
+        currentlyEditingCanvasId: '',
         panningMode: false,
         isPanning: false,
         sendCoords: false,
@@ -54,6 +49,8 @@ class CanvasContainer extends React.Component {
             let urlData = this.canvas.toDataURL({format: 'png', multiplier: 4});
             let changedDpi = changeDpiDataUrl(urlData, 5000);
             saveAs(changedDpi);
+        } else {
+            this.createNewCanvas();
         }
     };
 
@@ -264,28 +261,40 @@ class CanvasContainer extends React.Component {
             backgroundImageStretch: false
         });
     };
-    handleClick = () => {
-        const canvas = this.canvas.toJSON();
-        this.setState({
-            canvas
-        }, () => {
-            this.canvas.clear();
-        });
-    };
-
-    handlePostCanvas = () => {
-        const canvas = this.state.canvas;
-        this.props.onPostCanvas({canvas});
-    };
 
     deviceViewHandler = (isDesktopView) => {
         this.canvasRef = null;
         this.setState({isDesktopView: isDesktopView});
     };
 
-    render() {
-        console.log(this.props.currentElement);
+    handleLoadCanvas = (c) => {
+        const {canvas, _id} = c;
+        this.setState({
+            currentlyEditingCanvasId: _id
+        });
+        this.canvas.loadFromJSON(canvas);
+    };
 
+    handleEdit = (id) => {
+        const cb = () => {
+            this.canvas.clear();
+            this.setState({
+                currentlyEditingCanvasId: ''
+            });
+        };
+        const canvas = this.canvas.toJSON();
+        this.props.onUpdateCanvas(id, canvas, cb);
+    };
+    handleCreateNewCanvas = () => {
+        this.setState({
+            currentlyEditingCanvasId: ''
+        }, () => this.canvas.clear());
+    };
+    createNewCanvas = () => {
+        const canvas = this.canvas.toJSON();
+        this.props.onPostCanvas(canvas, this.handleCreateNewCanvas);
+    };
+    render() {
         let canvas = this.canvas ? this.canvas.toObject() : null;
         const canvasSize = {
             height: 500,
@@ -297,10 +306,16 @@ class CanvasContainer extends React.Component {
         }
         return (
             <>
-                <SidebarContainer handleAdd={this.handleAdd}/>
+                <SidebarContainer
+                    currentlyEditingCanvasId={this.state.currentlyEditingCanvasId}
+                    handleLoadCanvas={this.handleLoadCanvas}
+                    handleAdd={this.handleAdd}/>
                 <div className="main-container">
                     <div>
                         <HeaderContainer
+                            handleCreateNewCanvas={this.handleCreateNewCanvas}
+                            handleEdit={this.handleEdit}
+                            currentlyEditingCanvasId={this.state.currentlyEditingCanvasId}
                             handleSave={this.handleSave}
                             panningMode={this.state.panningMode}
                             handlePanningMode={this.handlePanningMode}
@@ -333,15 +348,6 @@ class CanvasContainer extends React.Component {
                         </div>
                     </div>
                     <Footer viewChanged={(event) => this.deviceViewHandler(event)}/>
-                    <button onClick={this.props.onLoadCanvases}>
-                        load canvas from back
-                    </button>
-                    <button onClick={this.handleClick} >
-                        add canvas to state
-                    </button>
-                    <button onClick={this.handlePostCanvas} >
-                        Post cnavas
-                    </button>
                 </div>
             </>
         );
@@ -350,15 +356,14 @@ class CanvasContainer extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        currentElement: state.canvas.currentElement,
-        canvases: state.canvases.canvases
+        currentElement: state.canvas.currentElement
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onPostCanvas: (canvas) => dispatch(handleAddCanvas(canvas)),
-        onLoadCanvases: () => dispatch(handleLoadCanvases()),
+        onUpdateCanvas: (id, canvas, cb) => dispatch(actions.handleUpdateCanvas(id, canvas, cb)),
+        onPostCanvas: (canvas, cb) => dispatch(actions.handlePostCanvas(canvas, cb)),
         onCurrentObjectUpdate: (obj) => dispatch(actions.updateCurrentObject(obj)),
         onDeleteObject: (canvas, obj) => dispatch(actions.deleteObject(canvas, obj)),
         onElementPropChange: (canvas, obj) => dispatch(actions.updateElement(canvas, obj)),
