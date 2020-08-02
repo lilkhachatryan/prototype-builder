@@ -58,7 +58,7 @@ export const updateGroupElement = (canvas, obj) => {
     canvas.renderAll();
     return {
         type: actionTypes.UPDATE_GROUP_OBJECT,
-        payload: newCurrentElement.toObject(['colors', 'fillName', 'vertical', 'customType'])
+        payload: newCurrentElement.toObject(['colors', 'fillName', 'customType'])
     };
 };
 

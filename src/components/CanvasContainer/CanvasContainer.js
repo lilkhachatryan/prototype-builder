@@ -37,7 +37,6 @@ class CanvasContainer extends React.Component {
     };
 
     updateSelection = () => {
-        console.log(this.canvas.getActiveObject())
         return this.props.onCurrentObjectUpdate(this.canvas.getActiveObject().toObject(['id', 'colors', 'fillName', 'customType']));
     };
 
@@ -271,20 +270,7 @@ class CanvasContainer extends React.Component {
                 currentlyEditingCanvasId: ''
             });
         };
-        const canvas = this.canvas.toJSON([
-            'id',
-            'colors',
-            'fillName',
-            'customType',
-            'borderColor',
-            'borderDashArray',
-            'cornerColor',
-            'cornerSize',
-            'cornerStyle',
-            'transparentCorners',
-            'cornerStrokeColor'
-        ]);
-        console.log(canvas)
+        const canvas = this.canvas.toJSON(['customType', 'borderColor', 'borderDashArray', 'cornerColor', 'cornerSize', 'cornerStyle', 'transparentCorners', 'cornerStrokeColor', 'id', 'fillname']);
         this.props.onUpdateCanvas(id, canvas, cb);
     };
     handleCreateNewCanvas = () => {
@@ -293,19 +279,7 @@ class CanvasContainer extends React.Component {
         }, () => this.canvas.clear());
     };
     createNewCanvas = () => {
-        const canvas = this.canvas.toJSON([
-            'id',
-            'colors',
-            'fillName',
-            'customType',
-            'borderColor',
-            'borderDashArray',
-            'cornerColor',
-            'cornerSize',
-            'cornerStyle',
-            'transparentCorners',
-            'cornerStrokeColor'
-        ]);
+        const canvas = this.canvas.toJSON(['customType', 'borderColor', 'borderDashArray', 'cornerColor', 'cornerSize', 'cornerStyle', 'transparentCorners', 'cornerStrokeColor', 'id', 'fillname']);
         this.props.onPostCanvas(canvas, this.handleCreateNewCanvas);
     };
     handleDeleteCanvasWithId = (id) => {
