@@ -1,9 +1,9 @@
 import React from 'react';
-import { fabric } from 'fabric';
+import {fabric} from 'fabric';
 import 'fabric-history';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import saveAs from 'file-saver';
-import { changeDpiDataUrl } from "changedpi/src";
+import {changeDpiDataUrl} from "changedpi/src";
 
 import SidebarContainer from "../sidebar/SidebarContainer";
 import SettingsContainer from "../settings/SettingsContainer";
@@ -13,6 +13,9 @@ import initAligningGuidelines from "../../utils/fabric/aligning_guidelines";
 import initCenteringGuidelines from "../../utils/fabric/centering_guidelines";
 import * as actions from '../../actions/canvasActions';
 import Footer from "../Layout/Footer/Footer";
+import {notifyInfo, notifyWarning} from "../../utils/notify";
+import {CanvasNotifyTime} from "../../utils/notify";
+
 
 class CanvasContainer extends React.Component {
     state = {
@@ -43,13 +46,22 @@ class CanvasContainer extends React.Component {
     removeSelection = () => {
         return this.props.onCurrentObjectUpdate({});
     };
+
     handleSave = (type) => {
-        if (type === 'png') {
-            let urlData = this.canvas.toDataURL({ format: 'png', multiplier: 4 });
-            let changedDpi = changeDpiDataUrl(urlData, 5000);
-            saveAs(changedDpi);
+        if (!this.canvas.isEmpty()) {
+            if (this.state.currentlyEditingCanvasId) {
+                this.handleEdit(this.state.currentlyEditingCanvasId);
+            } else if (!this.state.currentlyEditingCanvasId) {
+                if (type === 'png') {
+                    let urlData = this.canvas.toDataURL({format: 'png', multiplier: 4});
+                    let changedDpi = changeDpiDataUrl(urlData, 5000);
+                    saveAs(changedDpi);
+                } else {
+                    this.createNewCanvas();
+                }
+            }
         } else {
-            this.createNewCanvas();
+            notifyWarning('The canvas is empty!', 'Canvas', CanvasNotifyTime);
         }
     };
 
@@ -106,14 +118,14 @@ class CanvasContainer extends React.Component {
     };
 
     handlePan = () => {
-        let move = { x: 0, y: 0 };
+        let move = {x: 0, y: 0};
         this.canvas.on('mouse:move', (event) => {
             if (this.state.panningMode) {
                 this.canvas.setCursor('grab');
             }
             if (this.state.isPanning && this.state.panningMode) {
                 this.canvas.setCursor('grab');
-                const { e: { movementX, movementY } } = event;
+                const {e: {movementX, movementY}} = event;
                 const delta = new fabric.Point(movementX, movementY);
                 this.canvas.relativePan(delta);
                 move.x += movementX;
@@ -252,11 +264,11 @@ class CanvasContainer extends React.Component {
 
     deviceViewHandler = (isDesktopView) => {
         this.canvasRef = null;
-        this.setState({ isDesktopView: isDesktopView });
+        this.setState({isDesktopView: isDesktopView});
     };
 
     handleLoadCanvas = (c) => {
-        const { canvas, _id } = c;
+        const {canvas, _id} = c;
         this.setState({
             currentlyEditingCanvasId: _id
         });
@@ -265,6 +277,7 @@ class CanvasContainer extends React.Component {
 
     handleEdit = (id) => {
         const cb = () => {
+            notifyInfo('The canvas was edited successfully ', 'Canvas', CanvasNotifyTime);
             this.canvas.clear();
             this.setState({
                 currentlyEditingCanvasId: ''
@@ -279,12 +292,25 @@ class CanvasContainer extends React.Component {
         }, () => this.canvas.clear());
     };
     createNewCanvas = () => {
+        const cb = () => {
+            this.handleCreateNewCanvas();
+            notifyInfo('The canvas was created successfully', 'Canvas', CanvasNotifyTime);
+        };
         const canvas = this.canvas.toJSON(['customType', 'borderColor', 'borderDashArray', 'cornerColor', 'cornerSize', 'cornerStyle', 'transparentCorners', 'cornerStrokeColor', 'id', 'fillname']);
-        this.props.onPostCanvas(canvas, this.handleCreateNewCanvas);
+        this.props.onPostCanvas(canvas, cb );
     };
     handleDeleteCanvasWithId = (id) => {
-        this.props.onDeleteCanvas(id);
+        console.log(this.canvas.isEmpty());
+        const cb = () => {
+            notifyInfo('The canvas was deleted successfully', 'Canvas', CanvasNotifyTime);
+            this.canvas.clear();
+            this.setState({
+                currentlyEditingCanvasId: ''
+            });
+        };
+        this.props.onDeleteCanvas(id, cb);
     };
+
     render() {
         let canvas = this.canvas ? this.canvas.toObject() : null;
         const canvasSize = {
@@ -301,13 +327,11 @@ class CanvasContainer extends React.Component {
                     handleDeleteCanvasWithId={this.handleDeleteCanvasWithId}
                     currentlyEditingCanvasId={this.state.currentlyEditingCanvasId}
                     handleLoadCanvas={this.handleLoadCanvas}
-                    handleAdd={this.handleAdd} />
+                    handleAdd={this.handleAdd}/>
                 <div className="main-container">
                     <div>
                         <HeaderContainer
                             handleCreateNewCanvas={this.handleCreateNewCanvas}
-                            handleEdit={this.handleEdit}
-                            currentlyEditingCanvasId={this.state.currentlyEditingCanvasId}
                             handleSave={this.handleSave}
                             panningMode={this.state.panningMode}
                             handlePanningMode={this.handlePanningMode}
@@ -318,7 +342,7 @@ class CanvasContainer extends React.Component {
                             handleUnGroupObjects={this.handleUnGroupObjects}
                             handleObjectsGroup={this.handleObjectsGroup}
                             bringToTop={this.handleBringToTop}
-                            center={this.handleCenter} />
+                            center={this.handleCenter}/>
                         <div className='main-container__canvas-section'>
                             <canvas
                                 className='canvas'
@@ -339,12 +363,13 @@ class CanvasContainer extends React.Component {
                             />
                         </div>
                     </div>
-                    <Footer viewChanged={(event) => this.deviceViewHandler(event)} />
+                    <Footer viewChanged={(event) => this.deviceViewHandler(event)}/>
                 </div>
             </>
         );
     }
 }
+
 const mapStateToProps = state => {
     return {
         currentElement: state.canvas.currentElement
@@ -352,7 +377,7 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        onDeleteCanvas: (id) => dispatch(actions.handleDeleteCanvasWithId(id)),
+        onDeleteCanvas: (id, cb) => dispatch(actions.handleDeleteCanvasWithId(id, cb)),
         onUpdateCanvas: (id, canvas, cb) => dispatch(actions.handleUpdateCanvas(id, canvas, cb)),
         onPostCanvas: (canvas, cb) => dispatch(actions.handlePostCanvas(canvas, cb)),
         onCurrentObjectUpdate: (obj) => dispatch(actions.updateCurrentObject(obj)),

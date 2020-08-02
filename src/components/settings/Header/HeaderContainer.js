@@ -9,8 +9,6 @@ import './HeaderContainer.scss';
 
 const HeaderContainer = ({
                              handleCreateNewCanvas,
-                             handleEdit,
-                             currentlyEditingCanvasId,
                              currentElement,
                              handleRemove,
                              handleUndoAndRedo,
@@ -41,18 +39,11 @@ const HeaderContainer = ({
                     onClick={handleUnGroupObjects}
                 ><FontAwesomeIcon icon={faObjectUngroup}/></button>
                 <SaveAs
-                    disabled={currentlyEditingCanvasId}
                     handleSave={handleSave}/>
                 <button disabled={_.isEmpty(currentElement)}
                         className='btn mr-2 fontAwesome__override'
                         onClick={() => handleRemove(currentElement)}>
                     <FontAwesomeIcon icon={faTrashAlt}/>
-                </button>
-                <button
-                     type='button'
-                     onClick={ () => handleEdit(currentlyEditingCanvasId) }
-                     disabled={!currentlyEditingCanvasId}>
-                     Save Edit
                 </button>
                 <button onClick={handleCreateNewCanvas} >
                     CreateNewCanvas

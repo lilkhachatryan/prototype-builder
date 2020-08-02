@@ -167,10 +167,11 @@ export function deleteCanvasWithIDSuccess(payload) {
 }
 
 
-export function handleDeleteCanvasWithId(id) {
+export function handleDeleteCanvasWithId(id, cb) {
     return (dispatch) => {
         return deleteCanvasWithIdService(id).then( (res) => {
             dispatch(deleteCanvasWithIDSuccess(id));
+            cb();
         } );
     };
 }
