@@ -22,7 +22,7 @@ function App() {
                   <Switch>
                       <Route path='/register' exact component={ConnectedRegister}/>
                       <Route path='/login' exact component={ConnectedLogin}/>
-                      <Route exact path={`${process.env.PUBLIC_URL}/`} component={Home}/>
+                      <Route exact path={'/'} component={Home}/>
                       <Route component={PageNotFound} />
                   </Switch>
               </AuthContainer>
