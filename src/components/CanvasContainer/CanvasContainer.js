@@ -49,9 +49,9 @@ class CanvasContainer extends React.Component {
 
     handleSave = (type) => {
         if (!this.canvas.isEmpty()) {
-            if (this.state.currentlyEditingCanvasId) {
+            if (this.state.currentlyEditingCanvasId && type !== 'png') {
                 this.handleEdit(this.state.currentlyEditingCanvasId);
-            } else if (!this.state.currentlyEditingCanvasId) {
+            } else if (!this.state.currentlyEditingCanvasId || type === 'png') {
                 if (type === 'png') {
                     let urlData = this.canvas.toDataURL({format: 'png', multiplier: 4});
                     let changedDpi = changeDpiDataUrl(urlData, 5000);
