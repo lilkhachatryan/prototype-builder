@@ -19,7 +19,6 @@ axios.interceptors.request.use(config => {
 
 export const setupInterceptors = (store) => {
     axios.interceptors.response.use(res => res, e => {
-        console.log('e.response.status', e.response.status);
         if (!e.response || !e.response.status)
             return Promise.reject(e);
 
