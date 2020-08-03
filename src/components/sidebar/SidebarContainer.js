@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 // import Triangle from './tools/Triangle';
 import ButtonCustom from './tools/Button';
 import Circle from './tools/Circle';
-import ConnectedCanvasesList from "./CanvasesList";
+// import ConnectedCanvasesList from "./CanvasesList";
 import Divider from './tools/Divider';
 import Footer from './tools/Footer';
 import Header from './tools/Header';
@@ -84,11 +84,6 @@ class SidebarContainer extends React.Component {
                         </Accordion>
                     </div>
                     <UploadImage handleAdd={handleAdd} panningPosition={this.props.panningPosition}/>
-                    <ConnectedCanvasesList
-                        handleDeleteCanvasWithId={this.props.handleDeleteCanvasWithId}
-                        currentlyEditingCanvasId={this.props.currentlyEditingCanvasId}
-                        handleLoadCanvas={this.props.handleLoadCanvas}
-                    />
                 </div>
             </div>
         );

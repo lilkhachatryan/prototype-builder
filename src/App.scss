@@ -37,6 +37,25 @@ body, #root {
   color: #61dafb;
 }
 
+.fontAwesome__override {
+  margin: 5px;
+  padding: 3px;
+  outline: 0;
+  height: 40px;
+  border-radius: 4px;
+  border: 2px solid transparent;
+
+  svg {
+    width: 40px !important;
+    height: 30px;
+    border: 0;
+    padding: 0 !important;
+    box-sizing: border-box;
+    cursor: pointer;
+    color: var(--main-theme-color);
+  }
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

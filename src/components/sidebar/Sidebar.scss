@@ -38,3 +38,21 @@
     }
   }
 }
+
+.existing-canvas-item {
+
+  &.active, &:active {
+    background-color: var(--transparent);
+    color: var(--main-theme-color) !important;
+  }
+
+  .text-danger {
+    color: var(--main-theme-color) !important;
+  }
+
+  .fontAwesome__override {
+    svg {
+      height: 24px !important;
+    }
+  }
+}

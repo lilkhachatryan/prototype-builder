@@ -6,6 +6,9 @@ import UndoAndRedo from './UndoRedoContainer/UndoRedoContainer';
 import PanningModeButton from './PanningModeButton/PanningMode';
 import SaveAs from './SaveAs/Save';
 import './HeaderContainer.scss';
+import './SaveAs/Save.scss';
+import ConnectedCanvasesList from "../../sidebar/CanvasesList";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
 const HeaderContainer = ({
                              handleCreateNewCanvas,
@@ -18,6 +21,9 @@ const HeaderContainer = ({
                              handleObjectsGroup,
                              handleUnGroupObjects,
                              handleSave,
+                             handleDeleteCanvasWithId,
+                             currentlyEditingCanvasId,
+                             handleLoadCanvas,
                          }) => {
     return (
         <div className='header-container d-flex'>
@@ -27,8 +33,8 @@ const HeaderContainer = ({
                     panningMode={panningMode}
                     handlePanningMode={handlePanningMode}/>
                 <button disabled={_.isEmpty(currentElement)}
-                    className='btn additional-btn ml-2'
-                    onClick={handleClone}
+                        className='btn additional-btn ml-2'
+                        onClick={handleClone}
                 ><FontAwesomeIcon icon={faClone}/></button>
                 <button
                     className='btn additional-btn ml-3 mr-3'
@@ -45,9 +51,22 @@ const HeaderContainer = ({
                         onClick={() => handleRemove(currentElement)}>
                     <FontAwesomeIcon icon={faTrashAlt}/>
                 </button>
-                <button onClick={handleCreateNewCanvas} >
-                    CreateNewCanvas
+                <button className='btn saveButton' onClick={handleCreateNewCanvas}>
+                    Create New Canvas
                 </button>
+                <NavDropdown title={
+                    <div>
+                        <button className='btn saveButton'>
+                            Existing canvases
+                        </button>
+                    </div>
+                } id='existing-canvases'>
+                        <ConnectedCanvasesList
+                            handleDeleteCanvasWithId={handleDeleteCanvasWithId}
+                            currentlyEditingCanvasId={currentlyEditingCanvasId}
+                            handleLoadCanvas={handleLoadCanvas}
+                        />
+                </NavDropdown>
             </div>
         </div>
     );

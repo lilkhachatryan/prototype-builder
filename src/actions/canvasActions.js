@@ -5,7 +5,6 @@ import {
     postCanvasService,
     updateCanvasService
 } from "../services/client";
-import { faExternalLinkSquareAlt } from '@fortawesome/free-solid-svg-icons';
 
 
 export const updateElement = (canvas, obj, index) => {

@@ -5,8 +5,8 @@ import { createStore } from 'redux';
 import {BrowserRouter as Router} from "react-router-dom";
 import {combineReducers} from "redux";
 import {applyMiddleware} from "redux";
-import {register} from "./reducers/UserReducer";
-import {login} from "./reducers/UserReducer";
+import {register} from "./reducers/userReducer";
+import {login} from "./reducers/userReducer";
 import * as thunk from 'redux-thunk';
 import './index.css';
 import '././assets/styles/global.scss';
@@ -16,7 +16,7 @@ import {canvases} from "./reducers/canvasReducer";
 import 'react-notifications/lib/notifications.css';
 import {NotificationContainer} from "react-notifications";
 import { setupInterceptors } from "./utils/axios";
-import { handleTokenUpdate } from "./actions/UserActions";
+import { handleTokenUpdate } from "./actions/userActions";
 import { returnToken } from "./utils/helpers";
 
 export const reducers = combineReducers({
