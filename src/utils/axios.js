@@ -1,7 +1,6 @@
 import { notifyError } from "./notify";
 import { returnToken, removeToken } from "./helpers";
-import { handleTokenUpdate } from "../actions/UserActions";
-import {log} from "./loger";
+import { handleTokenUpdate } from "../actions/userActions";
 
 const axios = require('axios').create({
     baseURL: process.env.REACT_APP_API_URL
@@ -20,7 +19,6 @@ axios.interceptors.request.use(config => {
 
 export const setupInterceptors = (store) => {
     axios.interceptors.response.use(res => res, e => {
-        console.log('e.response.status', e.response.status);
         if (!e.response || !e.response.status)
             return Promise.reject(e);
 

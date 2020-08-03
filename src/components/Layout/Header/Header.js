@@ -6,7 +6,7 @@ import { ReactComponent as Rects } from '../../../assets/images/rects.svg';
 import {withRouter} from 'react-router-dom';
 
 import './Header.scss';
-import {handleUserLogOut} from "../../../actions/UserActions";
+import {handleUserLogOut} from "../../../actions/userActions";
 
 
 const Header = ({history, dispatch}) => {
@@ -32,6 +32,7 @@ const Header = ({history, dispatch}) => {
                 } id='basic-nav-dropdown'>
 
                     <NavDropdown.Item onClick={handleLogOut} >
+                        <i className="fa fa-sign-out" aria-hidden="true"/> &nbsp;
                         Log out
                     </NavDropdown.Item>
                 </NavDropdown>

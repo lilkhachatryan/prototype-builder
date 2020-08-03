@@ -5,7 +5,6 @@ import {
     postCanvasService,
     updateCanvasService
 } from "../services/client";
-import { faExternalLinkSquareAlt } from '@fortawesome/free-solid-svg-icons';
 
 
 export const updateElement = (canvas, obj, index) => {
@@ -167,10 +166,11 @@ export function deleteCanvasWithIDSuccess(payload) {
 }
 
 
-export function handleDeleteCanvasWithId(id) {
+export function handleDeleteCanvasWithId(id, cb) {
     return (dispatch) => {
         return deleteCanvasWithIdService(id).then( (res) => {
             dispatch(deleteCanvasWithIDSuccess(id));
+            cb();
         } );
     };
 }

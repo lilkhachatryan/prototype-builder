@@ -1,0 +1,21 @@
+.header-container {
+  flex-flow: column;
+  padding: 30px 0 0 65px;
+
+  .header-container__actionButtons {
+
+    .dropdown-toggle::after {
+      border: 0 none !important;
+      display: none;
+    }
+
+    .dropdown-menu {
+      left: -18px !important;
+    }
+
+    .additional-btn {
+      color: var(--canvas-header-btn);
+      border-color: var(--canvas-header-btn);
+    }
+  }
+}
