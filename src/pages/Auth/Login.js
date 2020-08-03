@@ -3,7 +3,7 @@ import * as YUP from 'yup';
 import {withFormik} from "formik";
 import Field from "../../components/Field";
 import {connect} from "react-redux";
-import {handleLoginUser} from "../../actions/UserActions";
+import {handleLoginUser} from "../../actions/userActions";
 import Account from "./Account";
 
 
@@ -27,7 +27,7 @@ const Login = ({values, handleChange, errors, touched, handleBlur, submitForm, i
             />
             <Field
                 type='text'
-                labelText='login'
+                labelText='Login'
                 errorText={errors.email}
                 name='email'
                 className='field-styling'
@@ -38,7 +38,7 @@ const Login = ({values, handleChange, errors, touched, handleBlur, submitForm, i
             />
             <Field
                 type='password'
-                labelText='password'
+                labelText='Password'
                 errorText={errors.password}
                 name='password'
                 className='field-styling'

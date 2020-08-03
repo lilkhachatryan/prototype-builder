@@ -4,7 +4,7 @@ import UploadImage from '../sidebar/tools/UploadImage/UploadImage';
 class CanvasSettings extends React.Component {
 
     state = {
-        bgColor: this.props.canvas ? this.props.canvas.background : '#FFFFFF'
+        bgColor:  this.props.canvas ? this.props.canvas.background : '#FFFFFF'
     };
 
     componentDidUpdate = (prevProps) => {
@@ -33,7 +33,7 @@ class CanvasSettings extends React.Component {
                 <h4>Canvas Settings</h4>
                 <div>
                     <label>Background color &nbsp;</label>
-                    <input type='color' onChange={this.handleChange} value={this.state.bgColor}/>
+                    <input type='color' onChange={this.handleChange} value={this.state.bgColor || '#FFFFFF'}/>
                 </div>
                 <hr className='dropdown-divider'/>
                 <div className='canvas-settings-background'>

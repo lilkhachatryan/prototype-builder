@@ -13,7 +13,8 @@ class ConnectedCanvasesList extends React.Component {
     }
 
     render() {
-        const mappedCanvases = this.props.canvases.map(c => <CanvasesItem
+        const mappedCanvases = this.props.canvases.map((c, i) => <CanvasesItem
+            no={i}
             handleDeleteCanvasWithId={this.props.handleDeleteCanvasWithId}
             active={this.props.currentlyEditingCanvasId === c._id}
             handleLoadCanvas={this.props.handleLoadCanvas}

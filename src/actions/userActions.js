@@ -2,7 +2,6 @@ import * as fromActionTypes from './actionTypes';
 import { registerService } from "../services/client";
 import { loginUserService } from "../services/client";
 import { setStorage } from "../utils/storage";
-import { notifyError } from "../utils/notify";
 import { removeToken } from "../utils/helpers";
 
 // register user

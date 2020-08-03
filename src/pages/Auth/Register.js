@@ -4,7 +4,7 @@ import Field from "../../components/Field";
 import * as YUP from 'yup';
 import {connect} from 'react-redux';
 import {passwordValidator} from "../../utils/validators";
-import {handleRegisterUser} from "../../actions/UserActions";
+import {handleRegisterUser} from "../../actions/userActions";
 import Account from "./Account";
 import './LoginStyles.scss';
 
@@ -38,7 +38,7 @@ const Register = ({values, handleChange, handleBlur, errors, touched, submitForm
                     onBlur={handleBlur}
                     value={values.email}
                     name='email'
-                    labelText='please enter your e-mail'
+                    labelText='Please enter your e-mail'
                 />
                 <Field
                     errorText={errors.first_name}
@@ -47,7 +47,7 @@ const Register = ({values, handleChange, handleBlur, errors, touched, submitForm
                     onBlur={handleBlur}
                     value={values.first_name}
                     name='first_name'
-                    labelText='please enter your first name'
+                    labelText='Please enter your first name'
                 />
                 <Field
                     errorText={errors.last_name}
@@ -56,7 +56,7 @@ const Register = ({values, handleChange, handleBlur, errors, touched, submitForm
                     onBlur={handleBlur}
                     value={values.last_name}
                     name='last_name'
-                    labelText='please enter your last name'
+                    labelText='Please enter your last name'
                 />
                 <Field
                     errorText={errors.password}
@@ -65,7 +65,7 @@ const Register = ({values, handleChange, handleBlur, errors, touched, submitForm
                     onBlur={handleBlur}
                     value={values.password}
                     name='password'
-                    labelText='please create a password'
+                    labelText='Please create a password'
                 />
                 <Field
                     errorText={errors.confirmPassword}
@@ -74,7 +74,7 @@ const Register = ({values, handleChange, handleBlur, errors, touched, submitForm
                     onBlur={handleBlur}
                     value={values.confirmPassword}
                     name='confirmPassword'
-                    labelText='please confirm the created password'
+                    labelText='Please confirm the created password'
                 />
                 <button
                     className='btn'

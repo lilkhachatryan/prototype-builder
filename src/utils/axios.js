@@ -1,7 +1,6 @@
 import { notifyError } from "./notify";
 import { returnToken, removeToken } from "./helpers";
-import { handleTokenUpdate } from "../actions/UserActions";
-import {log} from "./loger";
+import { handleTokenUpdate } from "../actions/userActions";
 
 const axios = require('axios').create({
     baseURL: process.env.REACT_APP_API_URL

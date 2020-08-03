@@ -66,8 +66,6 @@ const FooterContainer = (props) => {
                        rel='noopener noreferrer'>Axios</a>
                     <a href='http://fabricjs.com/' target='_blank'
                        rel='noopener noreferrer'>Fabric</a>
-                    <a href='https://expressjs.com/' target='_blank'
-                       rel='noopener noreferrer'>Express</a>
                 </div>
             </div>
         </div>
