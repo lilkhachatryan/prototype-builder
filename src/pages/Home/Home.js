@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { ReactComponent as Rects } from '../../assets/images/rects.svg';
-import gifSrc from '../../assets/images/projectGif.gif';
+import gifSrc from '../../assets/images/projectGif1.gif';
 
 import './Home.scss';
 
